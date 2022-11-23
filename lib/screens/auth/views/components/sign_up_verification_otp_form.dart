@@ -2,13 +2,19 @@ import "package:flutter/material.dart";
 import "package:flutter/services.dart";
 
 class SignUpVerificationOtpForm extends StatelessWidget {
+  final ValueNotifier<List<String>> controller;
+  final GlobalKey<FormState> formKey;
+
   const SignUpVerificationOtpForm({
     Key? key,
+    required this.controller,
+    required this.formKey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: formKey,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,6 +26,8 @@ class SignUpVerificationOtpForm extends StatelessWidget {
               autofocus: true,
               onChanged: (value) {
                 if (value.length == 1) {
+                  controller.value[0] = value;
+
                   FocusScope.of(context).nextFocus();
                 }
               },
@@ -38,6 +46,8 @@ class SignUpVerificationOtpForm extends StatelessWidget {
               onSaved: (pin2) {},
               onChanged: (value) {
                 if (value.length == 1) {
+                  controller.value[1] = value;
+
                   FocusScope.of(context).nextFocus();
                 }
               },
@@ -56,6 +66,8 @@ class SignUpVerificationOtpForm extends StatelessWidget {
               onSaved: (pin3) {},
               onChanged: (value) {
                 if (value.length == 1) {
+                  controller.value[2] = value;
+
                   FocusScope.of(context).nextFocus();
                 }
               },
@@ -74,6 +86,8 @@ class SignUpVerificationOtpForm extends StatelessWidget {
               onSaved: (pin4) {},
               onChanged: (value) {
                 if (value.length == 1) {
+                  controller.value[3] = value;
+
                   FocusScope.of(context).nextFocus();
                 }
               },

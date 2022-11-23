@@ -1,3 +1,4 @@
+import "package:dio/dio.dart";
 import "package:directus/directus.dart";
 import "package:shop/entities/account_entity.dart";
 import "package:shop/exceptions/account_exception.dart";
@@ -7,10 +8,12 @@ import "package:shop/utils/logger.dart";
 
 class AccountRepository {
   final Directus sdk;
+  final Dio dio;
   final SessionRepository sessionRepository;
 
   const AccountRepository(
     this.sdk,
+    this.dio,
     this.sessionRepository,
   );
 
@@ -64,5 +67,24 @@ class AccountRepository {
       });
     }
     return null;
+  }
+
+  Future<void> validateEmail(
+    String code,
+  ) async {
+    try {
+      await dio.post(
+        "/validate-account",
+        data: {
+          "account_code": code,
+          "id": await sessionRepository.getId(),
+        },
+      );
+    } on DioError catch (e) {
+      throw AccountException(
+        "An error occured",
+        e.response!.data["code"],
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import "package:shop/entities/session_entity.dart";
 
 class SessionRepository {
   final FlutterSecureStorage storage;
@@ -16,7 +17,7 @@ class SessionRepository {
     );
   }
 
-  Future<void> getId() async => storage.read(
+  Future<String?> getId() async => storage.read(
         key: "id",
       );
 
@@ -31,4 +32,18 @@ class SessionRepository {
   Future<String?> getEmail() async => storage.read(
         key: "email",
       );
+
+  Future<SessionEntity> getSession() async {
+    final id = await getId();
+    final email = await getEmail();
+
+    if (id == null || email == null) {
+      throw Exception("Session not found");
+    }
+
+    return SessionEntity(
+      id: id,
+      email: email,
+    );
+  }
 }
