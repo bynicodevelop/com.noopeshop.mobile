@@ -4,9 +4,14 @@ import "package:flutter_svg/flutter_svg.dart";
 import "../../../../constants.dart";
 
 class SignUpForm extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
   const SignUpForm({
     Key? key,
     required this.formKey,
+    required this.emailController,
+    required this.passwordController,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
@@ -18,6 +23,7 @@ class SignUpForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            controller: emailController,
             onSaved: (emal) {
               // Email
             },
@@ -44,6 +50,7 @@ class SignUpForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
+            controller: passwordController,
             onSaved: (pass) {
               // Password
             },

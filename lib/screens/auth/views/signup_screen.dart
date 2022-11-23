@@ -1,7 +1,13 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:shop/models/account_model.dart";
 import "package:shop/screens/auth/views/components/sign_up_form.dart";
 import "package:shop/route/route_constants.dart";
+import "package:shop/services/accounts/create/create_account_bloc.dart";
+import "package:shop/utils/notice.dart";
+import "package:shop/utils/translate.dart";
 
 import "../../../constants.dart";
 
@@ -13,7 +19,23 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
+  bool _termsAndConditions = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (kDebugMode) {
+      _emailController.text = "john@domain.tld";
+      _passwordController.text = "password!";
+      _termsAndConditions = true;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +58,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     "Let’s get started!",
                     style: Theme.of(context).textTheme.headline5,
                   ),
-                  const SizedBox(height: defaultPadding / 2),
+                  const SizedBox(
+                    height: defaultPadding / 2,
+                  ),
                   const Text(
                     "Please enter your valid data in order to create an account.",
                   ),
-                  const SizedBox(height: defaultPadding),
-                  SignUpForm(formKey: _formKey),
-                  const SizedBox(height: defaultPadding),
+                  const SizedBox(
+                    height: defaultPadding,
+                  ),
+                  SignUpForm(
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                  ),
+                  const SizedBox(
+                    height: defaultPadding,
+                  ),
                   Row(
                     children: [
                       Checkbox(
-                        onChanged: (value) {},
-                        value: false,
+                        onChanged: (value) => setState(
+                          () => _termsAndConditions = !_termsAndConditions,
+                        ),
+                        value: _termsAndConditions,
                       ),
                       Expanded(
                         child: Text.rich(
@@ -58,7 +92,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () async {
                                     Navigator.pushNamed(
-                                        context, termsOfServicesScreenRoute);
+                                      context,
+                                      termsOfServicesScreenRoute,
+                                    );
                                   },
                                 text: " Terms of service ",
                                 style: const TextStyle(
@@ -76,16 +112,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ],
                   ),
                   const SizedBox(height: defaultPadding * 2),
-                  ElevatedButton(
-                    onPressed: () async {
-                      // Validate Form
-                      // if (_formKey.currentState!.validate()) {}
-                      Navigator.pushNamed(
-                        context,
-                        profileSetupScreenRoute,
-                      );
+                  BlocListener<CreateAccountBloc, CreateAccountState>(
+                    listener: (context, state) {
+                      if (state is CreateAccountFailureState) {
+                        String message = t(context)!.notice_unknown;
+
+                        if (state.code == "user_already_exists") {
+                          message = t(context)!.notice_user_already_exists;
+                        }
+
+                        notice(
+                          context,
+                          message,
+                        );
+
+                        return;
+                      }
+
+                      if (state is CreateAccountSuccessState) {}
                     },
-                    child: const Text("Continue"),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (!_termsAndConditions) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  "Please accept the terms and conditions."),
+                            ),
+                          );
+                        }
+
+                        if (!_formKey.currentState!.validate()) return;
+
+                        context.read<CreateAccountBloc>().add(
+                              OnCreateAccountEvent(
+                                account: AccountModel(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              ),
+                            );
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   profileSetupScreenRoute,
+                        // );
+                      },
+                      child: const Text("Continue"),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

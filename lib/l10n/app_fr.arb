@@ -1,6 +1,10 @@
 {
-    "helloWorld": "Hello World!",
-    "@helloWorld": {
-      "description": "The conventional newborn programmer greeting"
+  "notice_unknown": "Une erreur est survenue.",
+    "@notice_unknown": {
+      "description": "Une erreur est survenue."
+    },
+    "notice_user_already_exists": "Un utilisateur avec cet email existe déjà.",
+    "@notice_user_already_exists": {
+      "description": "Un utilisateur avec cet email existe déjà."
     }
 }
