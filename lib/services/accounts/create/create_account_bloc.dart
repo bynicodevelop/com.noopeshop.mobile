@@ -19,9 +19,17 @@ class CreateAccountBloc extends Bloc<CreateAccountEvent, CreateAccountState> {
       emit(CreateAccountLoadingState());
 
       try {
-        final AccountEntity accountEntity = await accountRepository.create(
+        final AccountEntity? accountEntity = await accountRepository.create(
           event.account,
         );
+
+        if (accountEntity == null) {
+          emit(const CreateAccountFailureState(
+            code: "account_not_created",
+          ));
+
+          return;
+        }
 
         emit(CreateAccountSuccessState(
           account: accountEntity,

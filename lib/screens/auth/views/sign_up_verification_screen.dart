@@ -23,17 +23,18 @@ class SignUpVerificationScreen extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 2),
               const Text("We have sent the code verification to "),
-              Row(
-                children: [
-                  Text(
-                    "abuanwar072@gmail.com",
-                    style: Theme.of(context).textTheme.subtitle2,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text("Change your email?"),
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: defaultPadding,
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      "abuanwar072@gmail.com",
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+                  ],
+                ),
               ),
               const SignUpVerificationOtpForm(),
               const SizedBox(height: defaultPadding),
@@ -45,7 +46,9 @@ class SignUpVerificationScreen extends StatelessWidget {
                       TextSpan(
                         text: "1:36",
                         style: TextStyle(
-                            color: primaryColor, fontWeight: FontWeight.w500),
+                          color: primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),

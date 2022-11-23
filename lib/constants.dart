@@ -71,15 +71,24 @@ const Duration defaultDuration = Duration(
 );
 
 final passwordValidator = MultiValidator([
-  RequiredValidator(errorText: "Password is required"),
-  MinLengthValidator(8, errorText: "password must be at least 8 digits long"),
-  PatternValidator(r"(?=.*?[#?!@$%^&*-])",
-      errorText: "passwords must have at least one special character")
+  RequiredValidator(
+    errorText: "password_required",
+  ),
+  MinLengthValidator(
+    8,
+    errorText: "password_min_length",
+  ),
+  PatternValidator(
+    r"(?=.*?[#?!@$%^&*-])",
+    errorText: "password_min_special_character",
+  )
 ]);
 
 final emaildValidator = MultiValidator([
-  RequiredValidator(errorText: "Email is required"),
-  EmailValidator(errorText: "Enter a valid email address"),
+  RequiredValidator(
+    errorText: "email_required",
+  ),
+  EmailValidator(
+    errorText: "email_invalid",
+  ),
 ]);
-
-const pasNotMatchErrorText = "passwords do not match";

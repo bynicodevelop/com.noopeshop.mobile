@@ -3,8 +3,76 @@
     "@notice_unknown": {
       "description": "Une erreur est survenue."
     },
-    "notice_user_already_exists": "Un utilisateur avec cet email existe déjà.",
+    "notice_user_already_exists": "Un utilisateur existe déjà avec cet email.",
     "@notice_user_already_exists": {
-      "description": "Un utilisateur avec cet email existe déjà."
+      "description": "Un utilisateur existe déjà avec cet email."
+    },
+    "notice_account_not_created": "Votre compte n'a pas pu être créé. Veuillez réessayer.",
+    "@notice_account_not_created": {
+      "description": "Votre compte n'a pas pu être créé. Veuillez réessayer."
+    },
+    "signup_get_started_label": "Commençons !",
+    "@signup_get_started_label": {
+      "description": "Commençons !"
+    },
+    "signup_complet_form_label": "Veuillez entrer vos informations afin de créer un compte.",
+    "@signup_complet_form_label": {
+      "description": "Veuillez entrer vos informations afin de créer un compte."
+    },
+    "signup_I_agree_label": "J'ai pris connaissance des ",
+    "@signup_I_agree_label": {
+      "description": "J'ai pris connaissance des "
+    },
+    "signup_terms_label": " conditions d'utilisation ",
+    "@signup_terms_label": {
+      "description": " conditions d'utilisation "
+    },
+    "signup_conditions_label": " & politique de confidentialité.",
+    "@signup_conditions_label": {
+      "description": " & politique de confidentialité."
+    },
+    "signup_please_accept_conditions_label": "Merci d'accepter les conditions d'utilisation.",
+    "@signup_please_accept_conditions_label": {
+      "description": "Merci d'accepter les conditions d'utilisation."
+    },
+    "signup_continue_label": "Continuer",
+    "@signup_continue_label": {
+      "description": "Continuer"
+    },
+    "signup_have_account_label": "Vous avez un compte ?",
+    "@signup_have_account_label": {
+      "description": "Vous avez un compte ?"
+    },
+    "signup_login_label": "Se connecter",
+    "@signup_login_label": {
+      "description": "Se connecter"
+    },
+    "signup_email_label": "Adresse e-mail",
+    "@signup_email_label": {
+      "description": "Adresse e-mail"
+    },
+    "signup_password_label": "Mot de passe",
+    "@signup_password_label": {
+      "description": "Mot de passe"
+    },
+    "signup_email_required_label": "L'adresse e-mail est requise.",
+    "@signup_email_required_label": {
+      "description": "L'adresse e-mail est requise."
+    },
+    "signup_email_invalid_label": "L'adresse e-mail est invalide.",
+    "@signup_email_invalid_label": {
+      "description": "L'adresse e-mail est invalide."
+    },
+    "signup_password_required_label": "Le mot de passe est requis.",
+    "@signup_password_required_label": {
+      "description": "Le mot de passe est requis."
+    },
+    "signup_password_min_length_label": "Le mot de passe doit contenir au moins 8 caractères.",
+    "@signup_password_min_length_label": {
+      "description": "Le mot de passe doit contenir au moins 8 caractères."
+    },
+    "signup_password_min_special_character_label": "Le mot de passe doit contenir au moins 1 caractère spécial.",
+    "@signup_password_min_special_character_label": {
+      "description": "Le mot de passe doit contenir au moins 1 caractère spécial."
     }
 }

@@ -55,14 +55,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Let’s get started!",
+                    t(context)!.signup_get_started_label,
                     style: Theme.of(context).textTheme.headline5,
                   ),
                   const SizedBox(
                     height: defaultPadding / 2,
                   ),
-                  const Text(
-                    "Please enter your valid data in order to create an account.",
+                  Text(
+                    t(context)!.signup_complet_form_label,
                   ),
                   const SizedBox(
                     height: defaultPadding,
@@ -86,7 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Expanded(
                         child: Text.rich(
                           TextSpan(
-                            text: "I agree with the",
+                            text: t(context)!.signup_I_agree_label,
                             children: [
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
@@ -96,14 +96,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       termsOfServicesScreenRoute,
                                     );
                                   },
-                                text: " Terms of service ",
+                                text: t(context)!.signup_terms_label,
                                 style: const TextStyle(
                                   color: primaryColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const TextSpan(
-                                text: "& privacy policy.",
+                              TextSpan(
+                                text: t(context)!.signup_conditions_label,
                               ),
                             ],
                           ),
@@ -113,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: defaultPadding * 2),
                   BlocListener<CreateAccountBloc, CreateAccountState>(
-                    listener: (context, state) {
+                    listener: (context, state) async {
                       if (state is CreateAccountFailureState) {
                         String message = t(context)!.notice_unknown;
 
@@ -129,17 +129,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return;
                       }
 
-                      if (state is CreateAccountSuccessState) {}
+                      if (state is CreateAccountSuccessState) {
+                        Navigator.pushNamed(
+                          context,
+                          signUpVerificationScreenRoute,
+                        );
+                      }
                     },
                     child: ElevatedButton(
                       onPressed: () async {
                         if (!_termsAndConditions) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content: Text(
-                                  "Please accept the terms and conditions."),
+                                t(context)!
+                                    .signup_please_accept_conditions_label,
+                              ),
                             ),
                           );
+
+                          return;
                         }
 
                         if (!_formKey.currentState!.validate()) return;
@@ -152,23 +161,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               ),
                             );
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   profileSetupScreenRoute,
-                        // );
                       },
-                      child: const Text("Continue"),
+                      child: Text(
+                        t(context)!.signup_continue_label,
+                      ),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Do you have an account?"),
+                      Text(
+                        t(context)!.signup_have_account_label,
+                      ),
                       TextButton(
-                        onPressed: () async {
-                          Navigator.pushNamed(context, logInScreenRoute);
-                        },
-                        child: const Text("Log in"),
+                        onPressed: () async => Navigator.pushNamed(
+                          context,
+                          logInScreenRoute,
+                        ),
+                        child: Text(t(context)!.signup_login_label),
                       )
                     ],
                   ),

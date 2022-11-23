@@ -1,8 +1,8 @@
 import "package:directus/directus.dart";
-import "package:shop/config/constants.dart";
 import "package:shop/entities/account_entity.dart";
 import "package:shop/exceptions/account_exception.dart";
 import "package:shop/models/account_model.dart";
+import "package:shop/utils/logger.dart";
 
 class AccountRepository {
   final Directus sdk;
@@ -11,7 +11,7 @@ class AccountRepository {
     this.sdk,
   );
 
-  Future<AccountEntity> create(
+  Future<AccountEntity?> create(
     AccountModel accountModel,
   ) async {
     final email = accountModel.email.trim().toLowerCase();
@@ -22,13 +22,15 @@ class AccountRepository {
         DirectusUser(
           email: email,
           password: password,
-          role: DirectusRole(
-            id: kDefaultRoleId,
-          ),
         ),
       );
 
-      print(response.data);
+      return AccountEntity.fromJson(
+        {
+          "id": response.data.id,
+          "email": response.data.email,
+        },
+      );
     } on DirectusError catch (e) {
       String code = "unknown";
 
@@ -46,14 +48,10 @@ class AccountRepository {
         code,
       );
     } catch (e) {
-      print(e);
+      error("AccountRepository.create", data: {
+        "error": e.toString(),
+      });
     }
-
-    return AccountEntity.fromJson(
-      {
-        "id": "1",
-        "email": accountModel.email,
-      },
-    );
+    return null;
   }
 }
