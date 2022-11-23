@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/dot_indicators.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/dot_indicators.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
 
-import 'components/onbording_content.dart';
+import "components/onbording_content.dart";
 
 class OnBordingScreen extends StatefulWidget {
   const OnBordingScreen({Key? key}) : super(key: key);
@@ -76,7 +76,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pushNamed(
                         context, notificationPermissionScreenRoute);
                   },
@@ -121,7 +121,7 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
                     height: 60,
                     width: 60,
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (_pageIndex < _onbordData.length - 1) {
                           _pageController.nextPage(
                               curve: Curves.ease, duration: defaultDuration);

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/route/screen_export.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 // For preview
 class CategoryModel {
@@ -51,7 +51,7 @@ class Categories extends StatelessWidget {
                 category: demoCategories[index].name,
                 svgSrc: demoCategories[index].svgSrc,
                 isActive: index == 0,
-                press: () {
+                press: () async {
                   if (demoCategories[index].route != null) {
                     Navigator.pushNamed(context, demoCategories[index].route!);
                   }

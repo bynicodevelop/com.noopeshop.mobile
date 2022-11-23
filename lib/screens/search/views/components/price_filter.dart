@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../constants.dart';
-import '../../../../components/list_tile/checkbox_underline_list_tile.dart';
+import "../../../../constants.dart";
+import "../../../../components/list_tile/checkbox_underline_list_tile.dart";
 
 // For Demo
 class PriceModel {

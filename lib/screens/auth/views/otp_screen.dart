@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/otp_form.dart';
+import "components/otp_form.dart";
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class OtpScreen extends StatelessWidget {
                   const SizedBox(width: defaultPadding),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pushNamed(context, newPasswordScreenRoute);
                       },
                       child: const Text("Confirm"),

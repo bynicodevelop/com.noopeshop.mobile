@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/payment/views/components/card_input_formatters.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/screens/payment/views/components/card_input_formatters.dart";
 
-import 'components/payment_card.dart';
+import "components/payment_card.dart";
 
 class AddNewCardScreen extends StatefulWidget {
   const AddNewCardScreen({Key? key}) : super(key: key);
@@ -176,8 +176,8 @@ class _AddNewCardScreenState extends State<AddNewCardScreen> {
 }
 
 class Strings {
-  static const String appName = 'Payment Card Demo';
-  static const String fieldReq = 'This field is required';
-  static const String numberIsInvalid = 'Card is invalid';
-  static const String pay = 'Validate';
+  static const String appName = "Payment Card Demo";
+  static const String fieldReq = "This field is required";
+  static const String numberIsInvalid = "Card is invalid";
+  static const String pay = "Validate";
 }

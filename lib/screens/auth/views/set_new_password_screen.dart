@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/new_pass_form.dart';
+import "components/new_pass_form.dart";
 
 class SetNewPasswordScreen extends StatelessWidget {
   const SetNewPasswordScreen({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class SetNewPasswordScreen extends StatelessWidget {
               NewPassForm(formKey: _key),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_key.currentState!.validate()) {
                     Navigator.pushNamedAndRemoveUntil(context,
                         doneResetPasswordScreenRoute, (route) => false);

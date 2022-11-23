@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/list_tile/divider_list_tile.dart';
-import 'package:shop/components/network_image_with_loader.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/list_tile/divider_list_tile.dart";
+import "package:shop/components/network_image_with_loader.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/profile_card.dart';
-import 'components/profile_menu_item_list_tile.dart';
+import "components/profile_card.dart";
+import "components/profile_menu_item_list_tile.dart";
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
             imageSrc: "https://i.imgur.com/IXnwbLk.png",
             // proLableText: "Sliver",
             // isPro: true, if the user is pro
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, userInfoScreenRoute);
             },
           ),
@@ -50,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Orders",
             svgSrc: "assets/icons/Order.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, ordersScreenRoute);
             },
           ),
@@ -67,21 +67,21 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Addresses",
             svgSrc: "assets/icons/Address.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, addressesScreenRoute);
             },
           ),
           ProfileMenuListTile(
             text: "Payment",
             svgSrc: "assets/icons/card.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, emptyPaymentScreenRoute);
             },
           ),
           ProfileMenuListTile(
             text: "Wallet",
             svgSrc: "assets/icons/Wallet.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, walletScreenRoute);
             },
           ),
@@ -98,14 +98,14 @@ class ProfileScreen extends StatelessWidget {
             svgSrc: "assets/icons/Notification.svg",
             title: "Notification",
             trilingText: "Off",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, enableNotificationScreenRoute);
             },
           ),
           ProfileMenuListTile(
             text: "Preferences",
             svgSrc: "assets/icons/Preferences.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, preferencesScreenRoute);
             },
           ),
@@ -121,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Language",
             svgSrc: "assets/icons/Language.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, selectLanguageScreenRoute);
             },
           ),
@@ -142,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
           ProfileMenuListTile(
             text: "Get Help",
             svgSrc: "assets/icons/Help.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, getHelpScreenRoute);
             },
           ),

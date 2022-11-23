@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
 class EnableNotificationScreen extends StatelessWidget {
   const EnableNotificationScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class EnableNotificationScreen extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, notificationOptionsScreenRoute);
                 },
                 child: const Text("Enable Notification"),

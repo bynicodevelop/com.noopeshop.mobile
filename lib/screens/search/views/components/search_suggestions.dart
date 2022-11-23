@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'search_suggestion_text.dart';
+import "search_suggestion_text.dart";
 
 class SearchSuggestions extends StatelessWidget {
   const SearchSuggestions({

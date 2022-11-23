@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/network_image_with_loader.dart';
+import "package:flutter/material.dart";
+import "package:flutter_rating_bar/flutter_rating_bar.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/components/network_image_with_loader.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class UserReviewCard extends StatelessWidget {
   const UserReviewCard({
@@ -82,7 +82,7 @@ class UserReviewCard extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           const Text(
-            "“A cool gray cap in soft cssorduroy. Watch me.' By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
+            "“A cool gray cap in soft cssorduroy. Watch me. By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
           )
         ],
       ),

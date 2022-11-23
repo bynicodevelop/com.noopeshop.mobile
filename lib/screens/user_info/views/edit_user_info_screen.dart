@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
 
-import 'package:shop/components/network_image_with_loader.dart';
-import 'package:shop/constants.dart';
+import "package:shop/components/network_image_with_loader.dart";
+import "package:shop/constants.dart";
 
-import 'components/user_info_form.dart';
+import "components/user_info_form.dart";
 
 class EditUserInfoScreen extends StatelessWidget {
   const EditUserInfoScreen({Key? key}) : super(key: key);

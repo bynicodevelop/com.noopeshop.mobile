@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({Key? key}) : super(key: key);
@@ -33,7 +33,7 @@ class OrdersScreen extends StatelessWidget {
             svgSrc: "assets/icons/Product.svg",
             title: "Processing",
             numOfItem: 1,
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, orderProcessingScreenRoute);
             },
           ),
@@ -41,7 +41,7 @@ class OrdersScreen extends StatelessWidget {
             svgSrc: "assets/icons/Delivery.svg",
             title: "Delivered",
             numOfItem: 5,
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, deliveredOrdersScreenRoute);
             },
           ),
@@ -56,7 +56,7 @@ class OrdersScreen extends StatelessWidget {
             title: "Canceled",
             numOfItem: 2,
             counterColor: errorColor,
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, cancledOrdersScreenRoute);
             },
             isShowDivider: false,

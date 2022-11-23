@@ -1,18 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/cart_button.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/components/network_image_with_loader.dart';
-import 'package:shop/screens/product/views/added_to_cart_message_screen.dart';
-import 'package:shop/screens/product/views/components/product_list_tile.dart';
-import 'package:shop/screens/product/views/location_permission_store_availability_screen.dart';
-import 'package:shop/screens/product/views/size_guide_screen.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/components/cart_button.dart";
+import "package:shop/components/custom_modal_bottom_sheet.dart";
+import "package:shop/components/network_image_with_loader.dart";
+import "package:shop/screens/product/views/added_to_cart_message_screen.dart";
+import "package:shop/screens/product/views/components/product_list_tile.dart";
+import "package:shop/screens/product/views/location_permission_store_availability_screen.dart";
+import "package:shop/screens/product/views/size_guide_screen.dart";
 
-import '../../../constants.dart';
-import 'components/product_quantity.dart';
-import 'components/selected_colors.dart';
-import 'components/selected_size.dart';
-import 'components/unit_price.dart';
+import "../../../constants.dart";
+import "components/product_quantity.dart";
+import "components/selected_colors.dart";
+import "components/selected_size.dart";
+import "components/unit_price.dart";
 
 class ProductBuyNowScreen extends StatefulWidget {
   const ProductBuyNowScreen({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
         price: 269.4,
         title: "Add to cart",
         subTitle: "Total price",
-        press: () {
+        press: () async {
           customModalBottomSheet(
             context,
             isDismissible: false,
@@ -118,7 +118,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                     title: "Size guide",
                     svgSrc: "assets/icons/Sizeguid.svg",
                     isShowBottomBorder: true,
-                    press: () {
+                    press: () async {
                       customModalBottomSheet(
                         context,
                         height: MediaQuery.of(context).size.height * 0.9,
@@ -152,7 +152,7 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                     title: "Check stores",
                     svgSrc: "assets/icons/Stores.svg",
                     isShowBottomBorder: true,
-                    press: () {
+                    press: () async {
                       customModalBottomSheet(
                         context,
                         height: MediaQuery.of(context).size.height * 0.92,

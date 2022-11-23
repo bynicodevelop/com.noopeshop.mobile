@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
 class DoneResetPasswordScreen extends StatelessWidget {
   const DoneResetPasswordScreen({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class DoneResetPasswordScreen extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, logInScreenRoute);
                 },
                 child: const Text("Log in"),

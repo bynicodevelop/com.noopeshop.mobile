@@ -1,11 +1,11 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
 
-import 'components/express_shipping_method_card.dart';
-import 'components/shipping_method_card.dart';
-import 'components/standard_shopping_method_card.dart';
+import "components/express_shipping_method_card.dart";
+import "components/shipping_method_card.dart";
+import "components/standard_shopping_method_card.dart";
 
 class ShippingMethodsScreen extends StatelessWidget {
   const ShippingMethodsScreen({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../constants.dart';
-import '../network_image_with_loader.dart';
+import "../../constants.dart";
+import "../network_image_with_loader.dart";
 
 class ProductCard extends StatelessWidget {
   final String image, brandName, title;

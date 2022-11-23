@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
-import 'package:shop/theme/input_decoration_theme.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
+import "package:shop/theme/input_decoration_theme.dart";
 
-import 'components/language_card.dart';
+import "components/language_card.dart";
 
 class PreferredLanguageScreen extends StatelessWidget {
   const PreferredLanguageScreen({Key? key}) : super(key: key);
@@ -31,7 +31,9 @@ class PreferredLanguageScreen extends StatelessWidget {
                 child: Form(
                   child: TextFormField(
                     onSaved: (language) {},
-                    validator: (value) {}, // validate your textfield
+                    validator: (value) {
+                      return null;
+                    }, // validate your textfield
                     decoration: InputDecoration(
                       hintText: "Search your language",
                       filled: false,
@@ -70,7 +72,7 @@ class PreferredLanguageScreen extends StatelessWidget {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, logInScreenRoute);
                 },
                 child: const Text("Next"),

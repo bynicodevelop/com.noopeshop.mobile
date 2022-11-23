@@ -1,4 +1,4 @@
-import 'package:flutter/services.dart';
+import "package:flutter/services.dart";
 
 class CardMonthInputFormatter extends TextInputFormatter {
   @override
@@ -15,7 +15,7 @@ class CardMonthInputFormatter extends TextInputFormatter {
       buffer.write(newText[i]);
       var nonZeroIndex = i + 1;
       if (nonZeroIndex % 2 == 0 && nonZeroIndex != newText.length) {
-        buffer.write('/');
+        buffer.write("/");
       }
     }
 
@@ -41,7 +41,7 @@ class CardNumberInputFormatter extends TextInputFormatter {
       buffer.write(text[i]);
       var nonZeroIndex = i + 1;
       if (nonZeroIndex % 4 == 0 && nonZeroIndex != text.length) {
-        buffer.write('  '); // Add double spaces.
+        buffer.write("  "); // Add double spaces.
       }
     }
 

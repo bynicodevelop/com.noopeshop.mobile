@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/Banner/S/banner_s.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/Banner/S/banner_s.dart";
+import "package:shop/constants.dart";
 
 class BannerSStyle2 extends StatelessWidget {
   const BannerSStyle2(

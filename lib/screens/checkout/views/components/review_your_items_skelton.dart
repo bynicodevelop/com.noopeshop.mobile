@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../components/skleton/product/secondary_product_skelton.dart';
-import '../../../../constants.dart';
+import "../../../../components/skleton/product/secondary_product_skelton.dart";
+import "../../../../constants.dart";
 
 class ReviewYourItemsSkelton extends StatelessWidget {
   const ReviewYourItemsSkelton({

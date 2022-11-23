@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:form_field_validator/form_field_validator.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class NewPassForm extends StatelessWidget {
   const NewPassForm({

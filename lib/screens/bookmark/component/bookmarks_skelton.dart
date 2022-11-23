@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../components/skleton/product/product_card_skelton.dart';
-import '../../../constants.dart';
+import "../../../components/skleton/product/product_card_skelton.dart";
+import "../../../constants.dart";
 
 class BookMarksSlelton extends StatelessWidget {
   const BookMarksSlelton({

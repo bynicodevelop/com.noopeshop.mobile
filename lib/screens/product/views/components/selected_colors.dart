@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../constants.dart';
-import 'color_dot.dart';
+import "../../../../constants.dart";
+import "color_dot.dart";
 
 class SelectedColors extends StatelessWidget {
   const SelectedColors({

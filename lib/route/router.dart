@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:shop/entry_point.dart';
-import 'package:shop/screens/checkout/views/thanks_for_order_screen.dart';
-import 'package:shop/screens/language/view/select_language_screen.dart';
-import 'package:shop/screens/payment/views/add_new_card_screen.dart';
+import "package:flutter/material.dart";
+import "package:shop/entry_point.dart";
+import "package:shop/screens/checkout/views/thanks_for_order_screen.dart";
+import "package:shop/screens/language/view/select_language_screen.dart";
+import "package:shop/screens/payment/views/add_new_card_screen.dart";
 
-import 'screen_export.dart';
+import "screen_export.dart";
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {

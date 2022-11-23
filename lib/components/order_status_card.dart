@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
-import '../constants.dart';
-import 'order_process.dart';
+import "../constants.dart";
+import "order_process.dart";
 
 class OrderStatusCard extends StatelessWidget {
   const OrderStatusCard({

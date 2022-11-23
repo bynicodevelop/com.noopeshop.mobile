@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
 
-import 'components/pay_with_card.dart';
-import 'components/pay_with_cash.dart';
-import 'components/pay_with_credit.dart';
-import 'components/payment_method_button.dart';
+import "components/pay_with_card.dart";
+import "components/pay_with_cash.dart";
+import "components/pay_with_credit.dart";
+import "components/payment_method_button.dart";
 
 class PaymentMethodScreen extends StatefulWidget {
   const PaymentMethodScreen({Key? key}) : super(key: key);

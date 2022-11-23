@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
 
 class NoInternetScreen extends StatelessWidget {
   const NoInternetScreen({Key? key}) : super(key: key);
@@ -37,4 +37,3 @@ class NoInternetScreen extends StatelessWidget {
     );
   }
 }
-

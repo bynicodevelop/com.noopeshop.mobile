@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../network_image_with_loader.dart';
+import "../../network_image_with_loader.dart";
 
 class BannerS extends StatelessWidget {
   const BannerS(

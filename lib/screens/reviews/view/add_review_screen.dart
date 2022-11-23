@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter_rating_bar/flutter_rating_bar.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/constants.dart";
 
-import 'components/review_form.dart';
-import 'components/review_product_card.dart';
+import "components/review_form.dart";
+import "components/review_product_card.dart";
 
 class AddReviewScreen extends StatelessWidget {
   const AddReviewScreen({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../constants.dart';
+import "../constants.dart";
 
 class OrderProgress extends StatelessWidget {
   const OrderProgress({
@@ -141,6 +141,7 @@ class ProcessDotWithLine extends StatelessWidget {
 }
 
 enum OrderProcessStatus { done, processing, notDoneYeat, error, canceled }
+
 Widget statusWidget(BuildContext context, OrderProcessStatus status) {
   switch (status) {
     case OrderProcessStatus.processing:

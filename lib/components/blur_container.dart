@@ -1,8 +1,8 @@
-import 'dart:ui';
+import "dart:ui";
 
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../constants.dart';
+import "../constants.dart";
 
 class BlurContainer extends StatelessWidget {
   const BlurContainer({

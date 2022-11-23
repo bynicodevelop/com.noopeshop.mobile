@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/chat_active_dot.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/chat_active_dot.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/help_list_tile.dart';
+import "components/help_list_tile.dart";
 
 class GetHelpScreen extends StatelessWidget {
   const GetHelpScreen({Key? key}) : super(key: key);
@@ -72,7 +72,7 @@ class GetHelpScreen extends StatelessWidget {
             ),
             child: SafeArea(
               child: ListTile(
-                onTap: () {
+                onTap: () async {
                   Navigator.pushNamed(context, chatScreenRoute);
                 },
                 title: const Text(

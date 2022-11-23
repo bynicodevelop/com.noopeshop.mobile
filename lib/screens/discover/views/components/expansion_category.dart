@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/route/screen_export.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class ExpansionCategory extends StatelessWidget {
   const ExpansionCategory({
@@ -37,7 +37,7 @@ class ExpansionCategory extends StatelessWidget {
         (index) => Column(
           children: [
             ListTile(
-              onTap: () {
+              onTap: () async {
                 Navigator.pushNamed(context, onSaleScreenRoute);
               },
               title: Text(

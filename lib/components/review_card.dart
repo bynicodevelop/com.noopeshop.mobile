@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_rating_bar/flutter_rating_bar.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
-import '../constants.dart';
+import "../constants.dart";
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({

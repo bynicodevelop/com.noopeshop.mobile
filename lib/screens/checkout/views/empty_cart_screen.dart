@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
 
 class EmptyCartScreen extends StatelessWidget {
   const EmptyCartScreen({Key? key}) : super(key: key);

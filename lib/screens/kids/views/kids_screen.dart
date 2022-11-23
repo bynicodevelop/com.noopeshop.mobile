@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/Banner/L/banner_l_style_1.dart';
-import 'package:shop/components/Banner/S/banner_s_style_1.dart';
-import 'package:shop/components/Banner/S/banner_s_style_4.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/components/shopping_bag.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/route_constants.dart';
-import 'package:shop/screens/search/views/components/search_form.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/Banner/L/banner_l_style_1.dart";
+import "package:shop/components/Banner/S/banner_s_style_1.dart";
+import "package:shop/components/Banner/S/banner_s_style_4.dart";
+import "package:shop/components/product/product_card.dart";
+import "package:shop/components/shopping_bag.dart";
+import "package:shop/constants.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/route_constants.dart";
+import "package:shop/screens/search/views/components/search_form.dart";
 
 class KidsScreen extends StatelessWidget {
   const KidsScreen({Key? key}) : super(key: key);
@@ -89,7 +89,7 @@ class KidsScreen extends StatelessWidget {
                       price: kidsProducts[index].price,
                       priceAfetDiscount: kidsProducts[index].priceAfetDiscount,
                       dicountpercent: kidsProducts[index].dicountpercent,
-                      press: () {
+                      press: () async {
                         Navigator.pushNamed(context, productDetailsScreenRoute);
                       },
                     );

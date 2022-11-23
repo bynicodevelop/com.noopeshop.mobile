@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:shop/screens/order/views/components/order_summary_card.dart';
+import "package:flutter/material.dart";
+import "package:shop/screens/order/views/components/order_summary_card.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class OrderSummary extends StatelessWidget {
   const OrderSummary({

@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
 
 class NotificationPermissionScreen extends StatelessWidget {
   const NotificationPermissionScreen({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                     right: 0,
                     child: SafeArea(
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.pushNamed(
                               context, preferredLanuageScreenRoute);
                         },
@@ -93,7 +93,7 @@ class NotificationPermissionScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pushNamed(
                             context, preferredLanuageScreenRoute);
                       },

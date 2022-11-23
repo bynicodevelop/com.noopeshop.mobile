@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:shop/theme/checkbox_themedata.dart';
-import 'package:shop/theme/theme_data.dart';
+import "package:flutter/material.dart";
+import "package:shop/theme/checkbox_themedata.dart";
+import "package:shop/theme/theme_data.dart";
 
-import '../constants.dart';
-import 'button_theme.dart';
-import 'input_decoration_theme.dart';
+import "../constants.dart";
+import "button_theme.dart";
+import "input_decoration_theme.dart";
 
 ThemeData lightTheme(BuildContext context) {
   return ThemeData(
@@ -27,6 +27,5 @@ ThemeData lightTheme(BuildContext context) {
     appBarTheme: appBarLightTheme,
     scrollbarTheme: scrollbarThemeData,
     dataTableTheme: dataTableLightThemeData,
-    
   );
 }

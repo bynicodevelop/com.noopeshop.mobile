@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/product/product_card.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/route_constants.dart";
 
-import '../../../constants.dart';
+import "../../../constants.dart";
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class BookmarkScreen extends StatelessWidget {
                     priceAfetDiscount:
                         demoPopularProducts[index].priceAfetDiscount,
                     dicountpercent: demoPopularProducts[index].dicountpercent,
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, productDetailsScreenRoute);
                     },
                   );

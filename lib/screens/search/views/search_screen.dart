@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/search/views/components/search_form.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/custom_modal_bottom_sheet.dart";
+import "package:shop/constants.dart";
+import "package:shop/screens/search/views/components/search_form.dart";
 
-import 'components/recent_searches.dart';
-import 'components/search_filter.dart';
-import 'components/search_resulats.dart';
-import 'components/search_suggestions.dart';
+import "components/recent_searches.dart";
+import "components/search_filter.dart";
+import "components/search_resulats.dart";
+import "components/search_suggestions.dart";
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   },
                   onSaved: (value) {},
                   validator: (value) {}, // validate
-                  onTabFilter: () {
+                  onTabFilter: () async {
                     customModalBottomSheet(
                       context,
                       height: MediaQuery.of(context).size.height * 0.92,

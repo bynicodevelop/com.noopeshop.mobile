@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/theme/input_decoration_theme.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/theme/input_decoration_theme.dart";
 
-import '../../../constants.dart';
+import "../../../constants.dart";
 
 class LocationPermissonStoreAvailabilityScreen extends StatelessWidget {
   const LocationPermissonStoreAvailabilityScreen({Key? key}) : super(key: key);

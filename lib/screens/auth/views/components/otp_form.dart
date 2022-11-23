@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import "package:flutter/material.dart";
+import "package:flutter/services.dart";
 
 class OtpForm extends StatelessWidget {
   const OtpForm({
@@ -90,4 +90,3 @@ class OtpForm extends StatelessWidget {
     );
   }
 }
-

@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/route/screen_export.dart";
 
-import '../../../../constants.dart';
-import 'search_suggestion_text.dart';
+import "../../../../constants.dart";
+import "search_suggestion_text.dart";
 
 class RecentSearches extends StatelessWidget {
   const RecentSearches({

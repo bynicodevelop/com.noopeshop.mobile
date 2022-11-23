@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
 
-import 'components/cupertino_switch_divided_list_tile.dart';
+import "components/cupertino_switch_divided_list_tile.dart";
 
 class NotificationOptionsScreen extends StatelessWidget {
   const NotificationOptionsScreen({Key? key}) : super(key: key);

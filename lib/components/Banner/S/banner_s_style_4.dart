@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:flutter_svg/svg.dart';
+import "package:flutter_svg/svg.dart";
 
-import '../../../constants.dart';
-import 'banner_s.dart';
+import "../../../constants.dart";
+import "banner_s.dart";
 
 class BannerSStyle4 extends StatelessWidget {
   const BannerSStyle4({

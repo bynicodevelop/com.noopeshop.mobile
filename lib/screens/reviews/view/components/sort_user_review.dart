@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
-import '../../../../constants.dart';
-import 'rating_sort_dropdown_button.dart';
+import "../../../../constants.dart";
+import "rating_sort_dropdown_button.dart";
 
 class SortUserReview extends SliverPersistentHeaderDelegate {
   @override
@@ -24,7 +24,7 @@ class SortUserReview extends SliverPersistentHeaderDelegate {
           ),
           const SizedBox(width: defaultPadding / 2),
           RatingSortDropdownButton(
-            items: const ['Most useful', 'Recent'],
+            items: const ["Most useful", "Recent"],
             value: "Most useful",
             onChanged: (value) {
               // Set the dropdown value

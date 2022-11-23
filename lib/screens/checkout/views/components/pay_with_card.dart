@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/card_info.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/components/card_info.dart";
+import "package:shop/route/screen_export.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class PayWithCard extends StatefulWidget {
   const PayWithCard({
@@ -27,7 +27,7 @@ class _PayWithCardState extends State<PayWithCard> {
               child: Column(
                 children: [
                   OutlinedButton.icon(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.pushNamed(context, addNewCardScreenRoute);
                     },
                     icon: SvgPicture.asset(
@@ -68,7 +68,7 @@ class _PayWithCardState extends State<PayWithCard> {
               padding: const EdgeInsets.symmetric(
                   horizontal: defaultPadding, vertical: defaultPadding / 2),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, thanksForOrderScreenRoute);
                 },
                 child: const Text("Confirm"),

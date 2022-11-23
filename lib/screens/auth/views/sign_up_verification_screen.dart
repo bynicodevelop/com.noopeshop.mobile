@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
-import 'package:shop/screens/auth/views/components/sign_up_verification_otp_form.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/custom_modal_bottom_sheet.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
+import "package:shop/screens/auth/views/components/sign_up_verification_otp_form.dart";
 
 class SignUpVerificationScreen extends StatelessWidget {
   const SignUpVerificationScreen({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class SignUpVerificationScreen extends StatelessWidget {
                   const SizedBox(width: defaultPadding),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         FocusScope.of(context).unfocus();
                         customModalBottomSheet(
                           context,

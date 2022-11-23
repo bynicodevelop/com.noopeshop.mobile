@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/order/views/components/order_summary_card.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/screens/order/views/components/order_summary_card.dart";
 
-import 'components/order_summery.dart';
+import "components/order_summery.dart";
 
 class ThanksForOrderScreen extends StatelessWidget {
   const ThanksForOrderScreen({Key? key}) : super(key: key);

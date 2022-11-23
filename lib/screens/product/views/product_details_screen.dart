@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/cart_button.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/product/views/product_info_screen.dart';
-import 'package:shop/screens/product/views/product_returns_screen.dart';
-import 'package:shop/screens/product/views/shipping_methods_screen.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/cart_button.dart";
+import "package:shop/components/custom_modal_bottom_sheet.dart";
+import "package:shop/components/product/product_card.dart";
+import "package:shop/constants.dart";
+import "package:shop/screens/product/views/product_info_screen.dart";
+import "package:shop/screens/product/views/product_returns_screen.dart";
+import "package:shop/screens/product/views/shipping_methods_screen.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/notify_me_card.dart';
-import 'components/product_images.dart';
-import 'components/product_info.dart';
-import 'components/product_list_tile.dart';
-import '../../../components/review_card.dart';
-import 'product_buy_now_screen.dart';
+import "components/notify_me_card.dart";
+import "components/product_images.dart";
+import "components/product_info.dart";
+import "components/product_list_tile.dart";
+import "../../../components/review_card.dart";
+import "product_buy_now_screen.dart";
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({Key? key, this.isProductAvailable = true})
@@ -28,7 +28,7 @@ class ProductDetailsScreen extends StatelessWidget {
       bottomNavigationBar: isProductAvailable
           ? CartButton(
               price: 140,
-              press: () {
+              press: () async {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
@@ -65,14 +65,14 @@ class ProductDetailsScreen extends StatelessWidget {
               title: "Sleeveless Ruffle",
               isAvailable: isProductAvailable,
               description:
-                  "A cool gray cap in soft corduroy. Watch me.' By buying cotton products from Lindex, you’re supporting more responsibly...",
+                  "A cool gray cap in soft corduroy. Watch me. By buying cotton products from Lindex, you’re supporting more responsibly...",
               rating: 4.4,
               numOfReviews: 126,
             ),
             ProductListTile(
               svgSrc: "assets/icons/Product.svg",
               title: "Product Details",
-              press: () {
+              press: () async {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
@@ -83,7 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
             ProductListTile(
               svgSrc: "assets/icons/Delivery.svg",
               title: "Shipping Information",
-              press: () {
+              press: () async {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
@@ -95,7 +95,7 @@ class ProductDetailsScreen extends StatelessWidget {
               svgSrc: "assets/icons/Return.svg",
               title: "Returns",
               isShowBottomBorder: true,
-              press: () {
+              press: () async {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
@@ -121,7 +121,7 @@ class ProductDetailsScreen extends StatelessWidget {
               svgSrc: "assets/icons/Chat.svg",
               title: "Reviews",
               isShowBottomBorder: true,
-              press: () {
+              press: () async {
                 Navigator.pushNamed(context, productReviewsScreenRoute);
               },
             ),

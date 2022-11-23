@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class CentimetersSizeTable extends StatelessWidget {
   const CentimetersSizeTable({Key? key}) : super(key: key);
@@ -23,33 +23,33 @@ class CentimetersSizeTable extends StatelessWidget {
             DataColumn(
                 label: Expanded(
               child: Text(
-                'General Size',
+                "General Size",
                 maxLines: 2,
               ),
             )),
             DataColumn(
                 label: Expanded(
-              child: Text('US Hat size'),
+              child: Text("US Hat size"),
             )),
             DataColumn(
               label: Expanded(
-                child: Text('Head Measurement'),
+                child: Text("Head Measurement"),
               ),
             ),
           ],
           rows: const <DataRow>[
             DataRow(
               cells: <DataCell>[
-                DataCell(Text('S-M')),
-                DataCell(Text('S-M')),
-                DataCell(Text('21 7/8 - 22')),
+                DataCell(Text("S-M")),
+                DataCell(Text("S-M")),
+                DataCell(Text("21 7/8 - 22")),
               ],
             ),
             DataRow(
               cells: <DataCell>[
-                DataCell(Text('L-XL')),
-                DataCell(Text('L-XL')),
-                DataCell(Text('22 5/8 - 23')),
+                DataCell(Text("L-XL")),
+                DataCell(Text("L-XL")),
+                DataCell(Text("22 5/8 - 23")),
               ],
             ),
           ],

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
 
-import 'components/search_suggestion_text.dart';
+import "components/search_suggestion_text.dart";
 
 class SearchHistoryScreen extends StatelessWidget {
   const SearchHistoryScreen({Key? key}) : super(key: key);

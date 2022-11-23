@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart";
+import "package:shop/constants.dart";
 
 class ProductInfoScreen extends StatelessWidget {
   const ProductInfoScreen({Key? key}) : super(key: key);
@@ -34,10 +34,10 @@ class ProductInfoScreen extends StatelessWidget {
                   child: Column(
                     children: const [
                       HtmlWidget(
-                        '''
+                        """
                           <strong>Story</strong>
 
-                          <p>A cool gray cap in soft corduroy. Watch me.' By buying cotton products from Lindex, you’re supporting more responsibly...</p>
+                          <p>A cool gray cap in soft corduroy. Watch me." By buying cotton products from Lindex, you’re supporting more responsibly...</p>
                           <strong>Details</strong>
                           <ul>
                             <li>Materials: 100% cotton, and lining Structured</li>
@@ -51,7 +51,7 @@ class ProductInfoScreen extends StatelessWidget {
                           <p>Style: Summer Hat</p>
                           <p>Design: Plain</p>
                           <p>Fabric: Jersey</p>
-                        ''',
+                        """,
                       ),
                     ],
                   ),

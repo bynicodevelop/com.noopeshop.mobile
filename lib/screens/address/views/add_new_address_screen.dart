@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
 
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:shop/constants.dart';
+import "package:form_field_validator/form_field_validator.dart";
+import "package:shop/constants.dart";
 
-import 'components/use_current_location_card.dart';
+import "components/use_current_location_card.dart";
 
 class AddNewAddressScreen extends StatelessWidget {
   const AddNewAddressScreen({Key? key}) : super(key: key);

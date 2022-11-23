@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import '../banner_discount_tag.dart';
-import 'banner_m.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "../banner_discount_tag.dart";
+import "banner_m.dart";
 
-import '../../../constants.dart';
+import "../../../constants.dart";
 
 class BannerMStyle2 extends StatelessWidget {
   const BannerMStyle2({

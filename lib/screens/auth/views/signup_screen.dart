@@ -1,9 +1,9 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:shop/screens/auth/views/components/sign_up_form.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/gestures.dart";
+import "package:flutter/material.dart";
+import "package:shop/screens/auth/views/components/sign_up_form.dart";
+import "package:shop/route/route_constants.dart";
 
-import '../../../constants.dart';
+import "../../../constants.dart";
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             children: [
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
+                                  ..onTap = () async {
                                     Navigator.pushNamed(
                                         context, termsOfServicesScreenRoute);
                                   },
@@ -77,7 +77,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: defaultPadding * 2),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       // Validate Form
                       // if (_formKey.currentState!.validate()) {}
                       Navigator.pushNamed(
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       const Text("Do you have an account?"),
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.pushNamed(context, logInScreenRoute);
                         },
                         child: const Text("Log in"),

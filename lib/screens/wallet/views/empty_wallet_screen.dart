@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import '../../../constants.dart';
-import 'components/wallet_balance_card.dart';
+import "../../../constants.dart";
+import "components/wallet_balance_card.dart";
 
 class EmptyWalletScreen extends StatelessWidget {
   const EmptyWalletScreen({Key? key}) : super(key: key);

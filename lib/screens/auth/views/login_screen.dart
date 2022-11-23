@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
 
-import 'components/login_form.dart';
+import "components/login_form.dart";
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     child: TextButton(
                       child: const Text("Forgot password"),
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pushNamed(
                             context, passwordRecoveryScreenRoute);
                       },
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: defaultPadding,
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         Navigator.pushNamedAndRemoveUntil(
                             context,
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Text("Don't have an account?"),
                       TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           Navigator.pushNamed(context, signUpScreenRoute);
                         },
                         child: const Text("Sign up"),

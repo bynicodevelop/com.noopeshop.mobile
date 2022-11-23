@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/verification_method_card.dart';
+import "components/verification_method_card.dart";
 
 class VerificationMethodScreen extends StatelessWidget {
   const VerificationMethodScreen({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class VerificationMethodScreen extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, otpScreenRoute);
                 },
                 child: const Text("Next"),

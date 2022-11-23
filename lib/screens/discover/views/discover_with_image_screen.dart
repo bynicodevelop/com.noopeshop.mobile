@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/category_model.dart';
-import 'package:shop/route/screen_export.dart';
-import 'package:shop/screens/search/views/components/search_form.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/models/category_model.dart";
+import "package:shop/route/screen_export.dart";
+import "package:shop/screens/search/views/components/search_form.dart";
 
-import 'components/category_with_image.dart';
+import "components/category_with_image.dart";
 
 class DiscoverWithImageScreen extends StatelessWidget {
   const DiscoverWithImageScreen({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class DiscoverWithImageScreen extends StatelessWidget {
                     child: CategoryWithImage(
                       title: demoCategoriesWithImage[index].title,
                       image: demoCategoriesWithImage[index].image!,
-                      press: () {
+                      press: () async {
                         Navigator.pushNamed(context, subDiscoverScreenRoute);
                       },
                     ),

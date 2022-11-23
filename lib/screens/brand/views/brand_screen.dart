@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/product/product_card.dart';
-import 'package:shop/components/shopping_bag.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/product/product_card.dart";
+import "package:shop/components/shopping_bag.dart";
+import "package:shop/constants.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/brand_info.dart';
-import 'components/brand_search_form.dart';
+import "components/brand_info.dart";
+import "components/brand_search_form.dart";
 
 class BrandScreen extends StatelessWidget {
   const BrandScreen({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class BrandScreen extends StatelessWidget {
                             demoPopularProducts[index].priceAfetDiscount,
                         dicountpercent:
                             demoPopularProducts[index].dicountpercent,
-                        press: () {
+                        press: () async {
                           Navigator.pushNamed(
                               context, productDetailsScreenRoute);
                         },

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/address_card.dart';
+import "components/address_card.dart";
 
 class AddressesScreen extends StatelessWidget {
   const AddressesScreen({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class AddressesScreen extends StatelessWidget {
         child: Column(
           children: [
             OutlinedButton.icon(
-              onPressed: () {
+              onPressed: () async {
                 Navigator.pushNamed(context, addNewAddressesScreenRoute);
               },
               icon: SvgPicture.asset(

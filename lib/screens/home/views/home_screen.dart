@@ -1,16 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/Banner/L/banner_l_style_1.dart';
-import 'package:shop/components/Banner/S/banner_s_style_1.dart';
-import 'package:shop/components/Banner/S/banner_s_style_4.dart';
-import 'package:shop/components/Banner/S/banner_s_style_5.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/Banner/L/banner_l_style_1.dart";
+import "package:shop/components/Banner/S/banner_s_style_1.dart";
+import "package:shop/components/Banner/S/banner_s_style_4.dart";
+import "package:shop/components/Banner/S/banner_s_style_5.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/best_sellers.dart';
-import 'components/flash_sale.dart';
-import 'components/most_popular.dart';
-import 'components/offer_carousel_and_categories.dart';
-import 'components/popular_products.dart';
+import "components/best_sellers.dart";
+import "components/flash_sale.dart";
+import "components/most_popular.dart";
+import "components/offer_carousel_and_categories.dart";
+import "components/popular_products.dart";
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                     title: "New \narrival",
                     subtitle: "SPECIAL OFFER",
                     discountParcent: 50,
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                     title: "SUMMER \nSALE",
                     subtitle: "SPECIAL OFFER",
                     bottomText: "UP TO 80% OFF",
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                     title: "Black \nfriday",
                     subtitle: "50% off",
                     bottomText: "Collection".toUpperCase(),
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
@@ -78,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                     title: "Summer \nSale",
                     subtitle: "SPECIAL OFFER",
                     discountPercent: 50,
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                     title: "Black \nfriday",
                     subtitle: "50% Off",
                     bottomText: "Collection".toUpperCase(),
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),
@@ -100,7 +100,7 @@ class HomeScreen extends StatelessWidget {
                     image: "https://i.imgur.com/2443sJb.png",
                     title: "Grab \nyours now",
                     subtitle: "65% Off",
-                    press: () {
+                    press: () async {
                       Navigator.pushNamed(context, onSaleScreenRoute);
                     },
                   ),

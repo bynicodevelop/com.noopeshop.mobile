@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/components/check_mark.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/components/check_mark.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class VerificationMethodCard extends StatelessWidget {
   const VerificationMethodCard({

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/order_process.dart';
-import 'package:shop/components/order_status_card.dart';
-import 'package:shop/components/product/secondary_product_card.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/order_process.dart";
+import "package:shop/components/order_status_card.dart";
+import "package:shop/components/product/secondary_product_card.dart";
+import "package:shop/constants.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/screen_export.dart";
 
 class OrderProcessingScreen extends StatelessWidget {
   const OrderProcessingScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class OrderProcessingScreen extends StatelessWidget {
         child: Column(
           children: [
             OrderStatusCard(
-              press: () {
+              press: () async {
                 Navigator.pushNamed(context, orderDetailsScreenRoute);
               },
               orderId: "FDS6398220",

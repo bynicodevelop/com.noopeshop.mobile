@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
 
 class CurrentPasswordScreen extends StatelessWidget {
   const CurrentPasswordScreen({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class CurrentPasswordScreen extends StatelessWidget {
               ),
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushReplacementNamed(
                       context, newPasswordScreenRoute);
                 },

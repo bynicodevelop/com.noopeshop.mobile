@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/order_process.dart';
-import 'package:shop/components/order_status_card.dart';
-import 'package:shop/components/product/secondary_product_card.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/screen_export.dart';
-import 'package:shop/screens/profile/views/components/profile_menu_item_list_tile.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/order_process.dart";
+import "package:shop/components/order_status_card.dart";
+import "package:shop/components/product/secondary_product_card.dart";
+import "package:shop/constants.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/screen_export.dart";
+import "package:shop/screens/profile/views/components/profile_menu_item_list_tile.dart";
 
-import 'components/help_line.dart';
-import 'components/order_summary_card.dart';
+import "components/help_line.dart";
+import "components/order_summary_card.dart";
 
 class OrderDetailsScreen extends StatelessWidget {
   const OrderDetailsScreen({Key? key}) : super(key: key);
@@ -125,7 +125,7 @@ class OrderDetailsScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(defaultPadding),
                 child: OutlinedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pushNamed(context, cancleOrderScreenRoute);
                   },
                   child: Text(

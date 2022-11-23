@@ -1,8 +1,8 @@
-import 'package:animations/animations.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:animations/animations.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({Key? key}) : super(key: key);
@@ -51,7 +51,7 @@ class _EntryPointState extends State<EntryPoint> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pushNamed(context, searchScreenRoute);
             },
             icon: SvgPicture.asset(
@@ -61,7 +61,7 @@ class _EntryPointState extends State<EntryPoint> {
             ),
           ),
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pushNamed(context, notificationsScreenRoute);
             },
             icon: SvgPicture.asset(

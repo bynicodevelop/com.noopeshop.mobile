@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
 
 class SetupFingerprintScreen extends StatelessWidget {
   const SetupFingerprintScreen({Key? key}) : super(key: key);
@@ -48,4 +48,3 @@ class SetupFingerprintScreen extends StatelessWidget {
     );
   }
 }
-

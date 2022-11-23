@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/product/secondary_product_card.dart';
-import 'package:shop/components/skleton/skelton.dart';
-import 'package:shop/models/product_model.dart';
-import 'package:shop/route/screen_export.dart';
-import 'package:shop/screens/order/views/components/order_summary_card.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/product/secondary_product_card.dart";
+import "package:shop/models/product_model.dart";
+import "package:shop/route/screen_export.dart";
+import "package:shop/screens/order/views/components/order_summary_card.dart";
 
-import '../../../constants.dart';
-import 'components/coupon_code.dart';
+import "../../../constants.dart";
+import "components/coupon_code.dart";
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -68,7 +67,7 @@ class CartScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: defaultPadding),
               sliver: SliverToBoxAdapter(
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pushNamed(context, paymentMethodScreenRoute);
                   },
                   child: const Text("Continue"),

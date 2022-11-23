@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/route_constants.dart";
 
-import '../../profile/views/components/profile_card.dart';
-import 'components/user_info_list_tile.dart';
+import "../../profile/views/components/profile_card.dart";
+import "components/user_info_list_tile.dart";
 
 class UserInfoScreen extends StatelessWidget {
   const UserInfoScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class UserInfoScreen extends StatelessWidget {
         title: const Text("Profile"),
         actions: [
           TextButton(
-            onPressed: () {
+            onPressed: () async {
               Navigator.pushNamed(context, editUserInfoScreenRoute);
             },
             child: const Text("Edit"),
@@ -59,7 +59,7 @@ class UserInfoScreen extends StatelessWidget {
             ListTile(
               leading: const Text("Password"),
               trailing: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   Navigator.pushNamed(context, currentPasswordScreenRoute);
                 },
                 child: const Text("Change password"),

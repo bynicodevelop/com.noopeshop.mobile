@@ -1,11 +1,11 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
-import '../../../constants.dart';
-import '../../blur_container.dart';
-import 'banner_m.dart';
+import "../../../constants.dart";
+import "../../blur_container.dart";
+import "banner_m.dart";
 
 class BannerMWithCounter extends StatefulWidget {
   const BannerMWithCounter({

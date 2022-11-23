@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:shop/route/route_constants.dart';
+import "package:flutter/material.dart";
+import "package:shop/route/route_constants.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class PayWithCash extends StatelessWidget {
   const PayWithCash({
@@ -38,7 +38,7 @@ class PayWithCash extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                     horizontal: defaultPadding, vertical: defaultPadding / 2),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.pushNamed(context, thanksForOrderScreenRoute);
                   },
                   child: const Text("Confirm"),

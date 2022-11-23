@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/constants.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/setup_profile_form.dart';
-import 'components/user_image_upload.dart';
+import "components/setup_profile_form.dart";
+import "components/user_image_upload.dart";
 
 class ProfileSetupScreen extends StatelessWidget {
   const ProfileSetupScreen({Key? key}) : super(key: key);
@@ -53,7 +53,7 @@ class ProfileSetupScreen extends StatelessWidget {
                   const SizedBox(width: defaultPadding),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         Navigator.pushNamed(
                             context, signUpVerificationScreenRoute);
                       },

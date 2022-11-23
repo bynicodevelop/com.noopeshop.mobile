@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:shop/components/custom_modal_bottom_sheet.dart';
-import 'package:shop/components/list_tile/divider_list_tile.dart';
-import 'package:shop/components/outlined_active_button.dart';
-import 'package:shop/screens/search/views/components/brand_filter.dart';
-import 'package:shop/screens/search/views/components/color_filter.dart';
-import 'package:shop/screens/search/views/components/price_filter.dart';
-import 'package:shop/screens/search/views/components/product_sort_filter.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:shop/components/custom_modal_bottom_sheet.dart";
+import "package:shop/components/list_tile/divider_list_tile.dart";
+import "package:shop/components/outlined_active_button.dart";
+import "package:shop/screens/search/views/components/brand_filter.dart";
+import "package:shop/screens/search/views/components/color_filter.dart";
+import "package:shop/screens/search/views/components/price_filter.dart";
+import "package:shop/screens/search/views/components/product_sort_filter.dart";
 
-import '../../../../constants.dart';
-import 'size_fiter.dart';
+import "../../../../constants.dart";
+import "size_fiter.dart";
 
 class SearchFilter extends StatefulWidget {
   const SearchFilter({
@@ -95,7 +95,7 @@ class _SearchFilterState extends State<SearchFilter> {
                         children: [
                           DividerListTile(
                             title: const Text("Color"),
-                            press: () {
+                            press: () async {
                               customModalBottomSheet(
                                 context,
                                 height:
@@ -106,7 +106,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           ),
                           DividerListTile(
                             title: const Text("Size"),
-                            press: () {
+                            press: () async {
                               customModalBottomSheet(
                                 context,
                                 height:
@@ -117,7 +117,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           ),
                           DividerListTile(
                             title: const Text("Brand"),
-                            press: () {
+                            press: () async {
                               customModalBottomSheet(
                                 context,
                                 height:
@@ -128,7 +128,7 @@ class _SearchFilterState extends State<SearchFilter> {
                           ),
                           DividerListTile(
                             title: const Text("Price"),
-                            press: () {
+                            press: () async {
                               customModalBottomSheet(
                                 context,
                                 height:

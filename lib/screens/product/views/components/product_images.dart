@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import '/components/network_image_with_loader.dart';
+import "package:flutter/material.dart";
+import "/components/network_image_with_loader.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class ProductImages extends StatefulWidget {
   const ProductImages({

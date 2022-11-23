@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
 
-import '../../../../constants.dart';
+import "../../../../constants.dart";
 
 class StandardShippingMethodCard extends StatelessWidget {
   const StandardShippingMethodCard({
@@ -34,7 +34,7 @@ class StandardShippingMethodCard extends StatelessWidget {
                 Row(
                   children: [
                     SvgPicture.asset(
-                      'assets/icons/Standard.svg',
+                      "assets/icons/Standard.svg",
                       color: Theme.of(context).iconTheme.color,
                     ),
                     const SizedBox(width: defaultPadding / 2),

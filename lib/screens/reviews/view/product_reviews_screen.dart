@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:shop/components/review_card.dart';
-import 'package:shop/constants.dart';
-import 'package:shop/screens/product/views/components/product_list_tile.dart';
-import 'package:shop/route/screen_export.dart';
+import "package:flutter/material.dart";
+import "package:shop/components/review_card.dart";
+import "package:shop/constants.dart";
+import "package:shop/screens/product/views/components/product_list_tile.dart";
+import "package:shop/route/screen_export.dart";
 
-import 'components/sort_user_review.dart';
-import 'components/user_review_card.dart';
+import "components/sort_user_review.dart";
+import "components/user_review_card.dart";
 
 class ProductReviewsScreen extends StatelessWidget {
   const ProductReviewsScreen({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class ProductReviewsScreen extends StatelessWidget {
               title: "Add Review",
               svgSrc: "assets/icons/Chat-add.svg",
               isShowBottomBorder: true,
-              press: () {
+              press: () async {
                 Navigator.pushNamed(context, addReviewsScreenRoute);
               },
             ),
@@ -65,7 +65,7 @@ class ProductReviewsScreen extends StatelessWidget {
                         index.isEven ? null : "https://i.imgur.com/4h34UKX.png",
                     time: "36s",
                     review:
-                        "“A cool gray cap in soft cssorduroy. Watch me.' By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
+                        "A cool gray cap in soft cssorduroy. Watch me. By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
                   ),
                 ),
                 childCount: 7,
