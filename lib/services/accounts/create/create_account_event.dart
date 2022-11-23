@@ -1,13 +1,13 @@
-part of "create_bloc.dart";
+part of "create_account_bloc.dart";
 
-abstract class CreateEvent extends Equatable {
-  const CreateEvent();
+abstract class CreateAccountEvent extends Equatable {
+  const CreateAccountEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class OnCreateAccountEvent extends CreateEvent {
+class OnCreateAccountEvent extends CreateAccountEvent {
   final AccountModel account;
 
   const OnCreateAccountEvent({

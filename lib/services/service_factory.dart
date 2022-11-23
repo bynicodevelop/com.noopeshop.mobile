@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:shop/repositories/account_repository.dart";
-import "package:shop/services/accounts/create/create_bloc.dart";
+import "package:shop/services/accounts/create/create_account_bloc.dart";
 
 class ServiceFactory extends StatelessWidget {
   final AccountRepository accountRepository;
@@ -18,8 +18,8 @@ class ServiceFactory extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CreateBloc>(
-          create: (context) => CreateBloc(
+        BlocProvider<CreateAccountBloc>(
+          create: (context) => CreateAccountBloc(
             accountRepository,
           ),
         ),
