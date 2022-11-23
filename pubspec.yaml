@@ -48,6 +48,7 @@ dependencies:
   directus: ^0.7.2
   logger: ^1.1.0
   another_flushbar: ^1.12.29
+  flutter_secure_storage: ^6.0.0
 
 dev_dependencies:
   flutter_test:

@@ -2,13 +2,16 @@ import "package:directus/directus.dart";
 import "package:shop/entities/account_entity.dart";
 import "package:shop/exceptions/account_exception.dart";
 import "package:shop/models/account_model.dart";
+import "package:shop/repositories/session_repository.dart";
 import "package:shop/utils/logger.dart";
 
 class AccountRepository {
   final Directus sdk;
+  final SessionRepository sessionRepository;
 
   const AccountRepository(
     this.sdk,
+    this.sessionRepository,
   );
 
   Future<AccountEntity?> create(
@@ -23,6 +26,14 @@ class AccountRepository {
           email: email,
           password: password,
         ),
+      );
+
+      await sessionRepository.setId(
+        response.data.id!,
+      );
+
+      await sessionRepository.setEmail(
+        response.data.email!,
       );
 
       return AccountEntity.fromJson(
