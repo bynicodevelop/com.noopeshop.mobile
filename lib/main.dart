@@ -47,7 +47,7 @@ class App extends StatelessWidget {
           Locale("fr", ""),
         ],
         onGenerateRoute: router.generateRoute,
-        initialRoute: signUpScreenRoute,
+        initialRoute: entryPointScreenRoute,
       ),
     );
   }
