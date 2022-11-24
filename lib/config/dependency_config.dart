@@ -5,6 +5,7 @@ import "package:get_it/get_it.dart";
 import "package:injectable/injectable.dart";
 import "package:shop/config/constants.dart";
 import "package:shop/repositories/account_repository.dart";
+import "package:shop/repositories/categories_repository.dart";
 import "package:shop/repositories/session_repository.dart";
 
 final getIt = GetIt.instance;
@@ -54,6 +55,12 @@ $initGetIt(
       sdk,
       dio,
       sessionRepository,
+    ),
+  );
+
+  gh.factory<CategoriesRepository>(
+    () => CategoriesRepository(
+      sdk,
     ),
   );
 }

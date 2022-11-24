@@ -1,33 +1,16 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/entities/category_entity.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/services/categories/load/load_categories_bloc.dart";
 
 import "../../../../constants.dart";
 
-// For preview
-class CategoryModel {
-  final String name;
-  final String? svgSrc, route;
-
-  CategoryModel({
-    required this.name,
-    this.svgSrc,
-    this.route,
-  });
-}
-
-List<CategoryModel> demoCategories = [
-  CategoryModel(name: "All Categories"),
-  CategoryModel(
-      name: "On Sale",
-      svgSrc: "assets/icons/Sale.svg",
-      route: onSaleScreenRoute),
-  CategoryModel(name: "Man's", svgSrc: "assets/icons/Man.svg"),
-  CategoryModel(name: "Woman’s", svgSrc: "assets/icons/Woman.svg"),
-  CategoryModel(
-      name: "Kids", svgSrc: "assets/icons/Child.svg", route: kidsScreenRoute),
-];
-// End For Preview
+Map<String, dynamic> mappedSlug = {
+  "onsale": onSaleScreenRoute,
+  "kids": kidsScreenRoute,
+};
 
 class Categories extends StatelessWidget {
   const Categories({
@@ -36,31 +19,42 @@ class Categories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          ...List.generate(
-            demoCategories.length,
-            (index) => Padding(
-              padding: EdgeInsets.only(
-                  left: index == 0 ? defaultPadding : defaultPadding / 2,
-                  right:
-                      index == demoCategories.length - 1 ? defaultPadding : 0),
-              child: CategoryBtn(
-                category: demoCategories[index].name,
-                svgSrc: demoCategories[index].svgSrc,
-                isActive: index == 0,
-                press: () async {
-                  if (demoCategories[index].route != null) {
-                    Navigator.pushNamed(context, demoCategories[index].route!);
-                  }
-                },
+    return BlocBuilder<LoadCategoriesBloc, LoadCategoriesState>(
+      bloc: context.read<LoadCategoriesBloc>()..add(OnLoadCategoriesEvent()),
+      builder: (context, state) {
+        final List<CategoryEntity> categories =
+            (state as LoadCategoriesInitialState).categories;
+
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              ...List.generate(
+                categories.length,
+                (index) => Padding(
+                  padding: EdgeInsets.only(
+                    left: index == 0 ? defaultPadding : defaultPadding / 2,
+                    right: index == categories.length - 1 ? defaultPadding : 0,
+                  ),
+                  child: CategoryBtn(
+                    category: categories[index].title,
+                    // svgSrc: categories[index].svgSrc,
+                    isActive: index == 0,
+                    press: () async {
+                      if (mappedSlug.containsKey(categories[index].slug)) {
+                        Navigator.pushNamed(
+                          context,
+                          mappedSlug[categories[index].slug],
+                        );
+                      }
+                    },
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
