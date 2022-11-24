@@ -31,6 +31,7 @@ class ProductCard extends StatelessWidget {
         padding: const EdgeInsets.all(8),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AspectRatio(
             aspectRatio: 1.15,
@@ -46,7 +47,8 @@ class ProductCard extends StatelessWidget {
                     top: defaultPadding / 2,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: defaultPadding / 2),
+                        horizontal: defaultPadding / 2,
+                      ),
                       height: 16,
                       decoration: const BoxDecoration(
                         color: errorColor,
@@ -80,7 +82,9 @@ class ProductCard extends StatelessWidget {
                         .bodyText2!
                         .copyWith(fontSize: 10),
                   ),
-                  const SizedBox(height: defaultPadding / 2),
+                  const SizedBox(
+                    height: defaultPadding / 2,
+                  ),
                   Text(
                     title,
                     maxLines: 2,

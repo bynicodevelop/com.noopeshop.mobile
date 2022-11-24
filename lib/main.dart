@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:shop/config/dependency_config.dart";
 import "package:shop/repositories/account_repository.dart";
 import "package:shop/repositories/categories_repository.dart";
+import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
 import "package:shop/route/route_constants.dart";
 import "package:shop/route/router.dart" as router;
@@ -31,6 +32,7 @@ class App extends StatelessWidget {
     return ServiceFactory(
       getIt.get<AccountRepository>(),
       getIt.get<CategoriesRepository>(),
+      getIt.get<ProductRepository>(),
       getIt.get<SessionRepository>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
