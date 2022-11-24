@@ -78,5 +78,9 @@
     "signup_account_not_validated_label": "Ce code de validation à expiré.",
     "@signup_account_not_validated_label": {
       "description": "Ce code de validation à expiré."
+    },
+    "categories_label": "Catégories",
+    "@signup_account_not_validated_label": {
+      "description": "Catégories"
     }
 }
