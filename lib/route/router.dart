@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:shop/entities/product_entity.dart";
 import "package:shop/entry_point.dart";
 import "package:shop/screens/checkout/views/thanks_for_order_screen.dart";
 import "package:shop/screens/language/view/select_language_screen.dart";
@@ -79,13 +80,22 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case productDetailsScreenRoute:
       return MaterialPageRoute(
         builder: (context) {
-          bool isProductAvailable = settings.arguments as bool? ?? true;
-          return ProductDetailsScreen(isProductAvailable: isProductAvailable);
+          ProductEntity productEntity = settings.arguments as ProductEntity;
+
+          return ProductDetailsScreen(
+            productEntity: productEntity,
+          );
         },
       );
     case productReviewsScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const ProductReviewsScreen(),
+        builder: (context) {
+          ProductEntity productEntity = settings.arguments as ProductEntity;
+
+          return ProductReviewsScreen(
+            productEntity: productEntity,
+          );
+        },
       );
     case addReviewsScreenRoute:
       return MaterialPageRoute(

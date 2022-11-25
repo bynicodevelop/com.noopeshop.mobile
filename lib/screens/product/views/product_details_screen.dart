@@ -4,10 +4,14 @@ import "package:shop/components/cart_button.dart";
 import "package:shop/components/custom_modal_bottom_sheet.dart";
 import "package:shop/components/product/product_card.dart";
 import "package:shop/constants.dart";
+import "package:shop/entities/product_entity.dart";
 import "package:shop/screens/product/views/product_info_screen.dart";
 import "package:shop/screens/product/views/product_returns_screen.dart";
 import "package:shop/screens/product/views/shipping_methods_screen.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/utils/assets_network.dart";
+import "package:shop/utils/helpers/rating_by_star.dart";
+import "package:shop/utils/translate.dart";
 
 import "components/notify_me_card.dart";
 import "components/product_images.dart";
@@ -17,17 +21,21 @@ import "../../../components/review_card.dart";
 import "product_buy_now_screen.dart";
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({Key? key, this.isProductAvailable = true})
-      : super(key: key);
+  final ProductEntity productEntity;
 
-  final bool isProductAvailable;
+  const ProductDetailsScreen({
+    Key? key,
+    required this.productEntity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: isProductAvailable
+      bottomNavigationBar: productEntity.sellWithoutStock
           ? CartButton(
               price: 140,
+              title: t(context)!.cart_button_buy_now_label,
+              subTitle: t(context)!.cart_button_unit_label,
               press: () async {
                 customModalBottomSheet(
                   context,
@@ -36,10 +44,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 );
               },
             )
-          :
-
-          /// If profuct is not available then show [NotifyMeCard]
-          NotifyMeCard(
+          : NotifyMeCard(
               isNotify: false,
               onChanged: (value) {},
             ),
@@ -57,32 +62,37 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const ProductImages(
-              images: [productDemoImg1, productDemoImg2, productDemoImg3],
+            ProductImages(
+              images: productEntity.previews
+                  .map(
+                    (e) => networkImage(e),
+                  )
+                  .toList(),
             ),
             ProductInfo(
-              brand: "LIPSY LONDON",
-              title: "Sleeveless Ruffle",
-              isAvailable: isProductAvailable,
-              description:
-                  "A cool gray cap in soft corduroy. Watch me. By buying cotton products from Lindex, you’re supporting more responsibly...",
-              rating: 4.4,
-              numOfReviews: 126,
+              brand: productEntity.brandName,
+              title: productEntity.title,
+              isAvailable: productEntity.sellWithoutStock,
+              description: productEntity.productInfo,
+              rating: double.parse(productEntity.rating.toStringAsFixed(1)),
+              numOfReviews: productEntity.nbReviews,
             ),
             ProductListTile(
               svgSrc: "assets/icons/Product.svg",
-              title: "Product Details",
+              title: t(context)!.products_details_label,
               press: () async {
                 customModalBottomSheet(
                   context,
                   height: MediaQuery.of(context).size.height * 0.92,
-                  child: const ProductInfoScreen(),
+                  child: ProductInfoScreen(
+                    productEntity: productEntity,
+                  ),
                 );
               },
             ),
             ProductListTile(
               svgSrc: "assets/icons/Delivery.svg",
-              title: "Shipping Information",
+              title: t(context)!.products_shipping_info_label,
               press: () async {
                 customModalBottomSheet(
                   context,
@@ -93,7 +103,7 @@ class ProductDetailsScreen extends StatelessWidget {
             ),
             ProductListTile(
               svgSrc: "assets/icons/Return.svg",
-              title: "Returns",
+              title: t(context)!.products_return_label,
               isShowBottomBorder: true,
               press: () async {
                 customModalBottomSheet(
@@ -103,27 +113,31 @@ class ProductDetailsScreen extends StatelessWidget {
                 );
               },
             ),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
-                padding: EdgeInsets.all(defaultPadding),
+                padding: const EdgeInsets.all(
+                  defaultPadding,
+                ),
                 child: ReviewCard(
-                  rating: 4.3,
-                  numOfReviews: 128,
-                  numOfFiveStar: 80,
-                  numOfFourStar: 30,
-                  numOfThreeStar: 5,
-                  numOfTwoStar: 4,
-                  numOfOneStar: 1,
+                  rating: double.parse(productEntity.rating.toStringAsFixed(1)),
+                  numOfReviews: productEntity.nbReviews,
+                  numOfFiveStar: ratingByStar(productEntity.reviews, 5),
+                  numOfFourStar: ratingByStar(productEntity.reviews, 4),
+                  numOfThreeStar: ratingByStar(productEntity.reviews, 3),
+                  numOfTwoStar: ratingByStar(productEntity.reviews, 2),
+                  numOfOneStar: ratingByStar(productEntity.reviews, 1),
                 ),
               ),
             ),
             ProductListTile(
               svgSrc: "assets/icons/Chat.svg",
-              title: "Reviews",
+              title: t(context)!.products_reviews_label,
               isShowBottomBorder: true,
-              press: () async {
-                Navigator.pushNamed(context, productReviewsScreenRoute);
-              },
+              press: () async => Navigator.pushNamed(
+                context,
+                productReviewsScreenRoute,
+                arguments: productEntity,
+              ),
             ),
             SliverPadding(
               padding: const EdgeInsets.all(defaultPadding),

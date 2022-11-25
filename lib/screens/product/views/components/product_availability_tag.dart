@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:shop/utils/translate.dart";
 
 import "../../../../constants.dart";
 
@@ -21,7 +22,9 @@ class ProductAvailabilityTag extends StatelessWidget {
         ),
       ),
       child: Text(
-        isAvailable ? "Available in stock" : "Currently unavailable",
+        isAvailable
+            ? t(context)!.products_available_stock_label
+            : t(context)!.products_unavailable_stock_label,
         style: Theme.of(context)
             .textTheme
             .overline!

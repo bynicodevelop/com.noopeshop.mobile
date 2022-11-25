@@ -1,9 +1,16 @@
 import "package:flutter/material.dart";
-import "package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart";
+import "package:flutter_markdown/flutter_markdown.dart";
 import "package:shop/constants.dart";
+import "package:shop/entities/product_entity.dart";
+import "package:shop/utils/translate.dart";
 
 class ProductInfoScreen extends StatelessWidget {
-  const ProductInfoScreen({Key? key}) : super(key: key);
+  final ProductEntity productEntity;
+
+  const ProductInfoScreen({
+    Key? key,
+    required this.productEntity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class ProductInfoScreen extends StatelessWidget {
                     child: BackButton(),
                   ),
                   Text(
-                    "Product details",
+                    t(context)!.products_details_label,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   const SizedBox(width: 40),
@@ -30,28 +37,13 @@ class ProductInfoScreen extends StatelessWidget {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: defaultPadding,
+                  ),
                   child: Column(
-                    children: const [
-                      HtmlWidget(
-                        """
-                          <strong>Story</strong>
-
-                          <p>A cool gray cap in soft corduroy. Watch me." By buying cotton products from Lindex, you’re supporting more responsibly...</p>
-                          <strong>Details</strong>
-                          <ul>
-                            <li>Materials: 100% cotton, and lining Structured</li>
-                            <li>Adjustable cotton strap closure</li>
-                            <li>High-quality embroidery stitching</li>
-                            <li>Head circumference: 21” - 24” / 54-62 cm</li>
-                            <li>Embroidery stitching</li>
-                            <li>One size fits most</li>
-                          </ul>
-                          <strong>Style Notes</strong>
-                          <p>Style: Summer Hat</p>
-                          <p>Design: Plain</p>
-                          <p>Fabric: Jersey</p>
-                        """,
+                    children: [
+                      MarkdownBody(
+                        data: productEntity.productDetails,
                       ),
                     ],
                   ),

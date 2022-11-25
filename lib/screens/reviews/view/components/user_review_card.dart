@@ -6,6 +6,12 @@ import "package:shop/components/network_image_with_loader.dart";
 import "../../../../constants.dart";
 
 class UserReviewCard extends StatelessWidget {
+  final String name;
+  final String review;
+  final String time;
+  final String? userImage;
+  final double rating;
+
   const UserReviewCard({
     Key? key,
     required this.name,
@@ -14,10 +20,6 @@ class UserReviewCard extends StatelessWidget {
     this.userImage,
     required this.rating,
   }) : super(key: key);
-
-  final String name, review, time;
-  final String? userImage;
-  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -51,21 +53,27 @@ class UserReviewCard extends StatelessWidget {
                       )
                     : NetworkImageWithLoader(userImage!),
               ),
-              const SizedBox(width: defaultPadding / 2),
+              const SizedBox(
+                width: defaultPadding / 2,
+              ),
               Text(
-                "Arman Rokni",
+                name,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
-              const SizedBox(width: defaultPadding / 4),
+              const SizedBox(
+                width: defaultPadding / 4,
+              ),
               Text(
-                "36s ago",
+                time,
                 style: Theme.of(context).textTheme.caption,
               ),
               const Spacer(),
               RatingBar.builder(
-                initialRating: 4,
+                initialRating: rating,
                 itemSize: 16,
-                itemPadding: const EdgeInsets.only(right: defaultPadding / 4),
+                itemPadding: const EdgeInsets.only(
+                  right: defaultPadding / 4,
+                ),
                 unratedColor: Theme.of(context)
                     .textTheme
                     .bodyText1!
@@ -80,9 +88,11 @@ class UserReviewCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: defaultPadding),
-          const Text(
-            "“A cool gray cap in soft cssorduroy. Watch me. By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
+          const SizedBox(
+            height: defaultPadding,
+          ),
+          Text(
+            review,
           )
         ],
       ),

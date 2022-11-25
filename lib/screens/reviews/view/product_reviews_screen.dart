@@ -1,14 +1,25 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:shop/components/review_card.dart";
 import "package:shop/constants.dart";
+import "package:shop/entities/product_entity.dart";
 import "package:shop/screens/product/views/components/product_list_tile.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/services/reviews/sort_reviews/sort_reviews_bloc.dart";
+import "package:shop/utils/helpers/rating_by_star.dart";
+import "package:shop/utils/translate.dart";
+import "package:timeago/timeago.dart" as timeago;
 
 import "components/sort_user_review.dart";
 import "components/user_review_card.dart";
 
 class ProductReviewsScreen extends StatelessWidget {
-  const ProductReviewsScreen({Key? key}) : super(key: key);
+  final ProductEntity productEntity;
+
+  const ProductReviewsScreen({
+    Key? key,
+    required this.productEntity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +28,31 @@ class ProductReviewsScreen extends StatelessWidget {
         slivers: [
           SliverAppBar(
             pinned: true,
-            title: const Text("Reviews"),
+            title: Text(t(context)!.products_reviews_label),
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           ),
-          const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultPadding,
+            ),
             sliver: SliverToBoxAdapter(
               child: ReviewCard(
-                rating: 4.3,
-                numOfReviews: 120,
-                numOfFiveStar: 90,
-                numOfFourStar: 20,
-                numOfThreeStar: 4,
-                numOfTwoStar: 0,
-                numOfOneStar: 6,
+                rating: double.parse(productEntity.rating.toStringAsFixed(1)),
+                numOfReviews: productEntity.reviews.length,
+                numOfFiveStar: ratingByStar(productEntity.reviews, 5),
+                numOfFourStar: ratingByStar(productEntity.reviews, 4),
+                numOfThreeStar: ratingByStar(productEntity.reviews, 3),
+                numOfTwoStar: ratingByStar(productEntity.reviews, 2),
+                numOfOneStar: ratingByStar(productEntity.reviews, 1),
               ),
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+            padding: const EdgeInsets.symmetric(
+              vertical: defaultPadding,
+            ),
             sliver: ProductListTile(
-              title: "Add Review",
+              title: t(context)!.review_add_review_label,
               svgSrc: "assets/icons/Chat-add.svg",
               isShowBottomBorder: true,
               press: () async {
@@ -46,34 +61,60 @@ class ProductReviewsScreen extends StatelessWidget {
             ),
           ),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultPadding,
+            ),
             sliver: SliverPersistentHeader(
               delegate: SortUserReview(),
               pinned: true,
             ),
           ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-            sliver: SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => Padding(
-                  padding: const EdgeInsets.only(top: defaultPadding),
-                  child: UserReviewCard(
-                    rating: 4.2,
-                    name: "Arman Rokni",
-                    userImage:
-                        index.isEven ? null : "https://i.imgur.com/4h34UKX.png",
-                    time: "36s",
-                    review:
-                        "A cool gray cap in soft cssorduroy. Watch me. By bussying cottoaaan products from Lindex, you’re  more responsibly.”",
+          BlocBuilder<SortReviewsBloc, SortReviewsState>(
+            builder: (context, state) {
+              final SortReviewTypeEnum order =
+                  (state as SortReviewsInitialState).sortReviewsType;
+
+              if (order == SortReviewTypeEnum.rating) {
+                productEntity.reviews
+                    .sort((a, b) => b.rating.compareTo(a.rating));
+              } else if (order == SortReviewTypeEnum.date) {
+                productEntity.reviews
+                    .sort((a, b) => b.createdAt.compareTo(a.createdAt));
+              }
+
+              return SliverPadding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: defaultPadding,
+                ),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => Padding(
+                      padding: const EdgeInsets.only(
+                        top: defaultPadding,
+                      ),
+                      child: UserReviewCard(
+                        rating: productEntity.reviews[index].rating,
+                        name: productEntity.reviews[index].fullName,
+                        userImage: index.isEven
+                            ? null
+                            : "https://i.imgur.com/4h34UKX.png",
+                        time: timeago.format(
+                          productEntity.reviews[index].createdAt,
+                        ),
+                        review: productEntity.reviews[index].content,
+                      ),
+                    ),
+                    childCount: productEntity.reviews.length,
                   ),
                 ),
-                childCount: 7,
-              ),
-            ),
+              );
+            },
           ),
           const SliverToBoxAdapter(
-              child: SizedBox(height: defaultPadding * 1.5)),
+            child: SizedBox(
+              height: defaultPadding * 1.5,
+            ),
+          ),
         ],
       ),
     );

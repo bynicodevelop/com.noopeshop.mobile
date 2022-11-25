@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:shop/config/dependency_config.dart";
 import "package:shop/repositories/account_repository.dart";
 import "package:shop/repositories/categories_repository.dart";
+import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
 import "package:shop/route/route_constants.dart";
@@ -33,6 +34,7 @@ class App extends StatelessWidget {
       getIt.get<AccountRepository>(),
       getIt.get<CategoriesRepository>(),
       getIt.get<ProductRepository>(),
+      getIt.get<PagesRepository>(),
       getIt.get<SessionRepository>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

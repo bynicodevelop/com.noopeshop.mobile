@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_rating_bar/flutter_rating_bar.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:shop/utils/translate.dart";
 
 import "../constants.dart";
 
@@ -55,7 +56,7 @@ class ReviewCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text("Based on $numOfReviews Reviews"),
+                Text(t(context)!.products_reviews_base_on_label(numOfReviews)),
                 const SizedBox(height: defaultPadding),
                 RatingBar.builder(
                   initialRating: rating,
@@ -76,15 +77,32 @@ class ReviewCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: defaultPadding),
+          const SizedBox(
+            width: defaultPadding,
+          ),
           Expanded(
             child: Column(
               children: [
-                RateBar(star: 5, value: numOfFiveStar / numOfReviews),
-                RateBar(star: 4, value: numOfFourStar / numOfReviews),
-                RateBar(star: 3, value: numOfThreeStar / numOfReviews),
-                RateBar(star: 2, value: numOfTwoStar / numOfReviews),
-                RateBar(star: 1, value: numOfOneStar / numOfReviews),
+                RateBar(
+                  star: 5,
+                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                ),
+                RateBar(
+                  star: 4,
+                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                ),
+                RateBar(
+                  star: 3,
+                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                ),
+                RateBar(
+                  star: 2,
+                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                ),
+                RateBar(
+                  star: 1,
+                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                ),
               ],
             ),
           ),

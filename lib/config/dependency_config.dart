@@ -6,6 +6,7 @@ import "package:injectable/injectable.dart";
 import "package:shop/config/constants.dart";
 import "package:shop/repositories/account_repository.dart";
 import "package:shop/repositories/categories_repository.dart";
+import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
 
@@ -67,6 +68,12 @@ $initGetIt(
 
   gh.factory<ProductRepository>(
     () => ProductRepository(
+      sdk,
+    ),
+  );
+
+  gh.factory<PagesRepository>(
+    () => PagesRepository(
       sdk,
     ),
   );

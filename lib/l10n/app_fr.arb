@@ -80,7 +80,73 @@
       "description": "Ce code de validation à expiré."
     },
     "categories_label": "Catégories",
-    "@signup_account_not_validated_label": {
+    "@categories_label": {
       "description": "Catégories"
+    },
+    "products_latest_label": "Derniers produits",
+    "@products_latest_label": {
+      "description": "Derniers produits"
+    },
+    "products_info_label": "Info produit",
+    "@products_info_label": {
+      "description": "Info produit"
+    },
+    "products_reviews_label": "Avis",
+    "@products_reviews_label": {
+      "description": "Avis"
+    },
+    "products_reviews_base_on_label": "Basé sur {count} avis",
+    "@products_reviews_base_on_label": {
+      "description": "Indisponible",
+      "placeholders": {
+        "count": {
+          "type": "int",
+          "example": "5"
+        }
+      }
+    },
+    "products_details_label": "Détails du produit",
+    "@products_details_label": {
+      "description": "Détails du produit"
+    },
+    "products_shipping_info_label": "Livraison",
+    "@products_shipping_info_label": {
+      "description": "Livraison"
+    },
+    "products_return_label": "Retours",
+    "@products_return_label": {
+      "description": "Retours"
+    },
+    "products_available_stock_label": "Disponible",
+    "@products_available_stock_label": {
+      "description": "Disponible"
+    },
+    "products_unavailable_stock_label": "Indisponible",
+    "@products_unavailable_stock_label": {
+      "description": "Indisponible"
+    },
+    "cart_button_buy_now_label": "Acheter",
+    "@cart_button_buy_now_label": {
+      "description": "Acheter"
+    },
+    "cart_button_unit_label": "Unité",
+    "@cart_button_unit_label": {
+      "description": "Unité"
+    },
+    "review_add_review_label": "Ajouter un avis",
+    "@review_add_review_label": {
+      "description": "Ajouter un avis"
+    },
+    "review_user_reviews_label": "Avis utilisateurs",
+    "@review_user_reviews_label": {
+      "description": "Avis utilisateurs"
+    },
+    "review_most_useful_label": "Les plus utiles",
+    "@review_most_useful_label": {
+      "description": "Les plus utiles"
+    },
+    "review_recent_label": "Les plus récents",
+    "@review_recent_label": {
+      "description": "Les plus récents"
     }
 }
