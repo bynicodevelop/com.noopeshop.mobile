@@ -55,9 +55,11 @@ class ProductReviewsScreen extends StatelessWidget {
               title: t(context)!.review_add_review_label,
               svgSrc: "assets/icons/Chat-add.svg",
               isShowBottomBorder: true,
-              press: () async {
-                Navigator.pushNamed(context, addReviewsScreenRoute);
-              },
+              press: () async => Navigator.pushNamed(
+                context,
+                addReviewsScreenRoute,
+                arguments: productEntity,
+              ),
             ),
           ),
           SliverPadding(

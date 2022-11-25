@@ -99,7 +99,13 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case addReviewsScreenRoute:
       return MaterialPageRoute(
-        builder: (context) => const AddReviewScreen(),
+        builder: (context) {
+          ProductEntity productEntity = settings.arguments as ProductEntity;
+
+          return AddReviewScreen(
+            productEntity: productEntity,
+          );
+        },
       );
     case homeScreenRoute:
       return MaterialPageRoute(

@@ -148,5 +148,37 @@
     "review_recent_label": "Les plus récents",
     "@review_recent_label": {
       "description": "Les plus récents"
+    },
+    "review_add_label": "Ajouter un avis",
+    "@review_add_label": {
+      "description": "Ajouter un avis"
+    },
+    "review_vode_product_label": "Quel est votre avis sur ce produit ?",
+    "@review_vode_product_label": {
+      "description": "Quel est votre avis sur ce produit ?"
+    },
+    "review_form_comment_label": "Laissez un commentaire",
+    "@review_form_comment_label": {
+      "description": "Laissez un commentaire"
+    },
+    "review_form_comment_required_label": "Merci de laisser un commentaire.",
+    "@review_form_comment_required_label": {
+      "description": "Merci de laisser un commentaire."
+    },
+    "review_form_comment_placeholder_label": "Pourquoi avez-vous choisi ce produit ?",
+    "@review_form_comment_placeholder_label": {
+      "description": "Pourquoi avez-vous choisi ce produit ?"
+    },
+    "review_form_comment_help_label": "3000 caractères maximum",
+    "@review_form_comment_help_label": {
+      "description": "3000 caractères maximum"
+    },
+    "review_form_recommand_label": "Recommanderiez-vous ce produit ?",
+    "@review_form_recommand_label": {
+      "description": "Recommanderiez-vous ce produit ?"
+    },
+    "review_form_sumbit_label": "Soumettre",
+    "@review_form_sumbit_label": {
+      "description": "Soumettre"
     }
 }

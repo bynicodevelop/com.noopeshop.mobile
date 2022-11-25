@@ -1,98 +1,102 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:form_field_validator/form_field_validator.dart";
-import "package:shop/route/route_constants.dart";
+import "package:shop/utils/translate.dart";
 
 import "../../../../constants.dart";
 
-class ReviewForm extends StatelessWidget {
+class ReviewForm extends StatefulWidget {
+  final Function(String, bool) onSubmit;
+
   const ReviewForm({
     Key? key,
+    required this.onSubmit,
   }) : super(key: key);
 
   @override
+  State<ReviewForm> createState() => _ReviewFormState();
+}
+
+class _ReviewFormState extends State<ReviewForm> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final TextEditingController _reviewController = TextEditingController();
+
+  bool _isRecommend = true;
+
+  @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Set a Title for your review",
+            t(context)!.review_form_comment_label,
             style: Theme.of(context).textTheme.subtitle2,
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
-            onSaved: (reviewTitle) {},
-            validator: (value) {},
-            textInputAction: TextInputAction.next,
-            decoration: const InputDecoration(
-              hintText: "Summarize review",
-            ),
-          ),
-          const SizedBox(height: defaultPadding / 4),
-          Text(
-            "100 Character max",
-            style: Theme.of(context).textTheme.overline!.copyWith(
-                  color: Theme.of(context).textTheme.bodyText2!.color,
-                  fontWeight: FontWeight.w500,
-                ),
-          ),
-          const SizedBox(height: defaultPadding * 1.5),
-          Text(
-            "What did you like or dislike?",
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-          const SizedBox(height: defaultPadding),
-          TextFormField(
+            controller: _reviewController,
             onSaved: (review) {},
-            validator: RequiredValidator(errorText: "This field is required"),
+            validator: RequiredValidator(
+              errorText: t(context)!.review_form_comment_required_label,
+            ),
             maxLines: 5,
             textInputAction: TextInputAction.done,
-            decoration: const InputDecoration(
-              hintText: "What should shoppers know befor?",
+            decoration: InputDecoration(
+              hintText: t(context)!.review_form_comment_placeholder_label,
             ),
           ),
-          const SizedBox(height: defaultPadding / 4),
+          const SizedBox(
+            height: defaultPadding / 4,
+          ),
           Text(
-            "3000 Character max",
+            t(context)!.review_form_comment_help_label,
             style: Theme.of(context).textTheme.overline!.copyWith(
                   color: Theme.of(context).textTheme.bodyText2!.color,
                   fontWeight: FontWeight.w500,
                 ),
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: defaultPadding),
+            padding: EdgeInsets.symmetric(
+              vertical: defaultPadding,
+            ),
             child: Divider(),
           ),
           Row(
             children: [
               Expanded(
                 child: Text(
-                  "Would you recommend this product?",
+                  t(context)!.review_form_recommand_label,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
-              const SizedBox(width: defaultPadding),
+              const SizedBox(
+                width: defaultPadding,
+              ),
               CupertinoSwitch(
-                onChanged: (value) {},
+                onChanged: (value) => setState(() => _isRecommend = value),
                 activeColor: primaryMaterialColor.shade900,
-                value: true,
+                value: _isRecommend,
               )
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(
-                top: defaultPadding * 1.5, bottom: defaultPadding),
+              top: defaultPadding * 1.5,
+              bottom: defaultPadding,
+            ),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Validate the form field
                 if (_formKey.currentState!.validate()) {
-                  Navigator.popAndPushNamed(context, productReviewsScreenRoute);
+                  widget.onSubmit(
+                    _reviewController.text,
+                    _isRecommend,
+                  );
                 }
               },
-              child: const Text("Submit Review"),
+              child: Text(t(context)!.review_form_sumbit_label),
             ),
           )
         ],
