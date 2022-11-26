@@ -89,19 +89,19 @@ class ReviewCard extends StatelessWidget {
                 ),
                 RateBar(
                   star: 4,
-                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                  value: numOfReviews == 0 ? 0 : numOfFourStar / numOfReviews,
                 ),
                 RateBar(
                   star: 3,
-                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                  value: numOfReviews == 0 ? 0 : numOfThreeStar / numOfReviews,
                 ),
                 RateBar(
                   star: 2,
-                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                  value: numOfReviews == 0 ? 0 : numOfTwoStar / numOfReviews,
                 ),
                 RateBar(
                   star: 1,
-                  value: numOfReviews == 0 ? 0 : numOfFiveStar / numOfReviews,
+                  value: numOfReviews == 0 ? 0 : numOfOneStar / numOfReviews,
                 ),
               ],
             ),

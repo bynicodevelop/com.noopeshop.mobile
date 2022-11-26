@@ -25,14 +25,14 @@ class LoadProductByIdLoadedState extends LoadProductByIdState {
 }
 
 class LoadProductByIdFailureState extends LoadProductByIdState {
-  final String message;
+  final String code;
 
   const LoadProductByIdFailureState(
-    this.message,
+    this.code,
   );
 
   @override
   List<Object> get props => [
-        message,
+        code,
       ];
 }
