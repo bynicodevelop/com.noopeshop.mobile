@@ -16,86 +16,52 @@ class ProductRepository {
   );
 
   Future<List<ProductEntity>> getLatestProducts() async {
-    final response = await sdk.items("products").readMany(
-          query: Query(
-            fields: [
-              "id",
-              "thumbnail",
-              "title",
-              "product_info",
-              "product_details",
-              "brand_name",
-              "previews.directus_files_id",
-              "sell_without_stock",
-              "variantes.*",
-              "reviews.*"
-            ],
-            sort: [
-              "-date_created",
-            ],
-          ),
-          filters: Filters({
-            "status": Filter.eq("published"),
-          }),
-        );
+    final DirectusListResponse<Map<String, dynamic>> response =
+        await sdk.items("products").readMany(
+              query: Query(
+                fields: [
+                  "id",
+                  "thumbnail",
+                  "title",
+                  "product_info",
+                  "product_details",
+                  "brand_name",
+                  "previews.directus_files_id",
+                  "sell_without_stock",
+                  "variantes.*",
+                  "reviews.*",
+                ],
+                sort: [
+                  "-date_created",
+                ],
+              ),
+              filters: Filters({
+                "status": Filter.eq("published"),
+              }),
+            );
 
     _products.addAll(response.data
         .map(
           (product) {
-            List<VariantEntity> variants = [];
-            List<String> previews = [];
-            List<ReviewEntity> reviews = [];
-
-            if (product["variantes"] != null) {
-              variants = List<dynamic>.from(product["variantes"])
-                  .map<VariantEntity>(
-                    (variant) => VariantEntity.fromJson(variant),
-                  )
-                  .toList();
-            }
-
-            int price = 0;
-            int? priceAfterDiscount = 0;
-            int? discount = 0;
-
-            if (variants.isNotEmpty) {
-              price = minPrice(variants);
-              priceAfterDiscount = minPriceAfterDiscount(variants, price);
-              discount = discountPercent(price, priceAfterDiscount);
-            }
-
-            if (product["previews"] != null) {
-              previews = List<dynamic>.from(product["previews"])
-                  .map<String>(
-                    (preview) => preview["directus_files_id"],
-                  )
-                  .toList();
-            }
-
-            if (product["reviews"] != null) {
-              reviews = List<dynamic>.from(product["reviews"])
-                  .map<ReviewEntity>(
-                    (review) => ReviewEntity.fromJson(review),
-                  )
-                  .toList();
-            }
+            Map<String, dynamic> productData = _formatProductData(product);
 
             return ProductEntity(
-              id: product["id"] as int,
-              thumbnail: product["thumbnail"] as String,
-              title: product["title"] as String,
-              productInfo: product["product_info"] as String,
-              productDetails: product["product_details"] as String,
-              brandName: product["brand_name"] as String,
-              previews: previews,
-              variants: variants,
-              reviews: reviews,
-              price: price,
-              priceAfterDiscount: priceAfterDiscount,
-              dicountpercent: discount,
-              sellWithoutStock: product["sell_without_stock"] as bool,
-              nbReviews: reviews.length,
-              rating: averageRating(reviews),
+              id: productData["id"] as int,
+              thumbnail: productData["thumbnail"] as String,
+              title: productData["title"] as String,
+              productInfo: productData["product_info"] as String,
+              productDetails: productData["product_details"] as String,
+              brandName: productData["brand_name"] as String,
+              previews: productData["previews"] as List<String>,
+              variants: productData["variantes"] as List<VariantEntity>,
+              reviews: productData["reviews"] as List<ReviewEntity>,
+              relatedProducts: const [],
+              price: productData["price"] as int,
+              priceAfterDiscount: productData["price_after_discount"] as int?,
+              dicountpercent: productData["discount_percent"] as int?,
+              sellWithoutStock: productData["sell_without_stock"] as bool,
+              nbReviews: productData["nb_reviews"] as int,
+              rating: productData["rating"] as double,
             );
           },
         )
@@ -106,8 +72,127 @@ class ProductRepository {
   }
 
   Future<ProductEntity> loadProduct(int productId) async {
-    return _products.firstWhere(
+    final ProductEntity product = _products.firstWhere(
       (element) => element.id == productId,
     );
+
+    final DirectusListResponse<Map<String, dynamic>> response =
+        await sdk.items("products").readMany(
+              query: Query(
+                fields: [
+                  "id",
+                  "related_products.*.*",
+                  "related_products.*.variantes.*",
+                  "related_products.*.reviews.*",
+                  "related_products.*.previews.directus_files_id",
+                ],
+                sort: [
+                  "-date_created",
+                ],
+              ),
+              filters: Filters({
+                "status": Filter.eq("published"),
+                "id": Filter.eq(productId),
+              }),
+            );
+
+    final List<ProductEntity> relatedProductsData = [];
+
+    if (response.data.isNotEmpty) {
+      final List<dynamic> relatedProducts =
+          response.data.first["related_products"];
+
+      for (final relatedProduct in relatedProducts) {
+        final Map<String, dynamic> productRelated = Map<String, dynamic>.from(
+          relatedProduct["related_products_id"],
+        );
+
+        Map<String, dynamic> productData = _formatProductData(productRelated);
+
+        final ProductEntity productEntity = ProductEntity(
+          id: productData["id"] as int,
+          thumbnail: productData["thumbnail"] as String,
+          title: productData["title"] as String,
+          productInfo: productData["product_info"] as String,
+          productDetails: productData["product_details"] as String,
+          brandName: productData["brand_name"] as String,
+          previews: productData["previews"] as List<String>,
+          variants: productData["variantes"] as List<VariantEntity>,
+          reviews: productData["reviews"] as List<ReviewEntity>,
+          relatedProducts: const [],
+          price: productData["price"] as int,
+          priceAfterDiscount: productData["priceAfterDiscount"] as int?,
+          dicountpercent: productData["dicountpercent"] as int?,
+          sellWithoutStock: productData["sell_without_stock"] as bool,
+          nbReviews: productData["nb_reviews"] as int,
+          rating: productData["rating"] as double,
+        );
+
+        relatedProductsData.add(productEntity);
+      }
+    }
+
+    return product.copyWith(
+      relatedProducts: relatedProductsData,
+    );
+  }
+
+  Map<String, dynamic> _formatProductData(Map<String, dynamic> productData) {
+    List<VariantEntity> variants = [];
+    List<String> previews = [];
+    List<ReviewEntity> reviews = [];
+
+    if (productData["variantes"] != null) {
+      variants = List<dynamic>.from(productData["variantes"])
+          .map<VariantEntity>(
+            (variant) => VariantEntity.fromJson(variant),
+          )
+          .toList();
+    }
+
+    int price = 0;
+    int? priceAfterDiscount = 0;
+    int? discount = 0;
+
+    if (variants.isNotEmpty) {
+      price = minPrice(variants);
+      priceAfterDiscount = minPriceAfterDiscount(variants, price);
+      discount = discountPercent(price, priceAfterDiscount);
+    }
+
+    if (productData["previews"] != null) {
+      previews = List<dynamic>.from(productData["previews"])
+          .map<String>(
+            (preview) => preview["directus_files_id"],
+          )
+          .toList();
+    }
+
+    if (productData["reviews"] != null) {
+      reviews = List<dynamic>.from(productData["reviews"])
+          .map<ReviewEntity>(
+            (review) => ReviewEntity.fromJson(review),
+          )
+          .toList();
+    }
+
+    return {
+      "id": productData["id"],
+      "thumbnail": productData["thumbnail"],
+      "title": productData["title"],
+      "product_info": productData["product_info"],
+      "product_details": productData["product_details"],
+      "brand_name": productData["brand_name"],
+      "previews": previews,
+      "variantes": variants,
+      "reviews": reviews,
+      "related_products": const [],
+      "price": price,
+      "price_after_discount": priceAfterDiscount,
+      "dicountpercent": discount,
+      "sell_without_stock": productData["sell_without_stock"],
+      "nb_reviews": reviews.length,
+      "rating": averageRating(reviews),
+    };
   }
 }

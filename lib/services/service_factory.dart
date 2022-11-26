@@ -10,6 +10,7 @@ import "package:shop/services/accounts/validate/validate_account_bloc.dart";
 import "package:shop/services/categories/load/load_categories_bloc.dart";
 import "package:shop/services/pages/load_page/load_page_bloc.dart";
 import "package:shop/services/products/load_latest_products/load_latest_products_bloc.dart";
+import "package:shop/services/products/load_product_by_id/load_product_by_id_bloc.dart";
 import "package:shop/services/reviews/sort_reviews/sort_reviews_bloc.dart";
 import "package:shop/services/session/load/load_session_bloc.dart";
 
@@ -61,6 +62,11 @@ class ServiceFactory extends StatelessWidget {
         ),
         BlocProvider<LoadLatestProductsBloc>(
           create: (context) => LoadLatestProductsBloc(
+            productRepository,
+          ),
+        ),
+        BlocProvider<LoadProductByIdBloc>(
+          create: (context) => LoadProductByIdBloc(
             productRepository,
           ),
         ),

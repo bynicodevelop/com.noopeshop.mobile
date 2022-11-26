@@ -12,6 +12,7 @@ class ProductEntity extends Equatable {
   final List<String> previews;
   final List<VariantEntity> variants;
   final List<ReviewEntity> reviews;
+  final List<ProductEntity> relatedProducts;
   final int price;
   final int? priceAfterDiscount;
   final int? dicountpercent;
@@ -30,6 +31,7 @@ class ProductEntity extends Equatable {
     this.previews = const [],
     this.variants = const [],
     this.reviews = const [],
+    this.relatedProducts = const [],
     this.priceAfterDiscount,
     this.dicountpercent,
     this.sellWithoutStock = false,
@@ -47,6 +49,7 @@ class ProductEntity extends Equatable {
         previews: json["previews"] as List<String>,
         variants: json["variantes"] as List<VariantEntity>,
         reviews: json["reviews"] as List<ReviewEntity>,
+        relatedProducts: json["related_products"] as List<ProductEntity>,
         price: json["price"] as int,
         priceAfterDiscount: json["price_after_discount"] as int?,
         dicountpercent: json["dicount_percent"] as int?,
@@ -65,6 +68,7 @@ class ProductEntity extends Equatable {
         "previews": previews,
         "variantes": variants,
         "reviews": reviews,
+        "related_products": relatedProducts,
         "price": price,
         "price_after_discount": priceAfterDiscount,
         "dicountpercent": dicountpercent,
@@ -72,6 +76,43 @@ class ProductEntity extends Equatable {
         "nb_reviews": nbReviews,
         "rating": rating,
       };
+
+  ProductEntity copyWith({
+    int? id,
+    String? thumbnail,
+    String? brandName,
+    String? title,
+    String? productInfo,
+    String? productDetails,
+    List<String>? previews,
+    List<VariantEntity>? variants,
+    List<ReviewEntity>? reviews,
+    List<ProductEntity>? relatedProducts,
+    int? price,
+    int? priceAfterDiscount,
+    int? dicountpercent,
+    bool? sellWithoutStock,
+    int? nbReviews,
+    double? rating,
+  }) =>
+      ProductEntity(
+        id: id ?? this.id,
+        thumbnail: thumbnail ?? this.thumbnail,
+        brandName: brandName ?? this.brandName,
+        title: title ?? this.title,
+        productInfo: productInfo ?? this.productInfo,
+        productDetails: productDetails ?? this.productDetails,
+        previews: previews ?? this.previews,
+        variants: variants ?? this.variants,
+        reviews: reviews ?? this.reviews,
+        relatedProducts: relatedProducts ?? this.relatedProducts,
+        price: price ?? this.price,
+        priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
+        dicountpercent: dicountpercent ?? this.dicountpercent,
+        sellWithoutStock: sellWithoutStock ?? this.sellWithoutStock,
+        nbReviews: nbReviews ?? this.nbReviews,
+        rating: rating ?? this.rating,
+      );
 
   @override
   List<Object?> get props => [
@@ -84,6 +125,7 @@ class ProductEntity extends Equatable {
         previews,
         variants,
         reviews,
+        relatedProducts,
         price,
         priceAfterDiscount,
         dicountpercent,

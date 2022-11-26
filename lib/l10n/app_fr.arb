@@ -180,5 +180,9 @@
     "review_form_sumbit_label": "Soumettre",
     "@review_form_sumbit_label": {
       "description": "Soumettre"
+    },
+    "related_may_like_label": "Vous aimerez aussi",
+    "@related_may_like_label": {
+      "description": "Vous aimerez aussi"
     }
 }
