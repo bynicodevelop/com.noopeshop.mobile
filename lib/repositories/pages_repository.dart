@@ -11,7 +11,13 @@ class PagesRepository {
   );
 
   Future<PageEntity> getPageBySlug(PageInput pageInput) async {
-    // TODO: control input slug
+    if (pageInput.slug == null) {
+      throw PageException(
+        "Slug is required",
+        "slug_is_required",
+      );
+    }
+
     try {
       final response = await sdk.items("pages").readMany(
             filters: Filters({
@@ -19,7 +25,13 @@ class PagesRepository {
             }),
           );
 
-      // TODO: Si pas de contenu ?
+      if (response.data.isEmpty) {
+        throw PageException(
+          "Page not found",
+          "page_not_found",
+        );
+      }
+
       return PageEntity.fromJson(response.data.first);
     } on DirectusError catch (e) {
       String code = "unknown";
