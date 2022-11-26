@@ -4,24 +4,28 @@ import "package:shop/components/product/product_card.dart";
 import "package:shop/entities/product_entity.dart";
 import "package:shop/route/route_constants.dart";
 import "package:shop/screens/bookmark/component/bookmarks_skelton.dart";
-import "package:shop/services/products/load_latest_products/load_latest_products_bloc.dart";
+import "package:shop/services/bookmark/load_bookmark/load_bookmark_bloc.dart";
 import "package:shop/utils/assets_network.dart";
 import "package:shop/utils/format/price.dart";
 
 import "../../../constants.dart";
 
-class BookmarkScreen extends StatelessWidget {
+class BookmarkScreen extends StatefulWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
 
   @override
+  State<BookmarkScreen> createState() => _BookmarkScreenState();
+}
+
+class _BookmarkScreenState extends State<BookmarkScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<LoadLatestProductsBloc, LoadLatestProductsState>(
-        bloc: context.read<LoadLatestProductsBloc>()
-          ..add(OnLoadLatestProductsEvent()),
+      body: BlocBuilder<LoadBookmarkBloc, LoadBookmarkState>(
+        bloc: context.read<LoadBookmarkBloc>()..add(OnLoadBookmarkEvent()),
         builder: (context, state) {
           final List<ProductEntity> products =
-              (state as LoadLatestProductsInitialState).products;
+              (state as LoadBookmarkInitialState).products;
 
           return CustomScrollView(
             slivers: [
@@ -52,10 +56,13 @@ class BookmarkScreen extends StatelessWidget {
                             : null,
                         dicountpercent: products[index].dicountpercent,
                         press: () async {
-                          Navigator.pushNamed(
+                          await Navigator.pushNamed(
                             context,
                             productDetailsScreenRoute,
+                            arguments: products[index],
                           );
+
+                          setState(() {});
                         },
                       );
                     },

@@ -2,9 +2,11 @@ import "package:dio/dio.dart";
 import "package:directus/directus.dart";
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:get_it/get_it.dart";
+import "package:hive_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
 import "package:shop/config/constants.dart";
 import "package:shop/repositories/account_repository.dart";
+import "package:shop/repositories/bookmark_repository.dart";
 import "package:shop/repositories/categories_repository.dart";
 import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
@@ -44,6 +46,10 @@ $initGetIt(
     storage,
   );
 
+  await Hive.initFlutter();
+
+  final Box<List<int>> bookmarkBox = await Hive.openBox("bookmarks");
+
   final gh = GetItHelper(getIt, environment);
 
   gh.factory<SessionRepository>(
@@ -69,12 +75,20 @@ $initGetIt(
   gh.factory<ProductRepository>(
     () => ProductRepository(
       sdk,
+      bookmarkBox,
     ),
   );
 
   gh.factory<PagesRepository>(
     () => PagesRepository(
       sdk,
+    ),
+  );
+
+  gh.factory<BookmarkRepository>(
+    () => BookmarkRepository(
+      sdk,
+      bookmarkBox,
     ),
   );
 }

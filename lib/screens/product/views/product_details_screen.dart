@@ -6,10 +6,12 @@ import "package:shop/components/custom_modal_bottom_sheet.dart";
 import "package:shop/components/product/product_card.dart";
 import "package:shop/constants.dart";
 import "package:shop/entities/product_entity.dart";
+import "package:shop/inputs/product_input.dart";
 import "package:shop/screens/product/views/product_info_screen.dart";
 import "package:shop/screens/product/views/product_returns_screen.dart";
 import "package:shop/screens/product/views/shipping_methods_screen.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/products/load_product_by_id/load_product_by_id_bloc.dart";
 import "package:shop/utils/assets_network.dart";
 import "package:shop/utils/format/price.dart";
@@ -69,12 +71,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   floating: true,
                   actions: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        "assets/icons/Bookmark.svg",
-                        color: Theme.of(context).textTheme.bodyText1!.color,
-                      ),
+                    BlocBuilder<AddBookmarkBloc, AddBookmarkState>(
+                      builder: (context, state) {
+                        bool isBookmarked = widget.productEntity.isBookmarked;
+
+                        if (state is AddBookmarkSuccessState) {
+                          isBookmarked = state.isBookmarked;
+                        }
+
+                        return IconButton(
+                          onPressed: () => context
+                              .read<AddBookmarkBloc>()
+                              .add(OnAddBookmarkEvent(
+                                ProductInput(
+                                  id: widget.productEntity.id,
+                                ),
+                              )),
+                          icon: SvgPicture.asset(
+                            "assets/icons/Bookmark.svg",
+                            color: isBookmarked
+                                ? primaryColor
+                                : Theme.of(context).textTheme.bodyText1!.color,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

@@ -19,6 +19,7 @@ class ProductEntity extends Equatable {
   final bool sellWithoutStock;
   final int nbReviews;
   final double rating;
+  final bool isBookmarked;
 
   const ProductEntity({
     required this.id,
@@ -37,6 +38,7 @@ class ProductEntity extends Equatable {
     this.sellWithoutStock = false,
     this.nbReviews = 0,
     this.rating = 0,
+    this.isBookmarked = false,
   });
 
   factory ProductEntity.fromJson(Map<String, dynamic> json) => ProductEntity(
@@ -56,6 +58,7 @@ class ProductEntity extends Equatable {
         sellWithoutStock: json["sell_without_stock"] as bool,
         nbReviews: json["nb_reviews"] as int,
         rating: json["rating"] as double,
+        isBookmarked: json["is_bookmarked"] as bool,
       );
 
   Map<String, dynamic> toJson() => {
@@ -75,6 +78,7 @@ class ProductEntity extends Equatable {
         "sell_without_stock": sellWithoutStock,
         "nb_reviews": nbReviews,
         "rating": rating,
+        "is_bookmarked": isBookmarked,
       };
 
   ProductEntity copyWith({
@@ -94,6 +98,7 @@ class ProductEntity extends Equatable {
     bool? sellWithoutStock,
     int? nbReviews,
     double? rating,
+    bool? isBookmarked,
   }) =>
       ProductEntity(
         id: id ?? this.id,
@@ -112,6 +117,7 @@ class ProductEntity extends Equatable {
         sellWithoutStock: sellWithoutStock ?? this.sellWithoutStock,
         nbReviews: nbReviews ?? this.nbReviews,
         rating: rating ?? this.rating,
+        isBookmarked: isBookmarked ?? this.isBookmarked,
       );
 
   @override
@@ -132,5 +138,6 @@ class ProductEntity extends Equatable {
         sellWithoutStock,
         nbReviews,
         rating,
+        isBookmarked,
       ];
 }

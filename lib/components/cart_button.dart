@@ -28,7 +28,9 @@ class CartButton extends StatelessWidget {
             clipBehavior: Clip.hardEdge,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
-                Radius.circular(defaultBorderRadious),
+                Radius.circular(
+                  defaultBorderRadious,
+                ),
               ),
             ),
             child: InkWell(
@@ -39,7 +41,8 @@ class CartButton extends StatelessWidget {
                     flex: 4,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: defaultPadding),
+                        horizontal: defaultPadding,
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,8 +57,9 @@ class CartButton extends StatelessWidget {
                           Text(
                             subTitle,
                             style: const TextStyle(
-                                color: Colors.white54,
-                                fontWeight: FontWeight.w500),
+                              color: Colors.white54,
+                              fontWeight: FontWeight.w500,
+                            ),
                           )
                         ],
                       ),
@@ -69,10 +73,9 @@ class CartButton extends StatelessWidget {
                       color: Colors.black.withOpacity(0.15),
                       child: Text(
                         title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .subtitle2!
-                            .copyWith(color: Colors.white),
+                        style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                              color: Colors.white,
+                            ),
                       ),
                     ),
                   ),
