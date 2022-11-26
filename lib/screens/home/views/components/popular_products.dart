@@ -12,11 +12,16 @@ import "package:shop/utils/translate.dart";
 
 import "../../../../constants.dart";
 
-class PopularProducts extends StatelessWidget {
+class PopularProducts extends StatefulWidget {
   const PopularProducts({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<PopularProducts> createState() => _PopularProductsState();
+}
+
+class _PopularProductsState extends State<PopularProducts> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,11 +68,15 @@ class PopularProducts extends StatelessWidget {
                             ? priceFormat(products[index].priceAfterDiscount!)
                             : null,
                     dicountpercent: products[index].dicountpercent,
-                    press: () async => Navigator.pushNamed(
-                      context,
-                      productDetailsScreenRoute,
-                      arguments: products[index],
-                    ),
+                    press: () async {
+                      await Navigator.pushNamed(
+                        context,
+                        productDetailsScreenRoute,
+                        arguments: products[index],
+                      );
+
+                      setState(() {});
+                    },
                   ),
                 ),
               ),

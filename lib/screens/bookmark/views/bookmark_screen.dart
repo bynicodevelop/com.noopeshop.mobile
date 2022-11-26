@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_svg/svg.dart";
 import "package:shop/components/product/product_card.dart";
 import "package:shop/entities/product_entity.dart";
 import "package:shop/route/route_constants.dart";
@@ -26,6 +27,39 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
         builder: (context, state) {
           final List<ProductEntity> products =
               (state as LoadBookmarkInitialState).products;
+
+          if (products.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/Bookmark.svg",
+                    color: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .color!
+                        .withOpacity(.3),
+                    width: 40.0,
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    "No bookmark yet",
+                    style: Theme.of(context).textTheme.headline6!.copyWith(
+                          color: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .color!
+                              .withOpacity(.3),
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
+                ],
+              ),
+            );
+          }
 
           return CustomScrollView(
             slivers: [
