@@ -49,14 +49,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         return Scaffold(
           bottomNavigationBar: widget.productEntity.sellWithoutStock
               ? CartButton(
-                  price: 140,
+                  price: priceFormat(
+                      widget.productEntity.priceAfterDiscount == null
+                          ? widget.productEntity.price
+                          : widget.productEntity.priceAfterDiscount!),
                   title: t(context)!.cart_button_buy_now_label,
                   subTitle: t(context)!.cart_button_unit_label,
                   press: () async {
                     customModalBottomSheet(
                       context,
                       height: MediaQuery.of(context).size.height * 0.92,
-                      child: const ProductBuyNowScreen(),
+                      child: ProductBuyNowScreen(
+                        productEntity: widget.productEntity,
+                      ),
                     );
                   },
                 )
@@ -203,8 +208,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         itemCount: state.productEntity.relatedProducts.length,
                         itemBuilder: (context, index) => Padding(
                           padding: EdgeInsets.only(
-                              left: defaultPadding,
-                              right: index == 4 ? defaultPadding : 0),
+                            left: defaultPadding,
+                            right: index == 4 ? defaultPadding : 0,
+                          ),
                           child: ProductCard(
                             image: networkImage(
                               state.productEntity.relatedProducts[index]

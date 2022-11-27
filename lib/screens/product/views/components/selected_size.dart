@@ -1,18 +1,19 @@
 import "package:flutter/material.dart";
+import 'package:shop/entities/size_entity.dart';
 
 import "../../../../constants.dart";
 
 class SelectedSize extends StatelessWidget {
+  final List<SizeEntity> sizes;
+  final SizeEntity selectedIndex;
+  final ValueChanged<SizeEntity> press;
+
   const SelectedSize({
     Key? key,
     required this.sizes,
     required this.selectedIndex,
     required this.press,
   }) : super(key: key);
-
-  final List<String> sizes;
-  final int selectedIndex;
-  final ValueChanged<int> press;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +35,9 @@ class SelectedSize extends StatelessWidget {
               padding: EdgeInsets.only(
                   left: index == 0 ? defaultPadding : defaultPadding / 2),
               child: SizeButton(
-                text: sizes[index],
-                isActive: selectedIndex == index,
-                press: () => press(index),
+                text: sizes[index].value,
+                isActive: selectedIndex == sizes[index],
+                press: () => press(sizes[index]),
               ),
             ),
           ),

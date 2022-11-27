@@ -184,5 +184,17 @@
     "related_may_like_label": "Vous aimerez aussi",
     "@related_may_like_label": {
       "description": "Vous aimerez aussi"
+    },
+    "add_to_cart_label": "Ajouter au panier",
+    "@add_to_cart_label": {
+      "description": "Ajouter au panier"
+    },
+    "add_to_cart_total_price_label": "Total",
+    "@add_to_cart_total_price_label": {
+      "description": "Total"
+    },
+    "add_to_cart_guide_size_label": "Guide des tailles",
+    "@add_to_cart_guide_size_label": {
+      "description": "Guide des tailles"
     }
 }

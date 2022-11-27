@@ -1,18 +1,20 @@
 import "package:flutter/material.dart";
+import 'package:shop/entities/color_entity.dart';
 
 import "../../../../constants.dart";
 import "color_dot.dart";
 
 class SelectedColors extends StatelessWidget {
+  final List<ColorEntity> colors;
+  final ColorEntity selectedColorIndex;
+  final ValueChanged<ColorEntity> press;
+
   const SelectedColors({
     Key? key,
     required this.colors,
     required this.selectedColorIndex,
     required this.press,
   }) : super(key: key);
-  final List<Color> colors;
-  final int selectedColorIndex;
-  final ValueChanged<int> press;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +37,9 @@ class SelectedColors extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: index == 0 ? defaultPadding : defaultPadding / 2),
                 child: ColorDot(
-                  color: colors[index],
-                  isActive: selectedColorIndex == index,
-                  press: () => press(index),
+                  color: colors[index].value,
+                  isActive: selectedColorIndex == colors[index],
+                  press: () => press(colors[index]),
                 ),
               ),
             ),

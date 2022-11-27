@@ -1,7 +1,10 @@
 import "package:directus/directus.dart";
+import "package:flutter/material.dart";
 import "package:hive/hive.dart";
+import "package:shop/entities/color_entity.dart";
 import "package:shop/entities/product_entity.dart";
 import "package:shop/entities/review_entity.dart";
+import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
 import "package:shop/exceptions/product_exception.dart";
 import "package:shop/utils/filters/min_price.dart";
@@ -24,58 +27,58 @@ class ProductRepository {
 
     final List<int> bookmarks = bookmarkBox.get("bookmarks") ?? [];
 
-    try {
-      final List<Map<String, dynamic>> responses = await _getProductsData(null);
+    // try {
+    final List<Map<String, dynamic>> responses = await _getProductsData(null);
 
-      _products.addAll(responses
-          .map(
-            (product) {
-              Map<String, dynamic> productData = _formatProductData(product);
+    _products.addAll(responses
+        .map(
+          (product) {
+            Map<String, dynamic> productData = _formatProductData(product);
 
-              return ProductEntity(
-                id: productData["id"] as int,
-                thumbnail: productData["thumbnail"] as String,
-                title: productData["title"] as String,
-                productInfo: productData["product_info"] as String,
-                productDetails: productData["product_details"] as String,
-                brandName: productData["brand_name"] as String,
-                previews: productData["previews"] as List<String>,
-                variants: productData["variantes"] as List<VariantEntity>,
-                reviews: productData["reviews"] as List<ReviewEntity>,
-                relatedProducts: const [],
-                price: productData["price"] as int,
-                priceAfterDiscount: productData["price_after_discount"] as int?,
-                dicountpercent: productData["discount_percent"] as int?,
-                sellWithoutStock: productData["sell_without_stock"] as bool,
-                nbReviews: productData["nb_reviews"] as int,
-                rating: productData["rating"] as double,
-                isBookmarked: bookmarks.contains(productData["id"] as int),
-              );
-            },
-          )
-          .where((element) => element.variants.isNotEmpty)
-          .toList());
+            return ProductEntity(
+              id: productData["id"] as int,
+              thumbnail: productData["thumbnail"] as String,
+              title: productData["title"] as String,
+              productInfo: productData["product_info"] as String,
+              productDetails: productData["product_details"] as String,
+              brandName: productData["brand_name"] as String,
+              previews: productData["previews"] as List<String>,
+              variants: productData["variantes"] as List<VariantEntity>,
+              reviews: productData["reviews"] as List<ReviewEntity>,
+              relatedProducts: const [],
+              price: productData["price"] as int,
+              priceAfterDiscount: productData["price_after_discount"] as int?,
+              dicountpercent: productData["discount_percent"] as int?,
+              sellWithoutStock: productData["sell_without_stock"] as bool,
+              nbReviews: productData["nb_reviews"] as int,
+              rating: productData["rating"] as double,
+              isBookmarked: bookmarks.contains(productData["id"] as int),
+            );
+          },
+        )
+        .where((element) => element.variants.isNotEmpty)
+        .toList());
 
-      return _products;
-    } on DirectusError catch (e) {
-      String code = "unknown";
+    return _products;
+    // } on DirectusError catch (e) {
+    //   String code = "unknown";
 
-      switch (e.code) {
-        case 403:
-          code = "permission_denied";
-          break;
-      }
+    //   switch (e.code) {
+    //     case 403:
+    //       code = "permission_denied";
+    //       break;
+    //   }
 
-      throw ProductException(
-        e.message,
-        code,
-      );
-    } catch (e) {
-      throw ProductException(
-        e.toString(),
-        "unknown",
-      );
-    }
+    //   throw ProductException(
+    //     e.message,
+    //     code,
+    //   );
+    // } catch (e) {
+    //   throw ProductException(
+    //     e.toString(),
+    //     "unknown",
+    //   );
+    // }
   }
 
   Future<ProductEntity> loadProduct(int productId) async {
@@ -128,7 +131,7 @@ class ProductRepository {
                 fields: [
                   "id",
                   "related_products.*.*",
-                  "related_products.*.variantes.*",
+                  "related_products.*.variantes.*.*.*",
                   "related_products.*.reviews.*",
                   "related_products.*.previews.directus_files_id",
                 ],
@@ -202,7 +205,7 @@ class ProductRepository {
                     "brand_name",
                     "previews.directus_files_id",
                     "sell_without_stock",
-                    "variantes.*",
+                    "variantes.*.*.*",
                     "reviews.*",
                   ],
                   sort: [
@@ -276,7 +279,7 @@ class ProductRepository {
                   "brand_name",
                   "previews.directus_files_id",
                   "sell_without_stock",
-                  "variantes.*",
+                  "variantes.*.*.*",
                   "reviews.*",
                 ],
                 sort: [
@@ -297,7 +300,21 @@ class ProductRepository {
     if (productData["variantes"] != null) {
       variants = List<dynamic>.from(productData["variantes"])
           .map<VariantEntity>(
-            (variant) => VariantEntity.fromJson(variant),
+            (variant) => VariantEntity.fromJson({
+              ...variant,
+              "color": ColorEntity(
+                slug: variant["colors"].first["colors_id"]["slug"],
+                value: Color(int.parse(
+                    variant["colors"].first["colors_id"]["value"].replaceAll(
+                          "#",
+                          "0xff",
+                        ))),
+              ),
+              "size": SizeEntity(
+                slug: variant["sizes"].first["sizes_id"]["slug"],
+                value: variant["sizes"].first["sizes_id"]["value"],
+              ),
+            }),
           )
           .toList();
     }
