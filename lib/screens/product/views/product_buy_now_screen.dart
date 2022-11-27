@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:shop/components/cart_button.dart";
 import "package:shop/components/custom_modal_bottom_sheet.dart";
@@ -10,6 +11,7 @@ import "package:shop/entities/variant_entity.dart";
 import "package:shop/screens/product/views/added_to_cart_message_screen.dart";
 import "package:shop/screens/product/views/components/product_list_tile.dart";
 import "package:shop/screens/product/views/size_guide_screen.dart";
+import "package:shop/services/cart/add_to_cart/add_to_cart_bloc.dart";
 import "package:shop/utils/assets_network.dart";
 import "package:shop/utils/format/price.dart";
 import "package:shop/utils/translate.dart";
@@ -69,20 +71,33 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CartButton(
-        price: priceFormat((selectedVariant.value.priceAfterDiscount == null
-                ? selectedVariant.value.price
-                : selectedVariant.value.priceAfterDiscount!) *
-            _quantity.value),
-        title: t(context)!.add_to_cart_label,
-        subTitle: t(context)!.add_to_cart_total_price_label,
-        press: () async {
-          customModalBottomSheet(
-            context,
-            isDismissible: false,
-            child: const AddedToCartMessageScreen(),
-          );
+      bottomNavigationBar: BlocListener<AddToCartBloc, AddToCartState>(
+        listener: (context, state) async {
+          if (state is AddToCartSuccessState) {
+            selectedVariant.value = widget.productEntity.variants.first;
+            _quantity.value = 1;
+
+            customModalBottomSheet(
+              context,
+              isDismissible: false,
+              child: const AddedToCartMessageScreen(),
+            );
+          }
         },
+        child: CartButton(
+          price: priceFormat((selectedVariant.value.priceAfterDiscount == null
+                  ? selectedVariant.value.price
+                  : selectedVariant.value.priceAfterDiscount!) *
+              _quantity.value),
+          title: t(context)!.add_to_cart_label,
+          subTitle: t(context)!.add_to_cart_total_price_label,
+          press: () async => context.read<AddToCartBloc>().add(
+                OnAddToCartEvent(
+                  variant: selectedVariant.value,
+                  quantity: _quantity.value,
+                ),
+              ),
+        ),
       ),
       body: Column(
         children: [

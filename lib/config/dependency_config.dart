@@ -5,8 +5,13 @@ import "package:get_it/get_it.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:injectable/injectable.dart";
 import "package:shop/config/constants.dart";
+import "package:shop/entities/adapters/color_adapter.dart";
+import "package:shop/entities/color_entity.dart";
+import "package:shop/entities/size_entity.dart";
+import "package:shop/entities/variant_entity.dart";
 import "package:shop/repositories/account_repository.dart";
 import "package:shop/repositories/bookmark_repository.dart";
+import "package:shop/repositories/cart_repository.dart";
 import "package:shop/repositories/categories_repository.dart";
 import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
@@ -48,7 +53,13 @@ $initGetIt(
 
   await Hive.initFlutter();
 
+  Hive.registerAdapter(VariantEntityAdapter());
+  Hive.registerAdapter(ColorEntityAdapter());
+  Hive.registerAdapter(SizeEntityAdapter());
+  Hive.registerAdapter(ColorAdapter());
+
   final Box<List<int>> bookmarkBox = await Hive.openBox("bookmarks");
+  final Box<List<VariantEntity>> cartBox = await Hive.openBox("cart");
 
   final gh = GetItHelper(getIt, environment);
 
@@ -89,6 +100,12 @@ $initGetIt(
     () => BookmarkRepository(
       sdk,
       bookmarkBox,
+    ),
+  );
+
+  gh.factory<CartRepository>(
+    () => CartRepository(
+      cartBox,
     ),
   );
 }

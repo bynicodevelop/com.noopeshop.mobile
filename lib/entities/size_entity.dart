@@ -1,7 +1,14 @@
 import "package:equatable/equatable.dart";
+import "package:hive/hive.dart";
 
+part "size_entity.g.dart";
+
+@HiveType(typeId: 3)
 class SizeEntity extends Equatable {
+  @HiveField(0)
   final String slug;
+
+  @HiveField(1)
   final String value;
 
   const SizeEntity({

@@ -1,8 +1,15 @@
 import "package:equatable/equatable.dart";
 import "package:flutter/material.dart";
+import "package:hive/hive.dart";
 
+part "color_entity.g.dart";
+
+@HiveType(typeId: 1)
 class ColorEntity extends Equatable {
+  @HiveField(0)
   final String slug;
+
+  @HiveField(1)
   final Color value;
 
   const ColorEntity({

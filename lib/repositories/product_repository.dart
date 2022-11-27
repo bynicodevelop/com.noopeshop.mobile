@@ -302,6 +302,7 @@ class ProductRepository {
           .map<VariantEntity>(
             (variant) => VariantEntity.fromJson({
               ...variant,
+              "product_id": productData["id"],
               "color": ColorEntity(
                 slug: variant["colors"].first["colors_id"]["slug"],
                 value: Color(int.parse(

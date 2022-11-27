@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/utils/translate.dart";
 
 class AddedToCartMessageScreen extends StatelessWidget {
   const AddedToCartMessageScreen({Key? key}) : super(key: key);
@@ -22,28 +23,33 @@ class AddedToCartMessageScreen extends StatelessWidget {
               ),
               const Spacer(flex: 2),
               Text(
-                "Added to cart",
+                t(context)!.add_to_cart_added_title_label,
                 style: Theme.of(context)
                     .textTheme
                     .headline5!
                     .copyWith(fontWeight: FontWeight.w500),
               ),
               const SizedBox(height: defaultPadding / 2),
-              const Text(
-                "Click the checkout button to complete the purchase process.",
+              Text(
+                t(context)!.add_to_cart_added_subtitle_label,
                 textAlign: TextAlign.center,
               ),
-              const Spacer(flex: 2),
-              OutlinedButton(
-                onPressed: () async {
-                  Navigator.pushNamed(context, entryPointScreenRoute);
-                },
-                child: const Text("Continue shopping"),
+              const Spacer(
+                flex: 2,
               ),
-              const SizedBox(height: defaultPadding),
+              OutlinedButton(
+                onPressed: () async => Navigator.pushNamed(
+                  context,
+                  entryPointScreenRoute,
+                ),
+                child: Text(t(context)!.add_to_cart_continue_shopping_label),
+              ),
+              const SizedBox(
+                height: defaultPadding,
+              ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text("Checkout"),
+                child: Text(t(context)!.add_to_cart_checkout_label),
               ),
               const Spacer(),
             ],

@@ -196,5 +196,21 @@
     "add_to_cart_guide_size_label": "Guide des tailles",
     "@add_to_cart_guide_size_label": {
       "description": "Guide des tailles"
+    },
+    "add_to_cart_added_title_label": "Ajouté",
+    "@add_to_cart_added_title_label": {
+      "description": "Ajouté"
+    },
+    "add_to_cart_added_subtitle_label": "Cliquez sur le bouton commender pour finaliser votre commande.",
+    "@add_to_cart_added_subtitle_label": {
+      "description": "Cliquez sur le bouton commender pour finaliser votre commande."
+    },
+    "add_to_cart_continue_shopping_label": "Continuer mes achats",
+    "@add_to_cart_continue_shopping_label": {
+      "description": "Continuer mes achats"
+    },
+    "add_to_cart_checkout_label": "Commander",
+    "@add_to_cart_checkout_label": {
+      "description": "Commander"
     }
 }
