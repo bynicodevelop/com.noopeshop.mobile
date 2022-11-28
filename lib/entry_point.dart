@@ -85,7 +85,9 @@ class _EntryPointState extends State<EntryPoint> {
         child: _pages[_currentIndex],
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(top: defaultPadding / 2),
+        padding: const EdgeInsets.only(
+          top: defaultPadding / 2,
+        ),
         color: Theme.of(context).brightness == Brightness.light
             ? Colors.white
             : const Color(0xFF101015),
@@ -109,30 +111,42 @@ class _EntryPointState extends State<EntryPoint> {
           items: [
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Shop.svg"),
-              activeIcon: svgIcon("assets/icons/Shop.svg", color: primaryColor),
+              activeIcon: svgIcon(
+                "assets/icons/Shop.svg",
+                color: primaryColor,
+              ),
               label: "Shop",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Category.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Category.svg", color: primaryColor),
+              activeIcon: svgIcon(
+                "assets/icons/Category.svg",
+                color: primaryColor,
+              ),
               label: "Discover",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bookmark.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Bookmark.svg", color: primaryColor),
+              activeIcon: svgIcon(
+                "assets/icons/Bookmark.svg",
+                color: primaryColor,
+              ),
               label: "Bookmark",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bag.svg"),
-              activeIcon: svgIcon("assets/icons/Bag.svg", color: primaryColor),
+              activeIcon: svgIcon(
+                "assets/icons/Bag.svg",
+                color: primaryColor,
+              ),
               label: "Cart",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Profile.svg"),
-              activeIcon:
-                  svgIcon("assets/icons/Profile.svg", color: primaryColor),
+              activeIcon: svgIcon(
+                "assets/icons/Profile.svg",
+                color: primaryColor,
+              ),
               label: "Profile",
             ),
           ],

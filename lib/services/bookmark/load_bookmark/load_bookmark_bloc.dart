@@ -24,6 +24,10 @@ class LoadBookmarkBloc extends Bloc<LoadBookmarkEvent, LoadBookmarkState> {
         final List<ProductEntity> products =
             await productRepository.getProductFromListIds();
 
+        info("LoadBookmarkBloc", data: {
+          "products": products,
+        });
+
         emit(LoadBookmarkInitialState(
           products: products,
           loading: false,

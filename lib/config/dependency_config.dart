@@ -9,6 +9,8 @@ import "package:shop/entities/adapters/color_adapter.dart";
 import "package:shop/entities/color_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
+import "package:shop/inputs/cart_input.dart";
+import "package:shop/inputs/product_input.dart";
 import "package:shop/repositories/account_repository.dart";
 import "package:shop/repositories/bookmark_repository.dart";
 import "package:shop/repositories/cart_repository.dart";
@@ -51,15 +53,20 @@ $initGetIt(
     storage,
   );
 
+  // await Hive.deleteFromDisk();
+
   await Hive.initFlutter();
 
+  Hive.registerAdapter(ProductInputAdapter());
+  Hive.registerAdapter(CartInputAdapter());
   Hive.registerAdapter(VariantEntityAdapter());
   Hive.registerAdapter(ColorEntityAdapter());
   Hive.registerAdapter(SizeEntityAdapter());
   Hive.registerAdapter(ColorAdapter());
 
-  final Box<List<int>> bookmarkBox = await Hive.openBox("bookmarks");
-  final Box<List<VariantEntity>> cartBox = await Hive.openBox("cart");
+  final Box<List<dynamic>> bookmarkBox =
+      await Hive.openBox<List<dynamic>>("bookmarks");
+  final Box<List<dynamic>> cartBox = await Hive.openBox<List<dynamic>>("cart");
 
   final gh = GetItHelper(getIt, environment);
 

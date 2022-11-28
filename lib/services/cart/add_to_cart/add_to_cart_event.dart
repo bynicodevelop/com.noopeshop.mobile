@@ -8,17 +8,14 @@ abstract class AddToCartEvent extends Equatable {
 }
 
 class OnAddToCartEvent extends AddToCartEvent {
-  final VariantEntity variant;
-  final int quantity;
+  final CartInput variant;
 
   const OnAddToCartEvent({
     required this.variant,
-    required this.quantity,
   });
 
   @override
   List<Object> get props => [
         variant,
-        quantity,
       ];
 }

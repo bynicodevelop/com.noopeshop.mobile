@@ -1,6 +1,6 @@
 import "package:bloc/bloc.dart";
 import "package:equatable/equatable.dart";
-import "package:shop/entities/variant_entity.dart";
+import "package:shop/inputs/cart_input.dart";
 import "package:shop/repositories/cart_repository.dart";
 
 part "add_to_cart_event.dart";

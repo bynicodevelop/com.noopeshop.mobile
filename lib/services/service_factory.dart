@@ -12,6 +12,7 @@ import "package:shop/services/accounts/validate/validate_account_bloc.dart";
 import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/bookmark/load_bookmark/load_bookmark_bloc.dart";
 import "package:shop/services/cart/add_to_cart/add_to_cart_bloc.dart";
+import "package:shop/services/cart/load_cart/load_cart_bloc.dart";
 import "package:shop/services/categories/load/load_categories_bloc.dart";
 import "package:shop/services/pages/load_page/load_page_bloc.dart";
 import "package:shop/services/products/load_latest_products/load_latest_products_bloc.dart";
@@ -97,6 +98,12 @@ class ServiceFactory extends StatelessWidget {
         BlocProvider<AddToCartBloc>(
           create: (context) => AddToCartBloc(
             cartRepository,
+          ),
+        ),
+        BlocProvider<LoadCartBloc>(
+          create: (context) => LoadCartBloc(
+            cartRepository,
+            productRepository,
           ),
         ),
       ],

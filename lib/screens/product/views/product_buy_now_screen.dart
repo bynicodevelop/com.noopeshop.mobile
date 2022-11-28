@@ -8,6 +8,7 @@ import "package:shop/entities/color_entity.dart";
 import "package:shop/entities/product_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
+import "package:shop/inputs/cart_input.dart";
 import "package:shop/screens/product/views/added_to_cart_message_screen.dart";
 import "package:shop/screens/product/views/components/product_list_tile.dart";
 import "package:shop/screens/product/views/size_guide_screen.dart";
@@ -93,8 +94,11 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
           subTitle: t(context)!.add_to_cart_total_price_label,
           press: () async => context.read<AddToCartBloc>().add(
                 OnAddToCartEvent(
-                  variant: selectedVariant.value,
-                  quantity: _quantity.value,
+                  variant: CartInput(
+                    variant: selectedVariant.value,
+                    product: widget.productEntity,
+                    quantity: _quantity.value,
+                  ),
                 ),
               ),
         ),

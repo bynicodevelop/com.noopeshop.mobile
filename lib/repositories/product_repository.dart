@@ -7,13 +7,14 @@ import "package:shop/entities/review_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
 import "package:shop/exceptions/product_exception.dart";
+import "package:shop/inputs/product_input.dart";
 import "package:shop/utils/filters/min_price.dart";
 import "package:shop/utils/helpers/average_rating.dart";
 import "package:shop/utils/helpers/discount_percent.dart";
 
 class ProductRepository {
   final Directus sdk;
-  final Box<List<int>> bookmarkBox;
+  final Box<List<dynamic>> bookmarkBox;
 
   final List<ProductEntity> _products = [];
 
@@ -25,7 +26,8 @@ class ProductRepository {
   Future<List<ProductEntity>> getLatestProducts() async {
     _products.clear();
 
-    final List<int> bookmarks = bookmarkBox.get("bookmarks") ?? [];
+    final List<ProductInput> bookmarks = List<ProductInput>.from(
+        List<dynamic>.from(bookmarkBox.get("bookmarks") ?? []));
 
     // try {
     final List<Map<String, dynamic>> responses = await _getProductsData(null);
@@ -52,7 +54,8 @@ class ProductRepository {
               sellWithoutStock: productData["sell_without_stock"] as bool,
               nbReviews: productData["nb_reviews"] as int,
               rating: productData["rating"] as double,
-              isBookmarked: bookmarks.contains(productData["id"] as int),
+              isBookmarked:
+                  bookmarks.any((bookmark) => bookmark.id == productData["id"]),
             );
           },
         )
@@ -82,8 +85,12 @@ class ProductRepository {
   }
 
   Future<ProductEntity> loadProduct(int productId) async {
-    final List<int> bookmarks = bookmarkBox.get("bookmarks") ?? [];
+    final List<ProductInput> bookmarks = List<ProductInput>.from(
+        List<dynamic>.from(bookmarkBox.get("bookmarks") ?? []));
     late ProductEntity product;
+
+    final bool isBookmarked =
+        bookmarks.any((bookmark) => bookmark.id == productId);
 
     try {
       product = _products.firstWhere(
@@ -121,7 +128,7 @@ class ProductRepository {
         sellWithoutStock: productData["sell_without_stock"] as bool,
         nbReviews: productData["nb_reviews"] as int,
         rating: productData["rating"] as double,
-        isBookmarked: bookmarks.contains(productData["id"] as int),
+        isBookmarked: isBookmarked,
       );
     }
 
@@ -183,77 +190,81 @@ class ProductRepository {
 
     return product.copyWith(
       relatedProducts: relatedProductsData,
+      isBookmarked: isBookmarked,
     );
   }
 
   Future<List<ProductEntity>> getProductFromListIds() async {
     final List<ProductEntity> products = [];
-    final List<int> productIds = bookmarkBox.get("bookmarks") ?? [];
+    final List<ProductInput> productInputList = List<ProductInput>.from(
+        List<dynamic>.from(bookmarkBox.get("bookmarks") ?? []));
+
+    final List<int> productIds = productInputList.map((e) => e.id).toList();
 
     if (productIds.isEmpty) return products;
 
-    try {
-      final DirectusListResponse<Map<String, dynamic>> response =
-          await sdk.items("products").readMany(
-                query: Query(
-                  fields: [
-                    "id",
-                    "thumbnail",
-                    "title",
-                    "product_info",
-                    "product_details",
-                    "brand_name",
-                    "previews.directus_files_id",
-                    "sell_without_stock",
-                    "variantes.*.*.*",
-                    "reviews.*",
-                  ],
-                  sort: [
-                    "-date_created",
-                  ],
-                ),
-                filters: Filters({
-                  "status": Filter.eq("published"),
-                  "id": Filter.isIn(productIds),
-                }),
-              );
+    // try {
+    final DirectusListResponse<Map<String, dynamic>> response =
+        await sdk.items("products").readMany(
+              query: Query(
+                fields: [
+                  "id",
+                  "thumbnail",
+                  "title",
+                  "product_info",
+                  "product_details",
+                  "brand_name",
+                  "previews.directus_files_id",
+                  "sell_without_stock",
+                  "variantes.*.*.*",
+                  "reviews.*",
+                ],
+                sort: [
+                  "-date_created",
+                ],
+              ),
+              filters: Filters({
+                "status": Filter.eq("published"),
+                "id": Filter.isIn(productIds),
+              }),
+            );
 
-      for (final productData in response.data) {
-        Map<String, dynamic> productDataFormatted = _formatProductData(
-          productData,
-        );
-
-        final ProductEntity product = ProductEntity(
-          id: productDataFormatted["id"] as int,
-          thumbnail: productDataFormatted["thumbnail"] as String,
-          title: productDataFormatted["title"] as String,
-          productInfo: productDataFormatted["product_info"] as String,
-          productDetails: productDataFormatted["product_details"] as String,
-          brandName: productDataFormatted["brand_name"] as String,
-          previews: productDataFormatted["previews"] as List<String>,
-          variants: productDataFormatted["variantes"] as List<VariantEntity>,
-          reviews: productDataFormatted["reviews"] as List<ReviewEntity>,
-          relatedProducts: const [],
-          price: productDataFormatted["price"] as int,
-          priceAfterDiscount:
-              productDataFormatted["price_after_discount"] as int?,
-          dicountpercent: productDataFormatted["discount_percent"] as int?,
-          sellWithoutStock: productDataFormatted["sell_without_stock"] as bool,
-          nbReviews: productDataFormatted["nb_reviews"] as int,
-          rating: productDataFormatted["rating"] as double,
-          isBookmarked: true,
-        );
-
-        products.add(product);
-      }
-
-      return products;
-    } catch (e) {
-      throw ProductException(
-        e.toString(),
-        "unknown",
+    for (final productData in response.data) {
+      Map<String, dynamic> productDataFormatted = _formatProductData(
+        productData,
       );
+
+      final ProductEntity product = ProductEntity(
+        id: productDataFormatted["id"] as int,
+        thumbnail: productDataFormatted["thumbnail"] as String,
+        title: productDataFormatted["title"] as String,
+        productInfo: productDataFormatted["product_info"] as String,
+        productDetails: productDataFormatted["product_details"] as String,
+        brandName: productDataFormatted["brand_name"] as String,
+        previews: productDataFormatted["previews"] as List<String>,
+        variants: productDataFormatted["variantes"] as List<VariantEntity>,
+        reviews: productDataFormatted["reviews"] as List<ReviewEntity>,
+        relatedProducts: const [],
+        price: productDataFormatted["price"] as int,
+        priceAfterDiscount:
+            productDataFormatted["price_after_discount"] as int?,
+        dicountpercent: productDataFormatted["discount_percent"] as int?,
+        sellWithoutStock: productDataFormatted["sell_without_stock"] as bool,
+        nbReviews: productDataFormatted["nb_reviews"] as int,
+        rating: productDataFormatted["rating"] as double,
+        isBookmarked: true,
+      );
+
+      products.add(product);
     }
+
+    return products;
+    // } catch (e) {
+    //   throw ProductException(
+    //     e.toString(),
+    //     "unknown",
+    //   );
+    // }
   }
 
   Future<List<Map<String, dynamic>>> _getProductsData(
@@ -302,6 +313,9 @@ class ProductRepository {
           .map<VariantEntity>(
             (variant) => VariantEntity.fromJson({
               ...variant,
+              "thumbnail": variant["thumbnail"] != null
+                  ? variant["thumbnail"]["id"]
+                  : null,
               "product_id": productData["id"],
               "color": ColorEntity(
                 slug: variant["colors"].first["colors_id"]["slug"],

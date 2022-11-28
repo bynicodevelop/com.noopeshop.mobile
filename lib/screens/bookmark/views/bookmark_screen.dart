@@ -8,6 +8,7 @@ import "package:shop/screens/bookmark/component/bookmarks_skelton.dart";
 import "package:shop/services/bookmark/load_bookmark/load_bookmark_bloc.dart";
 import "package:shop/utils/assets_network.dart";
 import "package:shop/utils/format/price.dart";
+import "package:shop/utils/translate.dart";
 
 import "../../../constants.dart";
 
@@ -46,7 +47,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                     height: 20,
                   ),
                   Text(
-                    "No bookmark yet",
+                    t(context)!.bookmark_empty_title_label,
                     style: Theme.of(context).textTheme.headline6!.copyWith(
                           color: Theme.of(context)
                               .textTheme

@@ -1,23 +1,27 @@
 import "package:hive/hive.dart";
-import "package:shop/entities/variant_entity.dart";
+import "package:shop/inputs/cart_input.dart";
 
 class CartRepository {
-  late Box<List<VariantEntity>> cartBox;
+  late Box<List<dynamic>> cartBox;
 
   CartRepository(
     this.cartBox,
   );
 
-  Future<void> addToCart(VariantEntity variant) async {
-    final cart = cartBox.get("cart") ?? <VariantEntity>[];
+  Future<List<CartInput>> get cart async =>
+      List<CartInput>.from(List<dynamic>.from(cartBox.get("cart") ?? []));
 
-    // Update variant if exists in cart
-    final index = cart.indexWhere((element) => element.id == variant.id);
+  Future<void> addToCart(CartInput cartInput) async {
+    final cart = cartBox.get("cart") ?? <CartInput>[];
+
+    final int index = cart.indexWhere(
+      (element) => element.variant.id == cartInput.variant.id,
+    );
 
     if (index != -1) {
-      cart[index] = variant;
+      cart[index] = cartInput;
     } else {
-      cart.add(variant);
+      cart.add(cartInput);
     }
 
     await cartBox.put("cart", cart);
