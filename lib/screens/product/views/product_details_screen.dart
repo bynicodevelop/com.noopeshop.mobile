@@ -14,7 +14,6 @@ import "package:shop/route/screen_export.dart";
 import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/products/load_product_by_id/load_product_by_id_bloc.dart";
 import "package:shop/utils/assets_network.dart";
-import "package:shop/utils/format/price.dart";
 import "package:shop/utils/helpers/rating_by_star.dart";
 import "package:shop/utils/translate.dart";
 
@@ -49,10 +48,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         return Scaffold(
           bottomNavigationBar: widget.productEntity.sellWithoutStock
               ? CartButton(
-                  price: priceFormat(
-                      widget.productEntity.priceAfterDiscount == null
-                          ? widget.productEntity.price
-                          : widget.productEntity.priceAfterDiscount!),
+                  price: widget.productEntity.priceAfterDiscount == null
+                      ? widget.productEntity.price
+                      : widget.productEntity.priceAfterDiscount!,
                   title: t(context)!.cart_button_buy_now_label,
                   subTitle: t(context)!.cart_button_unit_label,
                   press: () async => customModalBottomSheet(
@@ -218,19 +216,25 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 .productEntity.relatedProducts[index].title,
                             brandName: state
                                 .productEntity.relatedProducts[index].brandName,
-                            price: priceFormat(
-                              state.productEntity.relatedProducts[index].price,
-                            ),
+                            price: state
+                                .productEntity.relatedProducts[index].price,
                             priceAfetDiscount: state
                                         .productEntity
                                         .relatedProducts[index]
                                         .priceAfterDiscount !=
                                     null
-                                ? priceFormat(state.productEntity
-                                    .relatedProducts[index].priceAfterDiscount!)
+                                ? state.productEntity.relatedProducts[index]
+                                    .priceAfterDiscount!
                                 : null,
-                            dicountpercent: state.productEntity
-                                .relatedProducts[index].dicountpercent,
+                            dicountpercent: state
+                                        .productEntity
+                                        .relatedProducts[index]
+                                        .dicountpercent !=
+                                    null
+                                ? int.parse(state.productEntity
+                                    .relatedProducts[index].dicountpercent!
+                                    .toStringAsFixed(0))
+                                : null,
                             press: () async {
                               await Navigator.pushNamed(
                                 context,

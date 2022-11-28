@@ -9,6 +9,7 @@ import "package:shop/entities/adapters/color_adapter.dart";
 import "package:shop/entities/color_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
+import "package:shop/entities/vat_entity.dart";
 import "package:shop/inputs/cart_input.dart";
 import "package:shop/inputs/product_input.dart";
 import "package:shop/repositories/account_repository.dart";
@@ -53,13 +54,15 @@ $initGetIt(
     storage,
   );
 
-  // await Hive.deleteFromDisk();
-
   await Hive.initFlutter();
+
+  // await Hive.deleteBoxFromDisk("bookmarks");
+  // await Hive.deleteBoxFromDisk("cart");
 
   Hive.registerAdapter(ProductInputAdapter());
   Hive.registerAdapter(CartInputAdapter());
   Hive.registerAdapter(VariantEntityAdapter());
+  Hive.registerAdapter(VatEntityAdapter());
   Hive.registerAdapter(ColorEntityAdapter());
   Hive.registerAdapter(SizeEntityAdapter());
   Hive.registerAdapter(ColorAdapter());

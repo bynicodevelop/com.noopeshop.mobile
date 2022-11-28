@@ -30,12 +30,16 @@ class OrderSummaryCard extends StatelessWidget {
             "Order Summary",
             style: Theme.of(context).textTheme.subtitle2,
           ),
-          const SizedBox(height: defaultPadding / 2),
+          const SizedBox(
+            height: defaultPadding / 2,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: defaultPadding / 2),
+            padding: const EdgeInsets.symmetric(
+              vertical: defaultPadding / 2,
+            ),
             child: OrderSummaryText(
               leadingText: "Subtotal",
-              trilingText: "\$$subTotal",
+              trilingText: "\$${subTotal.toStringAsFixed(2)}",
             ),
           ),
           OrderSummaryText(
@@ -43,16 +47,25 @@ class OrderSummaryCard extends StatelessWidget {
             trilingText: shippingFee == 0 ? "Free" : "\$$shippingFee",
             trilingTextColor: shippingFee == 0 ? successColor : null,
           ),
-          if (discount != null) const SizedBox(height: defaultPadding / 2),
+          if (discount != null)
+            const SizedBox(
+              height: defaultPadding / 2,
+            ),
           if (discount != null)
             OrderSummaryText(
-                leadingText: "Discount", trilingText: "\$$discount"),
-          const Divider(height: defaultPadding * 2),
+              leadingText: "Discount",
+              trilingText: "\$$discount",
+            ),
+          const Divider(
+            height: defaultPadding * 2,
+          ),
           OrderSummaryText(
             leadingText: "Total (Include of VAT)",
-            trilingText: "\$$totalWithVat",
+            trilingText: "\$${totalWithVat.toStringAsFixed(2)}",
           ),
-          const SizedBox(height: defaultPadding / 2),
+          const SizedBox(
+            height: defaultPadding / 2,
+          ),
           OrderSummaryText(
             leadingText: "Estimated VAT",
             trilingText: "\$$vat",

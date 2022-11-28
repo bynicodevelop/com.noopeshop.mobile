@@ -6,6 +6,7 @@ import "package:shop/entities/product_entity.dart";
 import "package:shop/entities/review_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
+import "package:shop/entities/vat_entity.dart";
 import "package:shop/exceptions/product_exception.dart";
 import "package:shop/inputs/product_input.dart";
 import "package:shop/utils/filters/min_price.dart";
@@ -48,9 +49,10 @@ class ProductRepository {
               variants: productData["variantes"] as List<VariantEntity>,
               reviews: productData["reviews"] as List<ReviewEntity>,
               relatedProducts: const [],
-              price: productData["price"] as int,
-              priceAfterDiscount: productData["price_after_discount"] as int?,
-              dicountpercent: productData["discount_percent"] as int?,
+              price: productData["price"] as double,
+              priceAfterDiscount:
+                  productData["price_after_discount"] as double?,
+              dicountpercent: productData["discount_percent"] as double?,
               sellWithoutStock: productData["sell_without_stock"] as bool,
               nbReviews: productData["nb_reviews"] as int,
               rating: productData["rating"] as double,
@@ -122,9 +124,9 @@ class ProductRepository {
         variants: productData["variantes"] as List<VariantEntity>,
         reviews: productData["reviews"] as List<ReviewEntity>,
         relatedProducts: const [],
-        price: productData["price"] as int,
-        priceAfterDiscount: productData["price_after_discount"] as int?,
-        dicountpercent: productData["discount_percent"] as int?,
+        price: productData["price"] as double,
+        priceAfterDiscount: productData["price_after_discount"] as double?,
+        dicountpercent: productData["discount_percent"] as double?,
         sellWithoutStock: productData["sell_without_stock"] as bool,
         nbReviews: productData["nb_reviews"] as int,
         rating: productData["rating"] as double,
@@ -176,9 +178,9 @@ class ProductRepository {
           variants: productData["variantes"] as List<VariantEntity>,
           reviews: productData["reviews"] as List<ReviewEntity>,
           relatedProducts: const [],
-          price: productData["price"] as int,
-          priceAfterDiscount: productData["priceAfterDiscount"] as int?,
-          dicountpercent: productData["dicountpercent"] as int?,
+          price: productData["price"] as double,
+          priceAfterDiscount: productData["priceAfterDiscount"] as double?,
+          dicountpercent: productData["dicountpercent"] as double?,
           sellWithoutStock: productData["sell_without_stock"] as bool,
           nbReviews: productData["nb_reviews"] as int,
           rating: productData["rating"] as double,
@@ -245,10 +247,10 @@ class ProductRepository {
         variants: productDataFormatted["variantes"] as List<VariantEntity>,
         reviews: productDataFormatted["reviews"] as List<ReviewEntity>,
         relatedProducts: const [],
-        price: productDataFormatted["price"] as int,
+        price: productDataFormatted["price"] as double,
         priceAfterDiscount:
-            productDataFormatted["price_after_discount"] as int?,
-        dicountpercent: productDataFormatted["discount_percent"] as int?,
+            productDataFormatted["price_after_discount"] as double?,
+        dicountpercent: productDataFormatted["discount_percent"] as double?,
         sellWithoutStock: productDataFormatted["sell_without_stock"] as bool,
         nbReviews: productDataFormatted["nb_reviews"] as int,
         rating: productDataFormatted["rating"] as double,
@@ -303,40 +305,92 @@ class ProductRepository {
     return response.data;
   }
 
+  double _vatPrice(variant) {
+    return variant["vat"]["value"] > 0
+        ? variant["price"] / 100 +
+            (variant["price"] /
+                100 *
+                double.parse(variant["vat"]["value"].toString()) /
+                100)
+        : variant["price"] / 100;
+  }
+
+  double _vatPriceAmount(variant) {
+    return variant["vat"]["value"] > 0
+        ? variant["price"] /
+            100 *
+            double.parse(variant["vat"]["value"].toString()) /
+            100
+        : 0;
+  }
+
+  double _vatPriceAfterDiscount(variant) {
+    return variant["vat"]["value"] > 0
+        ? variant["price_after_discount"] / 100 +
+            (variant["price_after_discount"] /
+                100 *
+                double.parse(variant["vat"]["value"].toString()) /
+                100)
+        : variant["price_after_discount"] / 100;
+  }
+
+  double _vatPriceAfterDiscountAmount(variant) {
+    return variant["vat"]["value"] > 0
+        ? variant["price_after_discount"] /
+            100 *
+            double.parse(variant["vat"]["value"].toString()) /
+            100
+        : 0;
+  }
+
   Map<String, dynamic> _formatProductData(Map<String, dynamic> productData) {
     List<VariantEntity> variants = [];
     List<String> previews = [];
     List<ReviewEntity> reviews = [];
 
     if (productData["variantes"] != null) {
-      variants = List<dynamic>.from(productData["variantes"])
-          .map<VariantEntity>(
-            (variant) => VariantEntity.fromJson({
-              ...variant,
-              "thumbnail": variant["thumbnail"] != null
-                  ? variant["thumbnail"]["id"]
-                  : null,
-              "product_id": productData["id"],
-              "color": ColorEntity(
-                slug: variant["colors"].first["colors_id"]["slug"],
-                value: Color(int.parse(
-                    variant["colors"].first["colors_id"]["value"].replaceAll(
-                          "#",
-                          "0xff",
-                        ))),
-              ),
-              "size": SizeEntity(
-                slug: variant["sizes"].first["sizes_id"]["slug"],
-                value: variant["sizes"].first["sizes_id"]["value"],
-              ),
-            }),
-          )
-          .toList();
+      variants =
+          List<dynamic>.from(productData["variantes"]).map<VariantEntity>(
+        (variant) {
+          return VariantEntity.fromJson({
+            ...variant,
+            "price": _vatPrice(variant),
+            "price_vat": _vatPriceAmount(variant),
+            "price_after_discount": variant["price_after_discount"] != null
+                ? _vatPriceAfterDiscount(variant)
+                : null,
+            "price_after_discount_vat": variant["price_after_discount"] != null
+                ? _vatPriceAfterDiscountAmount(variant)
+                : null,
+            "thumbnail": variant["thumbnail"] != null
+                ? variant["thumbnail"]["id"]
+                : null,
+            "product_id": productData["id"],
+            "color": ColorEntity(
+              slug: variant["colors"].first["colors_id"]["slug"],
+              value: Color(int.parse(
+                  variant["colors"].first["colors_id"]["value"].replaceAll(
+                        "#",
+                        "0xff",
+                      ))),
+            ),
+            "size": SizeEntity(
+              slug: variant["sizes"].first["sizes_id"]["slug"],
+              value: variant["sizes"].first["sizes_id"]["value"],
+            ),
+            "vat_rate": VatEntity(
+              id: variant["vat"]["id"],
+              label: variant["vat"]["label"],
+              value: double.parse(variant["vat"]["value"].toString()),
+            ),
+          });
+        },
+      ).toList();
     }
 
-    int price = 0;
-    int? priceAfterDiscount = 0;
-    int? discount = 0;
+    double price = 0;
+    double? priceAfterDiscount = 0;
+    double? discount = 0;
 
     if (variants.isNotEmpty) {
       price = minPrice(variants);

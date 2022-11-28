@@ -16,7 +16,6 @@ import "package:shop/screens/product/views/size_guide_screen.dart";
 import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/cart/add_to_cart/add_to_cart_bloc.dart";
 import "package:shop/utils/assets_network.dart";
-import "package:shop/utils/format/price.dart";
 import "package:shop/utils/translate.dart";
 
 import "../../../constants.dart";
@@ -88,10 +87,10 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
           }
         },
         child: CartButton(
-          price: priceFormat((selectedVariant.value.priceAfterDiscount == null
+          price: (selectedVariant.value.priceAfterDiscount == null
                   ? selectedVariant.value.price
                   : selectedVariant.value.priceAfterDiscount!) *
-              _quantity.value),
+              _quantity.value,
           title: t(context)!.add_to_cart_label,
           subTitle: t(context)!.add_to_cart_total_price_label,
           press: () async => context.read<AddToCartBloc>().add(
@@ -178,13 +177,11 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                       children: [
                         Expanded(
                           child: UnitPrice(
-                            price: priceFormat(selectedVariant.value.price),
-                            priceAfterDiscount: selectedVariant
-                                        .value.priceAfterDiscount !=
-                                    null
-                                ? priceFormat(
-                                    selectedVariant.value.priceAfterDiscount!)
-                                : null,
+                            price: selectedVariant.value.price,
+                            priceAfterDiscount:
+                                selectedVariant.value.priceAfterDiscount != null
+                                    ? selectedVariant.value.priceAfterDiscount!
+                                    : null,
                           ),
                         ),
                         ProductQuantity(

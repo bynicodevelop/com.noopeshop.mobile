@@ -1,17 +1,20 @@
 import "package:shop/entities/variant_entity.dart";
 
-int minPrice(List<VariantEntity> products) {
-  return products
-      .map<int>(
-        (variant) => variant.price,
+double minPrice(List<VariantEntity> products) {
+  return double.parse(products
+      .map<double>(
+        (variant) {
+          return variant.price;
+        },
       )
       .reduce(
         (value, element) => value < element ? value : element,
-      );
+      )
+      .toStringAsFixed(2));
 }
 
-int? minPriceAfterDiscount(List<VariantEntity> products, int price) {
-  int priceAfterDiscount = products.map<int>(
+double? minPriceAfterDiscount(List<VariantEntity> products, double price) {
+  double priceAfterDiscount = products.map<double>(
     (variant) {
       if (variant.priceAfterDiscount != null) {
         return variant.priceAfterDiscount!;
@@ -23,5 +26,7 @@ int? minPriceAfterDiscount(List<VariantEntity> products, int price) {
     (value, element) => value < element ? value : element,
   );
 
-  return priceAfterDiscount == price ? null : priceAfterDiscount;
+  return double.parse(priceAfterDiscount.toStringAsFixed(2)) == price
+      ? null
+      : double.parse(priceAfterDiscount.toStringAsFixed(2));
 }

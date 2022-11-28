@@ -64,10 +64,14 @@ class SecondaryProductCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: defaultPadding / 4),
+          const SizedBox(
+            width: defaultPadding / 4,
+          ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(defaultPadding / 2),
+              padding: const EdgeInsets.all(
+                defaultPadding / 2,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -93,7 +97,7 @@ class SecondaryProductCard extends StatelessWidget {
                       ? Row(
                           children: [
                             Text(
-                              "\$" + priceAfetDiscount.toString(),
+                              "\$" + priceAfetDiscount!.toStringAsFixed(2),
                               style: const TextStyle(
                                 color: Color(0xFF31B0D8),
                                 fontWeight: FontWeight.w500,
@@ -115,7 +119,7 @@ class SecondaryProductCard extends StatelessWidget {
                           ],
                         )
                       : Text(
-                          "\$" + price.toString(),
+                          "\$" + price.toStringAsFixed(2),
                           style: const TextStyle(
                             color: Color(0xFF31B0D8),
                             fontWeight: FontWeight.w500,

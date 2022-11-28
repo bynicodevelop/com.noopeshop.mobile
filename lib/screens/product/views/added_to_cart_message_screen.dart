@@ -47,6 +47,7 @@ class AddedToCartMessageScreen extends StatelessWidget {
               const SizedBox(
                 height: defaultPadding,
               ),
+              // TODO: cette redirection nécessite de naviguer vers les pages view
               ElevatedButton(
                 onPressed: () {},
                 child: Text(t(context)!.add_to_cart_checkout_label),

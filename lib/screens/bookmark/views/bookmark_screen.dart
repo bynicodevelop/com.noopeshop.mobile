@@ -7,7 +7,6 @@ import "package:shop/route/route_constants.dart";
 import "package:shop/screens/bookmark/component/bookmarks_skelton.dart";
 import "package:shop/services/bookmark/load_bookmark/load_bookmark_bloc.dart";
 import "package:shop/utils/assets_network.dart";
-import "package:shop/utils/format/price.dart";
 import "package:shop/utils/translate.dart";
 
 import "../../../constants.dart";
@@ -84,12 +83,16 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                         image: networkImage(products[index].thumbnail),
                         brandName: products[index].brandName,
                         title: products[index].title,
-                        price: priceFormat(products[index].price),
-                        priceAfetDiscount: products[index].priceAfterDiscount !=
-                                null
-                            ? priceFormat(products[index].priceAfterDiscount!)
+                        price: products[index].price,
+                        priceAfetDiscount:
+                            products[index].priceAfterDiscount != null
+                                ? products[index].priceAfterDiscount!
+                                : null,
+                        dicountpercent: products[index].dicountpercent != null
+                            ? int.parse(products[index]
+                                .dicountpercent!
+                                .toStringAsFixed(0))
                             : null,
-                        dicountpercent: products[index].dicountpercent,
                         press: () async {
                           await Navigator.pushNamed(
                             context,

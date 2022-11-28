@@ -7,7 +7,6 @@ import "package:shop/models/product_model.dart";
 import "package:shop/route/screen_export.dart";
 import "package:shop/services/products/load_latest_products/load_latest_products_bloc.dart";
 import "package:shop/utils/assets_network.dart";
-import "package:shop/utils/format/price.dart";
 import "package:shop/utils/translate.dart";
 
 import "../../../../constants.dart";
@@ -62,12 +61,15 @@ class _PopularProductsState extends State<PopularProducts> {
                     image: networkImage(products[index].thumbnail),
                     brandName: products[index].brandName,
                     title: products[index].title,
-                    price: priceFormat(products[index].price),
+                    price: products[index].price,
                     priceAfetDiscount:
                         products[index].priceAfterDiscount != null
-                            ? priceFormat(products[index].priceAfterDiscount!)
+                            ? products[index].priceAfterDiscount!
                             : null,
-                    dicountpercent: products[index].dicountpercent,
+                    dicountpercent: products[index].dicountpercent != null
+                        ? int.parse(
+                            products[index].dicountpercent!.toStringAsFixed(0))
+                        : null,
                     press: () async {
                       await Navigator.pushNamed(
                         context,

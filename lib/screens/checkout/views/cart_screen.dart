@@ -8,7 +8,7 @@ import "package:shop/route/screen_export.dart";
 import "package:shop/screens/order/views/components/order_summary_card.dart";
 import "package:shop/services/cart/load_cart/load_cart_bloc.dart";
 import "package:shop/utils/assets_network.dart";
-import "package:shop/utils/format/price.dart";
+import "package:shop/utils/helpers/total.dart";
 import "package:shop/utils/translate.dart";
 
 import "../../../constants.dart";
@@ -94,25 +94,31 @@ class CartScreen extends StatelessWidget {
                 // While loading use 👇
                 // const ReviewYourItemsSkelton(),
                 SliverPadding(
-                  padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: defaultPadding,
+                  ),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) => Padding(
-                        padding: const EdgeInsets.only(bottom: defaultPadding),
+                        padding: const EdgeInsets.only(
+                          bottom: defaultPadding,
+                        ),
                         child: SecondaryProductCard(
                           image: networkImage(cart[index].variant.thumbnail),
                           brandName: demoPopularProducts[index].brandName,
                           title: cart[index].variant.title,
-                          price: priceFormat(
-                              cart[index].variant.price * cart[index].quantity),
+                          price:
+                              cart[index].variant.price * cart[index].quantity,
                           priceAfetDiscount:
                               cart[index].variant.priceAfterDiscount != null
-                                  ? priceFormat(
-                                      cart[index].variant.priceAfterDiscount! *
-                                          cart[index].quantity)
+                                  ? cart[index].variant.priceAfterDiscount! *
+                                      cart[index].quantity
                                   : null,
                           style: ElevatedButton.styleFrom(
-                            maximumSize: const Size(double.infinity, 80),
+                            maximumSize: const Size(
+                              double.infinity,
+                              80,
+                            ),
                             padding: EdgeInsets.zero,
                           ),
                         ),
@@ -125,25 +131,37 @@ class CartScreen extends StatelessWidget {
                   child: CouponCode(),
                 ),
 
-                const SliverPadding(
-                  padding: EdgeInsets.symmetric(
+                SliverPadding(
+                  padding: const EdgeInsets.symmetric(
                     vertical: defaultPadding * 1.5,
                   ),
                   sliver: SliverToBoxAdapter(
                     child: OrderSummaryCard(
-                      subTotal: 169.0,
-                      discount: 10,
-                      totalWithVat: 185,
-                      vat: 5,
+                      subTotal: total(cart),
+                      // discount: 10,
+                      totalWithVat: total(cart),
+                      vat: cart
+                          .map((e) =>
+                              e.variant.priceAfterDiscountVat ??
+                              e.variant.priceVat)
+                          .toList()
+                          .reduce(
+                            (value, element) => value + element,
+                          ),
                     ),
                   ),
                 ),
                 SliverPadding(
-                  padding: const EdgeInsets.symmetric(vertical: defaultPadding),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: defaultPadding,
+                  ),
                   sliver: SliverToBoxAdapter(
                     child: ElevatedButton(
                       onPressed: () async {
-                        Navigator.pushNamed(context, paymentMethodScreenRoute);
+                        Navigator.pushNamed(
+                          context,
+                          paymentMethodScreenRoute,
+                        );
                       },
                       child: const Text("Continue"),
                     ),

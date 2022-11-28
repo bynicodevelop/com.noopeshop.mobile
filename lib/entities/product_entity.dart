@@ -13,9 +13,9 @@ class ProductEntity extends Equatable {
   final List<VariantEntity> variants;
   final List<ReviewEntity> reviews;
   final List<ProductEntity> relatedProducts;
-  final int price;
-  final int? priceAfterDiscount;
-  final int? dicountpercent;
+  final double price;
+  final double? priceAfterDiscount;
+  final double? dicountpercent;
   final bool sellWithoutStock;
   final int nbReviews;
   final double rating;
@@ -52,9 +52,9 @@ class ProductEntity extends Equatable {
         variants: json["variantes"] as List<VariantEntity>,
         reviews: json["reviews"] as List<ReviewEntity>,
         relatedProducts: json["related_products"] as List<ProductEntity>,
-        price: json["price"] as int,
-        priceAfterDiscount: json["price_after_discount"] as int?,
-        dicountpercent: json["dicount_percent"] as int?,
+        price: json["price"] as double,
+        priceAfterDiscount: json["price_after_discount"] as double?,
+        dicountpercent: json["dicount_percent"] as double?,
         sellWithoutStock: json["sell_without_stock"] as bool,
         nbReviews: json["nb_reviews"] as int,
         rating: json["rating"] as double,
@@ -92,9 +92,9 @@ class ProductEntity extends Equatable {
     List<VariantEntity>? variants,
     List<ReviewEntity>? reviews,
     List<ProductEntity>? relatedProducts,
-    int? price,
-    int? priceAfterDiscount,
-    int? dicountpercent,
+    double? price,
+    double? priceAfterDiscount,
+    double? dicountpercent,
     bool? sellWithoutStock,
     int? nbReviews,
     double? rating,
