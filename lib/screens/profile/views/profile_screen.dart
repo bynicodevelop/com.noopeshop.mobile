@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
 import "package:shop/components/list_tile/divider_list_tile.dart";
-import "package:shop/components/network_image_with_loader.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/screen_export.dart";
 
@@ -26,21 +25,15 @@ class ProfileScreen extends StatelessWidget {
               Navigator.pushNamed(context, userInfoScreenRoute);
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: defaultPadding, vertical: defaultPadding * 1.5),
-            child: GestureDetector(
-              onTap: () {},
-              child: const AspectRatio(
-                aspectRatio: 1.8,
-                child:
-                    NetworkImageWithLoader("https://i.imgur.com/dz0BBom.png"),
-              ),
-            ),
+
+          const SizedBox(
+            height: defaultPadding,
           ),
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+            padding: const EdgeInsets.symmetric(
+              horizontal: defaultPadding,
+            ),
             child: Text(
               "Account",
               style: Theme.of(context).textTheme.subtitle2,

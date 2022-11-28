@@ -3,7 +3,6 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/svg.dart";
 import "package:shop/components/product/secondary_product_card.dart";
 import "package:shop/inputs/cart_input.dart";
-import "package:shop/models/product_model.dart";
 import "package:shop/route/screen_export.dart";
 import "package:shop/screens/order/views/components/order_summary_card.dart";
 import "package:shop/services/cart/load_cart/load_cart_bloc.dart";
@@ -87,7 +86,7 @@ class CartScreen extends StatelessWidget {
               slivers: [
                 SliverToBoxAdapter(
                   child: Text(
-                    "Review your order",
+                    t(context)!.cart_review_order_label,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ),
@@ -104,8 +103,9 @@ class CartScreen extends StatelessWidget {
                           bottom: defaultPadding,
                         ),
                         child: SecondaryProductCard(
+                          press: () {},
                           image: networkImage(cart[index].variant.thumbnail),
-                          brandName: demoPopularProducts[index].brandName,
+                          brandName: cart[index].product.brandName!,
                           title: cart[index].variant.title,
                           price:
                               cart[index].variant.price * cart[index].quantity,
@@ -130,7 +130,6 @@ class CartScreen extends StatelessWidget {
                 const SliverToBoxAdapter(
                   child: CouponCode(),
                 ),
-
                 SliverPadding(
                   padding: const EdgeInsets.symmetric(
                     vertical: defaultPadding * 1.5,

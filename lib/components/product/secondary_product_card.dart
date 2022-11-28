@@ -26,7 +26,7 @@ class SecondaryProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
+      onPressed: press,
       style: style ??
           OutlinedButton.styleFrom(
               minimumSize: const Size(256, 114),
@@ -38,7 +38,10 @@ class SecondaryProductCard extends StatelessWidget {
             aspectRatio: 1.15,
             child: Stack(
               children: [
-                NetworkImageWithLoader(image, radius: defaultBorderRadious),
+                NetworkImageWithLoader(
+                  image,
+                  radius: defaultBorderRadious,
+                ),
                 if (dicountpercent != null)
                   Positioned(
                     right: defaultPadding / 2,
