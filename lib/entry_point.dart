@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/screens/explorer/views/explorer_screen.dart";
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({Key? key}) : super(key: key);
@@ -14,13 +15,14 @@ class EntryPoint extends StatefulWidget {
 class _EntryPointState extends State<EntryPoint> {
   final List _pages = const [
     HomeScreen(),
-    DiscoverScreen(),
+    // DiscoverScreen(),
     BookmarkScreen(),
+    ExplorerScreen(),
     // EmptyCartScreen(), // if Cart is empty
     CartScreen(),
     ProfileScreen(),
   ];
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +37,16 @@ class _EntryPointState extends State<EntryPoint> {
     }
 
     return Scaffold(
+      extendBodyBehindAppBar: _currentIndex == 2,
+      extendBody: _currentIndex == 2,
       appBar: AppBar(
         // pinned: true,
         // floating: true,
         // snap: true,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
+        backgroundColor: _currentIndex != 2
+            ? Theme.of(context).scaffoldBackgroundColor
+            : Colors.transparent,
         leading: const SizedBox(),
         leadingWidth: 0,
         centerTitle: false,
@@ -85,13 +92,16 @@ class _EntryPointState extends State<EntryPoint> {
         child: _pages[_currentIndex],
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.only(
-          top: defaultPadding / 2,
+        padding: EdgeInsets.only(
+          top: _currentIndex != 2 ? defaultPadding / 2 : 0,
         ),
-        color: Theme.of(context).brightness == Brightness.light
-            ? Colors.white
-            : const Color(0xFF101015),
+        color: _currentIndex != 2
+            ? Theme.of(context).brightness == Brightness.light
+                ? Colors.white
+                : const Color(0xFF101015)
+            : Colors.transparent,
         child: BottomNavigationBar(
+          elevation: 0,
           currentIndex: _currentIndex,
           onTap: (index) {
             if (index != _currentIndex) {
@@ -100,11 +110,12 @@ class _EntryPointState extends State<EntryPoint> {
               });
             }
           },
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? Colors.white
-              : const Color(0xFF101015),
+          backgroundColor: _currentIndex != 2
+              ? Theme.of(context).brightness == Brightness.light
+                  ? Colors.white
+                  : const Color(0xFF101015)
+              : Colors.transparent,
           type: BottomNavigationBarType.fixed,
-          // selectedLabelStyle: TextStyle(color: primaryColor),
           selectedFontSize: 12,
           selectedItemColor: primaryColor,
           unselectedItemColor: Colors.transparent,
@@ -118,20 +129,20 @@ class _EntryPointState extends State<EntryPoint> {
               label: "Shop",
             ),
             BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Category.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Category.svg",
-                color: primaryColor,
-              ),
-              label: "Discover",
-            ),
-            BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bookmark.svg"),
               activeIcon: svgIcon(
                 "assets/icons/Bookmark.svg",
                 color: primaryColor,
               ),
               label: "Bookmark",
+            ),
+            BottomNavigationBarItem(
+              icon: svgIcon("assets/icons/Category.svg"),
+              activeIcon: svgIcon(
+                "assets/icons/Category.svg",
+                color: primaryColor,
+              ),
+              label: "Discover",
             ),
             BottomNavigationBarItem(
               icon: svgIcon("assets/icons/Bag.svg"),
