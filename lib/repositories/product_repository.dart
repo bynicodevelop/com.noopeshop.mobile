@@ -427,7 +427,7 @@ class ProductRepository {
       "related_products": const [],
       "price": price,
       "price_after_discount": priceAfterDiscount,
-      "dicountpercent": discount,
+      "discount_percent": discount,
       "sell_without_stock": productData["sell_without_stock"],
       "nb_reviews": reviews.length,
       "rating": averageRating(reviews),
