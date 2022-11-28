@@ -220,5 +220,37 @@
     "cart_empty_title_label": "Votre panier est vide",
     "@cart_empty_title_label": {
       "description": "Votre panier est vide"
+    },
+    "cart_review_order_label": "Récapitulatif de la commande",
+    "@cart_empty_title_label": {
+      "description": "Récapitulatif de la commande"
+    },
+    "cart_review_continue_button_label": "Continuer",
+    "@cart_review_continue_button_label": {
+      "description": "Continuer"
+    },
+    "cart_review_order_summary_label": "Ticket",
+    "@cart_review_order_summary_label": {
+      "description": "Ticket"
+    },
+    "cart_review_discount_label": "Remise",
+    "@cart_review_discount_label": {
+      "description": "Remise"
+    },
+    "cart_review_subtotal_label": "Sous-total",
+    "@cart_review_subtotal_label": {
+      "description": "Sous-total"
+    },
+    "cart_review_shipping_fee_label": "Frais de livraison",
+    "@cart_review_shipping_fee_label": {
+      "description": "Frais de livraison"
+    },
+    "cart_review_total_with_vat_label": "Total (TVA incluse)",
+    "@cart_review_total_with_vat_label": {
+      "description": "Total (TVA incluse)"
+    },
+    "cart_review_estimated_vat_label": "TVA estimée",
+    "@cart_review_total_with_vat_label": {
+      "description": "TVA estimée"
     }
 }

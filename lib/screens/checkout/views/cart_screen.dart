@@ -163,7 +163,8 @@ class CartScreen extends StatelessWidget {
                           paymentMethodScreenRoute,
                         );
                       },
-                      child: const Text("Continue"),
+                      child:
+                          Text(t(context)!.cart_review_continue_button_label),
                     ),
                   ),
                 ),

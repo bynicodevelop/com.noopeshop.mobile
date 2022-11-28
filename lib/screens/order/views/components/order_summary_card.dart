@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:shop/utils/translate.dart";
 
 import "../../../../constants.dart";
 
@@ -27,7 +28,7 @@ class OrderSummaryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Order Summary",
+            t(context)!.cart_review_order_label,
             style: Theme.of(context).textTheme.subtitle2,
           ),
           const SizedBox(
@@ -38,12 +39,12 @@ class OrderSummaryCard extends StatelessWidget {
               vertical: defaultPadding / 2,
             ),
             child: OrderSummaryText(
-              leadingText: "Subtotal",
+              leadingText: t(context)!.cart_review_subtotal_label,
               trilingText: "\$${subTotal.toStringAsFixed(2)}",
             ),
           ),
           OrderSummaryText(
-            leadingText: "Shipping Fee",
+            leadingText: t(context)!.cart_review_shipping_fee_label,
             trilingText: shippingFee == 0 ? "Free" : "\$$shippingFee",
             trilingTextColor: shippingFee == 0 ? successColor : null,
           ),
@@ -53,21 +54,21 @@ class OrderSummaryCard extends StatelessWidget {
             ),
           if (discount != null)
             OrderSummaryText(
-              leadingText: "Discount",
+              leadingText: t(context)!.cart_review_discount_label,
               trilingText: "\$$discount",
             ),
           const Divider(
             height: defaultPadding * 2,
           ),
           OrderSummaryText(
-            leadingText: "Total (Include of VAT)",
+            leadingText: t(context)!.cart_review_total_with_vat_label,
             trilingText: "\$${totalWithVat.toStringAsFixed(2)}",
           ),
           const SizedBox(
             height: defaultPadding / 2,
           ),
           OrderSummaryText(
-            leadingText: "Estimated VAT",
+            leadingText: t(context)!.cart_review_estimated_vat_label,
             trilingText: "\$$vat",
           ),
         ],
