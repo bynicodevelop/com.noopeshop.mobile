@@ -55,15 +55,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           : widget.productEntity.priceAfterDiscount!),
                   title: t(context)!.cart_button_buy_now_label,
                   subTitle: t(context)!.cart_button_unit_label,
-                  press: () async {
-                    customModalBottomSheet(
-                      context,
-                      height: MediaQuery.of(context).size.height * 0.92,
-                      child: ProductBuyNowScreen(
-                        productEntity: widget.productEntity,
-                      ),
-                    );
-                  },
+                  press: () async => customModalBottomSheet(
+                    context,
+                    height: MediaQuery.of(context).size.height * 0.92,
+                    child: ProductBuyNowScreen(
+                      productEntity: widget.productEntity,
+                    ),
+                  ),
                 )
               : NotifyMeCard(
                   isNotify: false,

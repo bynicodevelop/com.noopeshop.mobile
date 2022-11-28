@@ -9,9 +9,11 @@ import "package:shop/entities/product_entity.dart";
 import "package:shop/entities/size_entity.dart";
 import "package:shop/entities/variant_entity.dart";
 import "package:shop/inputs/cart_input.dart";
+import "package:shop/inputs/product_input.dart";
 import "package:shop/screens/product/views/added_to_cart_message_screen.dart";
 import "package:shop/screens/product/views/components/product_list_tile.dart";
 import "package:shop/screens/product/views/size_guide_screen.dart";
+import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/cart/add_to_cart/add_to_cart_bloc.dart";
 import "package:shop/utils/assets_network.dart";
 import "package:shop/utils/format/price.dart";
@@ -96,7 +98,11 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                 OnAddToCartEvent(
                   variant: CartInput(
                     variant: selectedVariant.value,
-                    product: widget.productEntity,
+                    product: ProductInput(
+                      id: widget.productEntity.id,
+                      title: widget.productEntity.title,
+                      brandName: widget.productEntity.brandName,
+                    ),
                     quantity: _quantity.value,
                   ),
                 ),
@@ -118,14 +124,30 @@ class _ProductBuyNowScreenState extends State<ProductBuyNowScreen> {
                   widget.productEntity.title,
                   style: Theme.of(context).textTheme.subtitle2,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(
-                    "assets/icons/Bookmark.svg",
-                    color: widget.productEntity.isBookmarked
-                        ? primaryColor
-                        : Theme.of(context).textTheme.bodyText1!.color,
-                  ),
+                BlocBuilder<AddBookmarkBloc, AddBookmarkState>(
+                  builder: (context, state) {
+                    bool isBookmarked = widget.productEntity.isBookmarked;
+
+                    if (state is AddBookmarkSuccessState) {
+                      isBookmarked = state.isBookmarked;
+                    }
+
+                    return IconButton(
+                      onPressed: () => context
+                          .read<AddBookmarkBloc>()
+                          .add(OnAddBookmarkEvent(
+                            ProductInput(
+                              id: widget.productEntity.id,
+                            ),
+                          )),
+                      icon: SvgPicture.asset(
+                        "assets/icons/Bookmark.svg",
+                        color: isBookmarked
+                            ? primaryColor
+                            : Theme.of(context).textTheme.bodyText1!.color,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

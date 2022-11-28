@@ -2,6 +2,7 @@ import "package:equatable/equatable.dart";
 import "package:hive/hive.dart";
 import "package:shop/entities/product_entity.dart";
 import "package:shop/entities/variant_entity.dart";
+import "package:shop/inputs/product_input.dart";
 
 part "cart_input.g.dart";
 
@@ -11,7 +12,7 @@ class CartInput extends Equatable {
   final VariantEntity variant;
 
   @HiveField(1)
-  final ProductEntity product;
+  final ProductInput product;
 
   @HiveField(2)
   final int quantity;
