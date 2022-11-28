@@ -7,6 +7,7 @@ import "package:shop/repositories/categories_repository.dart";
 import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
+import "package:shop/services/accounts/auth_state/auth_state_bloc.dart";
 import "package:shop/services/accounts/create/create_account_bloc.dart";
 import "package:shop/services/accounts/validate/validate_account_bloc.dart";
 import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
@@ -47,6 +48,12 @@ class ServiceFactory extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AuthStateBloc>(
+          lazy: false,
+          create: (context) => AuthStateBloc(
+            accountRepository,
+          )..add(OnAuthStateEvent()),
+        ),
         BlocProvider<SortReviewsBloc>(
           create: (context) => SortReviewsBloc(),
         ),

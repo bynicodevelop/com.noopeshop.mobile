@@ -17,6 +17,8 @@ class AccountRepository {
     this.sessionRepository,
   );
 
+  bool get isAuthenticated => sdk.auth.isLoggedIn;
+
   Future<AccountEntity?> create(
     AccountModel accountModel,
   ) async {
