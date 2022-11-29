@@ -101,10 +101,7 @@ class AccountRepository {
         password: password,
       );
 
-      final DirectusResponse<DirectusUser>? user =
-          await sdk.auth.currentUser?.read();
-
-      print(user!.data.id);
+      await sdk.auth.currentUser?.read();
     } on DirectusError catch (e) {
       String code = "unknown";
 
