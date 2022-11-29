@@ -30,60 +30,60 @@ class ProductRepository {
     final List<ProductInput> bookmarks = List<ProductInput>.from(
         List<dynamic>.from(bookmarkBox.get("bookmarks") ?? []));
 
-    // try {
-    final List<Map<String, dynamic>> responses = await _getProductsData(null);
+    try {
+      final List<Map<String, dynamic>> responses = await _getProductsData(null);
 
-    _products.addAll(responses
-        .map(
-          (product) {
-            Map<String, dynamic> productData = _formatProductData(product);
+      _products.addAll(responses
+          .map(
+            (product) {
+              Map<String, dynamic> productData = _formatProductData(product);
 
-            return ProductEntity(
-              id: productData["id"] as int,
-              thumbnail: productData["thumbnail"] as String,
-              title: productData["title"] as String,
-              productInfo: productData["product_info"] as String,
-              productDetails: productData["product_details"] as String,
-              brandName: productData["brand_name"] as String,
-              previews: productData["previews"] as List<String>,
-              variants: productData["variantes"] as List<VariantEntity>,
-              reviews: productData["reviews"] as List<ReviewEntity>,
-              relatedProducts: const [],
-              price: productData["price"] as double,
-              priceAfterDiscount:
-                  productData["price_after_discount"] as double?,
-              dicountpercent: productData["discount_percent"] as double?,
-              sellWithoutStock: productData["sell_without_stock"] as bool,
-              nbReviews: productData["nb_reviews"] as int,
-              rating: productData["rating"] as double,
-              isBookmarked:
-                  bookmarks.any((bookmark) => bookmark.id == productData["id"]),
-            );
-          },
-        )
-        .where((element) => element.variants.isNotEmpty)
-        .toList());
+              return ProductEntity(
+                id: productData["id"] as int,
+                thumbnail: productData["thumbnail"] as String,
+                title: productData["title"] as String,
+                productInfo: productData["product_info"] as String,
+                productDetails: productData["product_details"] as String,
+                brandName: productData["brand_name"] as String,
+                previews: productData["previews"] as List<String>,
+                variants: productData["variantes"] as List<VariantEntity>,
+                reviews: productData["reviews"] as List<ReviewEntity>,
+                relatedProducts: const [],
+                price: productData["price"] as double,
+                priceAfterDiscount:
+                    productData["price_after_discount"] as double?,
+                dicountpercent: productData["discount_percent"] as double?,
+                sellWithoutStock: productData["sell_without_stock"] as bool,
+                nbReviews: productData["nb_reviews"] as int,
+                rating: productData["rating"] as double,
+                isBookmarked: bookmarks
+                    .any((bookmark) => bookmark.id == productData["id"]),
+              );
+            },
+          )
+          .where((element) => element.variants.isNotEmpty)
+          .toList());
 
-    return _products;
-    // } on DirectusError catch (e) {
-    //   String code = "unknown";
+      return _products;
+    } on DirectusError catch (e) {
+      String code = "unknown";
 
-    //   switch (e.code) {
-    //     case 403:
-    //       code = "permission_denied";
-    //       break;
-    //   }
+      switch (e.code) {
+        case 403:
+          code = "permission_denied";
+          break;
+      }
 
-    //   throw ProductException(
-    //     e.message,
-    //     code,
-    //   );
-    // } catch (e) {
-    //   throw ProductException(
-    //     e.toString(),
-    //     "unknown",
-    //   );
-    // }
+      throw ProductException(
+        e.message,
+        code,
+      );
+    } catch (e) {
+      throw ProductException(
+        e.toString(),
+        "unknown",
+      );
+    }
   }
 
   Future<ProductEntity> loadProduct(int productId) async {
@@ -205,68 +205,68 @@ class ProductRepository {
 
     if (productIds.isEmpty) return products;
 
-    // try {
-    final DirectusListResponse<Map<String, dynamic>> response =
-        await sdk.items("products").readMany(
-              query: Query(
-                fields: [
-                  "id",
-                  "thumbnail",
-                  "title",
-                  "product_info",
-                  "product_details",
-                  "brand_name",
-                  "previews.directus_files_id",
-                  "sell_without_stock",
-                  "variantes.*.*.*",
-                  "reviews.*",
-                ],
-                sort: [
-                  "-date_created",
-                ],
-              ),
-              filters: Filters({
-                "status": Filter.eq("published"),
-                "id": Filter.isIn(productIds),
-              }),
-            );
+    try {
+      final DirectusListResponse<Map<String, dynamic>> response =
+          await sdk.items("products").readMany(
+                query: Query(
+                  fields: [
+                    "id",
+                    "thumbnail",
+                    "title",
+                    "product_info",
+                    "product_details",
+                    "brand_name",
+                    "previews.directus_files_id",
+                    "sell_without_stock",
+                    "variantes.*.*.*",
+                    "reviews.*",
+                  ],
+                  sort: [
+                    "-date_created",
+                  ],
+                ),
+                filters: Filters({
+                  "status": Filter.eq("published"),
+                  "id": Filter.isIn(productIds),
+                }),
+              );
 
-    for (final productData in response.data) {
-      Map<String, dynamic> productDataFormatted = _formatProductData(
-        productData,
+      for (final productData in response.data) {
+        Map<String, dynamic> productDataFormatted = _formatProductData(
+          productData,
+        );
+
+        final ProductEntity product = ProductEntity(
+          id: productDataFormatted["id"] as int,
+          thumbnail: productDataFormatted["thumbnail"] as String,
+          title: productDataFormatted["title"] as String,
+          productInfo: productDataFormatted["product_info"] as String,
+          productDetails: productDataFormatted["product_details"] as String,
+          brandName: productDataFormatted["brand_name"] as String,
+          previews: productDataFormatted["previews"] as List<String>,
+          variants: productDataFormatted["variantes"] as List<VariantEntity>,
+          reviews: productDataFormatted["reviews"] as List<ReviewEntity>,
+          relatedProducts: const [],
+          price: productDataFormatted["price"] as double,
+          priceAfterDiscount:
+              productDataFormatted["price_after_discount"] as double?,
+          dicountpercent: productDataFormatted["discount_percent"] as double?,
+          sellWithoutStock: productDataFormatted["sell_without_stock"] as bool,
+          nbReviews: productDataFormatted["nb_reviews"] as int,
+          rating: productDataFormatted["rating"] as double,
+          isBookmarked: true,
+        );
+
+        products.add(product);
+      }
+
+      return products;
+    } catch (e) {
+      throw ProductException(
+        e.toString(),
+        "unknown",
       );
-
-      final ProductEntity product = ProductEntity(
-        id: productDataFormatted["id"] as int,
-        thumbnail: productDataFormatted["thumbnail"] as String,
-        title: productDataFormatted["title"] as String,
-        productInfo: productDataFormatted["product_info"] as String,
-        productDetails: productDataFormatted["product_details"] as String,
-        brandName: productDataFormatted["brand_name"] as String,
-        previews: productDataFormatted["previews"] as List<String>,
-        variants: productDataFormatted["variantes"] as List<VariantEntity>,
-        reviews: productDataFormatted["reviews"] as List<ReviewEntity>,
-        relatedProducts: const [],
-        price: productDataFormatted["price"] as double,
-        priceAfterDiscount:
-            productDataFormatted["price_after_discount"] as double?,
-        dicountpercent: productDataFormatted["discount_percent"] as double?,
-        sellWithoutStock: productDataFormatted["sell_without_stock"] as bool,
-        nbReviews: productDataFormatted["nb_reviews"] as int,
-        rating: productDataFormatted["rating"] as double,
-        isBookmarked: true,
-      );
-
-      products.add(product);
     }
-
-    return products;
-    // } catch (e) {
-    //   throw ProductException(
-    //     e.toString(),
-    //     "unknown",
-    //   );
-    // }
   }
 
   Future<List<Map<String, dynamic>>> _getProductsData(
