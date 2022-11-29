@@ -1,9 +1,11 @@
 import "package:animations/animations.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/screen_export.dart";
 import "package:shop/screens/explorer/views/explorer_screen.dart";
+import "package:shop/services/accounts/auth_state/auth_state_bloc.dart";
 
 class EntryPoint extends StatefulWidget {
   const EntryPoint({Key? key}) : super(key: key);
@@ -91,77 +93,89 @@ class _EntryPointState extends State<EntryPoint> {
         },
         child: _pages[_currentIndex],
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.only(
-          top: _currentIndex != 2 ? defaultPadding / 2 : 0,
-        ),
-        color: _currentIndex != 2
-            ? Theme.of(context).brightness == Brightness.light
-                ? Colors.white
-                : const Color(0xFF101015)
-            : Colors.transparent,
-        child: BottomNavigationBar(
-          elevation: 0,
-          currentIndex: _currentIndex,
-          onTap: (index) {
-            if (index != _currentIndex) {
-              setState(() {
-                _currentIndex = index;
-              });
-            }
-          },
-          backgroundColor: _currentIndex != 2
-              ? Theme.of(context).brightness == Brightness.light
-                  ? Colors.white
-                  : const Color(0xFF101015)
-              : Colors.transparent,
-          type: BottomNavigationBarType.fixed,
-          selectedFontSize: 12,
-          selectedItemColor: primaryColor,
-          unselectedItemColor: Colors.transparent,
-          items: [
-            BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Shop.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Shop.svg",
-                color: primaryColor,
-              ),
-              label: "Shop",
+      bottomNavigationBar: BlocBuilder<AuthStateBloc, AuthStateState>(
+        bloc: context.read<AuthStateBloc>()..add(OnAuthStateEvent()),
+        builder: (context, state) {
+          final bool isAuthentificated =
+              (state as AuthStateInitialState).isAuthenticated;
+
+          return Container(
+            padding: EdgeInsets.only(
+              top: _currentIndex != 2 ? defaultPadding / 2 : 0,
             ),
-            BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Bookmark.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Bookmark.svg",
-                color: primaryColor,
-              ),
-              label: "Bookmark",
+            color: _currentIndex != 2
+                ? Theme.of(context).brightness == Brightness.light
+                    ? Colors.white
+                    : const Color(0xFF101015)
+                : Colors.transparent,
+            child: BottomNavigationBar(
+              elevation: 0,
+              currentIndex: _currentIndex,
+              onTap: (index) async {
+                if (index != _currentIndex) {
+                  if (index == 4 && !isAuthentificated) {
+                    Navigator.pushNamed(context, logInScreenRoute);
+
+                    return;
+                  }
+
+                  setState(() => _currentIndex = index);
+                }
+              },
+              backgroundColor: _currentIndex != 2
+                  ? Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : const Color(0xFF101015)
+                  : Colors.transparent,
+              type: BottomNavigationBarType.fixed,
+              selectedFontSize: 12,
+              selectedItemColor: primaryColor,
+              unselectedItemColor: Colors.transparent,
+              items: [
+                BottomNavigationBarItem(
+                  icon: svgIcon("assets/icons/Shop.svg"),
+                  activeIcon: svgIcon(
+                    "assets/icons/Shop.svg",
+                    color: primaryColor,
+                  ),
+                  label: "Shop",
+                ),
+                BottomNavigationBarItem(
+                  icon: svgIcon("assets/icons/Bookmark.svg"),
+                  activeIcon: svgIcon(
+                    "assets/icons/Bookmark.svg",
+                    color: primaryColor,
+                  ),
+                  label: "Bookmark",
+                ),
+                BottomNavigationBarItem(
+                  icon: svgIcon("assets/icons/Category.svg"),
+                  activeIcon: svgIcon(
+                    "assets/icons/Category.svg",
+                    color: primaryColor,
+                  ),
+                  label: "Discover",
+                ),
+                BottomNavigationBarItem(
+                  icon: svgIcon("assets/icons/Bag.svg"),
+                  activeIcon: svgIcon(
+                    "assets/icons/Bag.svg",
+                    color: primaryColor,
+                  ),
+                  label: "Cart",
+                ),
+                BottomNavigationBarItem(
+                  icon: svgIcon("assets/icons/Profile.svg"),
+                  activeIcon: svgIcon(
+                    "assets/icons/Profile.svg",
+                    color: primaryColor,
+                  ),
+                  label: "Profile",
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Category.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Category.svg",
-                color: primaryColor,
-              ),
-              label: "Discover",
-            ),
-            BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Bag.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Bag.svg",
-                color: primaryColor,
-              ),
-              label: "Cart",
-            ),
-            BottomNavigationBarItem(
-              icon: svgIcon("assets/icons/Profile.svg"),
-              activeIcon: svgIcon(
-                "assets/icons/Profile.svg",
-                color: primaryColor,
-              ),
-              label: "Profile",
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

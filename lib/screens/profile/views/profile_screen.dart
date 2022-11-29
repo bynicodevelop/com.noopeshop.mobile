@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_svg/svg.dart";
 import "package:shop/components/list_tile/divider_list_tile.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/screen_export.dart";
+import "package:shop/services/accounts/logout/logout_bloc.dart";
 
 import "components/profile_card.dart";
 import "components/profile_menu_item_list_tile.dart";
@@ -145,21 +147,38 @@ class ProfileScreen extends StatelessWidget {
             press: () {},
             isShowDivider: false,
           ),
-          const SizedBox(height: defaultPadding),
-
+          const SizedBox(
+            height: defaultPadding,
+          ),
           // Log Out
-          ListTile(
-            onTap: () {},
-            minLeadingWidth: 24,
-            leading: SvgPicture.asset(
-              "assets/icons/Logout.svg",
-              height: 24,
-              width: 24,
-              color: errorColor,
-            ),
-            title: const Text(
-              "Log Out",
-              style: TextStyle(color: errorColor, fontSize: 14, height: 1),
+          BlocListener<LogoutBloc, LogoutState>(
+            listener: (context, state) async {
+              if (state is LogoutSuccessState) {
+                Navigator.pushNamed(
+                  context,
+                  entryPointScreenRoute,
+                );
+              }
+            },
+            child: ListTile(
+              onTap: () => context.read<LogoutBloc>().add(
+                    OnLogoutEvent(),
+                  ),
+              minLeadingWidth: 24,
+              leading: SvgPicture.asset(
+                "assets/icons/Logout.svg",
+                height: 24,
+                width: 24,
+                color: errorColor,
+              ),
+              title: const Text(
+                "Log Out",
+                style: TextStyle(
+                  color: errorColor,
+                  fontSize: 14,
+                  height: 1,
+                ),
+              ),
             ),
           )
         ],

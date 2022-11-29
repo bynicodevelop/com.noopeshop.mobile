@@ -1,6 +1,10 @@
+import "package:flutter/foundation.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter/material.dart";
 import "package:shop/constants.dart";
 import "package:shop/route/route_constants.dart";
+import "package:shop/services/accounts/login/login_bloc.dart";
+import "package:shop/utils/notice.dart";
 
 import "components/login_form.dart";
 
@@ -12,7 +16,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (kDebugMode) {
+      _emailController.text = "john@domain.tld";
+      _passwordController.text = "password!";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
               fit: BoxFit.cover,
             ),
             Padding(
-              padding: const EdgeInsets.all(defaultPadding),
+              padding: const EdgeInsets.all(
+                defaultPadding,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,8 +56,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   const Text(
                     "Log in with your data that you intered during your registration.",
                   ),
-                  const SizedBox(height: defaultPadding),
-                  LogInForm(formKey: _formKey),
+                  const SizedBox(
+                    height: defaultPadding,
+                  ),
+                  LogInForm(
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                  ),
                   Align(
                     child: TextButton(
                       child: const Text("Forgot password"),
@@ -51,16 +76,39 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: defaultPadding,
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            entryPointScreenRoute,
-                            ModalRoute.withName(logInScreenRoute));
+                  BlocListener<LoginBloc, LoginState>(
+                    listener: (context, state) async {
+                      if (state is LoginFailureState) {
+                        notice(
+                          context,
+                          state.code,
+                        );
+                      }
+
+                      if (state is LoginSuccessState) {
+                        Navigator.pushNamed(
+                          context,
+                          entryPointScreenRoute,
+                        );
                       }
                     },
-                    child: const Text("Log in"),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<LoginBloc>().add(
+                                OnLoginEvent(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
+                          // Navigator.pushNamedAndRemoveUntil(
+                          //     context,
+                          //     entryPointScreenRoute,
+                          //     ModalRoute.withName(logInScreenRoute));
+                        }
+                      },
+                      child: const Text("Log in"),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

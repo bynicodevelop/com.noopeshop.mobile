@@ -8,10 +8,10 @@ import "package:shop/repositories/categories_repository.dart";
 import "package:shop/repositories/pages_repository.dart";
 import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
-import "package:shop/route/route_constants.dart";
 import "package:shop/route/router.dart" as router;
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_gen/gen_l10n/app_localizations.dart";
+import "package:shop/route/screen_export.dart";
 import "package:shop/services/service_factory.dart";
 
 import "theme/dark_theme.dart";

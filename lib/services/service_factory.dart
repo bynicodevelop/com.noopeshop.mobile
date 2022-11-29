@@ -9,6 +9,8 @@ import "package:shop/repositories/product_repository.dart";
 import "package:shop/repositories/session_repository.dart";
 import "package:shop/services/accounts/auth_state/auth_state_bloc.dart";
 import "package:shop/services/accounts/create/create_account_bloc.dart";
+import "package:shop/services/accounts/login/login_bloc.dart";
+import "package:shop/services/accounts/logout/logout_bloc.dart";
 import "package:shop/services/accounts/validate/validate_account_bloc.dart";
 import "package:shop/services/bookmark/add_bookmark/add_bookmark_bloc.dart";
 import "package:shop/services/bookmark/load_bookmark/load_bookmark_bloc.dart";
@@ -60,6 +62,16 @@ class ServiceFactory extends StatelessWidget {
         BlocProvider<LoadSessionBloc>(
           create: (context) => LoadSessionBloc(
             sessionRepository,
+          ),
+        ),
+        BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(
+            accountRepository,
+          ),
+        ),
+        BlocProvider<LogoutBloc>(
+          create: (context) => LogoutBloc(
+            accountRepository,
           ),
         ),
         BlocProvider<CreateAccountBloc>(

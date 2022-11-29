@@ -4,9 +4,14 @@ import "package:flutter_svg/flutter_svg.dart";
 import "../../../../constants.dart";
 
 class LogInForm extends StatelessWidget {
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
   const LogInForm({
     Key? key,
     required this.formKey,
+    required this.emailController,
+    required this.passwordController,
   }) : super(key: key);
 
   final GlobalKey<FormState> formKey;
@@ -18,9 +23,7 @@ class LogInForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            onSaved: (emal) {
-              // Email
-            },
+            controller: emailController,
             validator: emaildValidator,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -44,9 +47,7 @@ class LogInForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
-            onSaved: (pass) {
-              // Password
-            },
+            controller: passwordController,
             validator: passwordValidator,
             obscureText: true,
             decoration: InputDecoration(

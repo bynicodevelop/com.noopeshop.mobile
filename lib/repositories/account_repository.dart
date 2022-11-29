@@ -2,6 +2,7 @@ import "package:dio/dio.dart";
 import "package:directus/directus.dart";
 import "package:shop/entities/account_entity.dart";
 import "package:shop/exceptions/account_exception.dart";
+import "package:shop/inputs/login_input.dart";
 import "package:shop/models/account_model.dart";
 import "package:shop/repositories/session_repository.dart";
 import "package:shop/utils/logger.dart";
@@ -89,4 +90,47 @@ class AccountRepository {
       );
     }
   }
+
+  Future<void> login(LoginInput loginInput) async {
+    final email = loginInput.email.trim().toLowerCase();
+    final password = loginInput.password.trim();
+
+    try {
+      await sdk.auth.login(
+        email: email,
+        password: password,
+      );
+
+      final DirectusResponse<DirectusUser>? user =
+          await sdk.auth.currentUser?.read();
+
+      print(user!.data.id);
+    } on DirectusError catch (e) {
+      String code = "unknown";
+
+      switch (e.code) {
+        case 400:
+          code = "invalid_credentials";
+          break;
+        case 403:
+          code = "permission_denied";
+          break;
+      }
+
+      if (e.message.contains("email")) {
+        code = "invalid_email";
+      }
+
+      throw AccountException(
+        e.message,
+        code,
+      );
+    } catch (e) {
+      error("AccountRepository.login", data: {
+        "error": e.toString(),
+      });
+    }
+  }
+
+  Future<void> logout() async => await sdk.auth.logout();
 }
