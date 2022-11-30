@@ -3,7 +3,7 @@ import "package:flutter_svg/flutter_svg.dart";
 
 import "../../../../constants.dart";
 
-class LogInForm extends StatelessWidget {
+class LogInForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
 
@@ -17,13 +17,20 @@ class LogInForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
 
   @override
+  State<LogInForm> createState() => _LogInFormState();
+}
+
+class _LogInFormState extends State<LogInForm> {
+  bool _obscureText = true;
+
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           TextFormField(
-            controller: emailController,
+            controller: widget.emailController,
             validator: emaildValidator,
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.emailAddress,
@@ -47,9 +54,9 @@ class LogInForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding),
           TextFormField(
-            controller: passwordController,
+            controller: widget.passwordController,
             validator: passwordValidator,
-            obscureText: true,
+            obscureText: _obscureText,
             decoration: InputDecoration(
               hintText: "Password",
               prefixIcon: Padding(
@@ -59,6 +66,22 @@ class LogInForm extends StatelessWidget {
                   "assets/icons/Lock.svg",
                   height: 24,
                   width: 24,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodyText1!
+                      .color!
+                      .withOpacity(0.3),
+                ),
+              ),
+              suffixIcon: IconButton(
+                splashColor: Colors.transparent,
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
                   color: Theme.of(context)
                       .textTheme
                       .bodyText1!

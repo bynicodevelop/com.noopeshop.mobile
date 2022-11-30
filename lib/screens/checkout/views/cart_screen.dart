@@ -157,6 +157,19 @@ class CartScreen extends StatelessWidget {
                   sliver: SliverToBoxAdapter(
                     child: ElevatedButton(
                       onPressed: () async {
+                        // final bool isAuthenticated = (context
+                        //         .read<AuthStateBloc>()
+                        //         .state as AuthStateInitialState)
+                        //     .isAuthenticated;
+
+                        // if (!isAuthenticated) {
+                        //   Navigator.pushNamed(
+                        //     context,
+                        //     signUpScreenRoute,
+                        //   );
+
+                        //   return;
+                        // }
                         Navigator.pushNamed(
                           context,
                           paymentMethodScreenRoute,
